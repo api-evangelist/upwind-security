@@ -1,0 +1,2875 @@
+openapi: 3.1.0
+info:
+  description: "## Overview\n\nThe Management REST API v1 represents a collection of endpoints designed for the execution of administrative tasks programmatically. Tailored for utilization by back-end servers or trusted entities, the API facilitates integration, data retrieval, and workflow automation.\n\nThe API provides a powerful set of tools to interact with your organization's resources, including [Threats](/restapi/v1/threats), [Vulnerabilities](/restapi/v1/vulnerabilities), [Configurations](/restapi/v1/configurations), and [Workflows](/restapi/v1/workflows). Whether you are building applications, integrating services, or exploring data, this documentation serves as your guide through the various endpoints and functionalities offered by our API.\n\nWhen you make a request to the API, you will specify an HTTP method and a path. Additionally, you might also specify request headers and path, query, or body parameters. The API will return the response status code, response headers, and potentially a response body.\n\nThe API reference documentation describes the HTTP method, path, and parameters for every operation. It also displays example requests and responses for each operation.\n\n## Authentication\n\nTo access the endpoints of the API, you need to authenticate your requests. We use OAuth 2.0, a widely adopted industry standard for authorization, to secure and control access to the API.\n\nThe API uses [JSON Web Tokens (JWTs)](https://datatracker.ietf.org/doc/html/rfc7519) access tokens to authenticate requests. The API access token's scopes claim indicates which request methods can be performed when calling the API. Trying to perform any request method not permitted within the set scopes will result in a **403 Forbidden** response.\n\nYou can authenticate your request by adding an access token in the [Authorization](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-bearer-20#section-2.1) HTTP header using the [Bearer authentication scheme](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-bearer-20). To obtain an access token, you must first obtain client credentials.\n\n### Obtaining client credentials\n\nBefore you can make requests to the API, you will need to obtain client credentials. Follow the steps in the [Generate New Credentials](/settings/credentials#generate-new-credentials) section of the [Credentials](/settings/credentials) page to generate a client ID and client secret unique to your application.\n\n### Obtaining access token\n\nNow that you have your client credentials, proceed with obtaining an access token. To get a token by using the client credentials grant, send a POST request to the OAuth 2.0 token endpoint URL (`/oauth/token`). All requests to the token endpoint should be an HTTP POST.\n\n:::important\nThe `audience` parameter in your token request must match the regional API endpoint you plan to use. This ensures your access token is valid for the correct region. An access token obtained with `audience=https://api.upwind.io` will only work with the US API endpoint and cannot be used with EU or ME endpoints.\n:::\n\n#### For US region\n```bash\ncurl --request POST \\\n  --url \"https://auth.upwind.io/oauth/token\" \\\n  --data-urlencode 'client_id=YOUR_CLIENT_ID' \\\n  --data-urlencode 'client_secret=YOUR_CLIENT_SECRET' \\\n  --data-urlencode 'audience=https://api.upwind.io' \\\n  --data-urlencode 'grant_type=client_credentials'\n```\n\n#### For EU region\n```bash\ncurl --request POST \\\n  --url \"https://auth.upwind.io/oauth/token\" \\\n  --data-urlencode 'client_id=YOUR_CLIENT_ID' \\\n  --data-urlencode 'client_secret=YOUR_CLIENT_SECRET' \\\n  --data-urlencode 'audience=https://api.eu.upwind.io' \\\n  --data-urlencode 'grant_type=client_credentials'\n```\n\n#### For ME region\n```bash\ncurl --request POST \\\n  --url \"https://auth.upwind.io/oauth/token\" \\\n  --data-urlencode 'client_id=YOUR_CLIENT_ID' \\\n  --data-urlencode 'client_secret=YOUR_CLIENT_SECRET' \\\n  --data-urlencode 'audience=https://api.me.upwind.io' \\\n  --data-urlencode 'grant_type=client_credentials'\n```\n\n:::warning\nTreat your access token like a password and consider using another service to store your token securely.\n:::\n\n### Authenticating\n\nOnce you have obtained an access token, you can authenticate your API requests by including it in the [Authorization](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-bearer-20#section-2.1) HTTP header using the [Bearer authentication scheme](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-bearer-20).\n\nFor example, to authenticate a request to list threat detections, include your access token in the `Authorization` header:\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\n## Requests\n\nTo make a request, first find the HTTP method and the path for the operation that you want to use. For example, the \"List Threat Detections\" operation uses the `GET` method and the `/threat-detections` path. For the full reference documentation for this operation, see [List Threat Detections](/restapi/v1/list-threat-detections).\n\nPrepend the base URL for the API to the path to get the full URL. Choose the appropriate regional endpoint:\n- **US**: `https://api.upwind.io`\n- **EU**: `https://api.eu.upwind.io`\n- **ME**: `https://api.me.upwind.io`\n\nFor instance, on the command line, use the `curl` command. Specify the HTTP method using the `--request` or `-X` flag, and provide the full URL using the `--url` flag.\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\n:::note\nIf you get a message similar to \"command not found: curl\", you may need to download and install `curl`. For more information, see [the curl project download page](https://curl.se/download.html).\n:::\n\n### Using headers\n\nMost operations do not require specifying headers other than the `Authorization` header. Other operations may specify that you should pass an `Content-Type` header with a value of `application/json` or additional headers.\n\nTo send a header in a `curl` command, use the `--header` or `-H` flag followed by the header in `key: value` format.\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\n### Using path parameters\n\nPath parameters modify the operation path. For example, the \"List threat detections\" path is `/v1/organizations/{organization-id}/threat-detections`. The curly brackets `{}` denote path parameters that you need to specify. In this case, you must specify your Upwind organization identifier. For the full reference documentation for this operation, see [List Threat Detections](/restapi/v1/list-threat-detections).\n\nFor example, to get a list of Threat Detection objects from the `org_Xk9mPq7RtYwN2vLs` organization, replace `{organization-id}` with `org_Xk9mPq7RtYwN2vLs` and prepend the base URL for the API. The full path is `https://api.upwind.io/v1/organizations/org_Xk9mPq7RtYwN2vLs/threat-detections`.\n\n### Using query parameters\n\nQuery parameters allow you to control what data is returned for a request. For example, a query parameter may let you specify how many items are returned when the response is paginated.\n\nFor `curl` commands, add a `?` to the end of the path, then append your query parameter name and value in the form `name=value`. Separate multiple query parameters with `&`.\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections?severity=CRITICAL\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\n### Using body parameters\n\nBody parameters allow you to pass additional data to the API. For example, the \"Update a threat detection\" operation allows you to change the status of a detection. For the full reference documentation for this operation, see [Update a threat detection](/restapi/v1/update-threat-detection).\n\nFor `curl` commands, use the `--data` flag to pass the body parameters in a JSON object.\n\n```bash\ncurl --request PATCH \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections/{detection-id}\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\" \\\n  --header \"Content-Type: application/json\" \\\n  --data '{\n    \"status\": \"ARCHIVED\"\n  }'\n```\n\nThe operation updates the threat detection and returns data about the modified detection. For more information about using the response, see the [Using the response](#using-the-response) section.\n\n### Using the response\n\nEvery request will return an HTTP status code that indicates the success of the response. For more information about response codes, see [the MDN HTTP response status code documentation](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status).\n\n### About the response code and headers\n\nTo view the status code and headers, use the `--include` or `--i` flag when you send your request.\n\nFor example, this request:\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\" \\\n  --include\n```\n\nReturns the response code and headers like:\n\n```bash\nHTTP/2 200\n```\n\nIn this example, the response code is `200`, which indicates a successful request.\n\n### About the response body\n\nMost operations will return a response body. Unless otherwise specified, the response body is in JSON format.\n\nFor example, this request returns a list of Threat Detection objects with data about each detection:\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\nYou can also filter threat detections using query parameters. For example, to get all HIGH severity threat detections:\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections?severity=HIGH\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\n## Pagination\n\nMany list endpoints return large datasets that are divided into smaller, manageable chunks called pages. The API supports two types of pagination to help you navigate through these results efficiently.\n\nEach list endpoint supports one of the two pagination methods based on the potential amount of data that the endpoint can return. Information about which pagination method is used can be found on the specific endpoint's reference page.\n\n### Page-based Pagination\n\nPage-based pagination uses traditional page numbers to navigate through results. This method is useful when you need to jump to specific pages or when the total number of pages is known.\n\n#### Parameters\n- `page`: Specifies the page number for pagination (default: 1)\n- `per-page`: Specifies how many results are returned on a page (default: 100)\n\nFor example, to get the first page with 50 results per page:\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections?page=1&per-page=50\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\nTo get the second page:\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections?page=2&per-page=50\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\n### Token-based Pagination\n\nToken-based pagination uses opaque tokens to navigate through results. This method is more efficient for large datasets and ensures consistent results even when data is being modified during pagination.\n\n#### Parameters\n- `page-token`: Specifies the token for fetching subsequent pages in a paginated result set\n- `per-page`: Specifies how many results are returned on a page (default: 100)\n\n#### Response Headers\n- `Link`: Provides pagination links for navigating through the result set, formatted as HTTP link headers\n\nFor example, to get the first page:\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/coniguration-findings?per-page=50\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\nTo get the next page, use the page-token from the previous response:\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/coniguration-findings?page-token=eyJjdXJzb3IiOiIxMjM0NTY3ODkwIn0&per-page=50\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\n#### Working with Link Headers\n\nWhen using token-based pagination, the response includes a `Link` header with navigation URLs. This header follows the [RFC 5988](https://datatracker.ietf.org/doc/html/rfc5988) standard for web linking and provides ready-to-use URLs for pagination navigation.\n\n```bash\nLink: <https://api.upwind.io/v1/organizations/org_Xk9mPq7RtYwN2vLs/configuration-findings?page-token=eyJjdXJzb3IiOiIxMjM0NTY3ODkwIn0&per-page=50>; rel=\"next\"\n```\n\nThe Link header may contain multiple relationships:\n- `rel=\"first\"`: URL for the first page of results\n- `rel=\"next\"`: URL for the next page of results (if available)\n- `rel=\"prev\"`: URL for the previous page of results (if available)\n- `rel=\"last\"`: URL for the last page of results (when determinable)\n\nMultiple links are comma-separated. For example:\n\n```bash\nLink: <https://api.upwind.io/v1/organizations/org_Xk9mPq7RtYwN2vLs/configuration-findings?page-token=abc123>; rel=\"first\", <https://api.upwind.io/v1/organizations/org_Xk9mPq7RtYwN2vLs/configuration-findings?page-token=xyz789>; rel=\"next\"\n```\n\nYou can parse this header to automatically navigate through pages without manually constructing URLs or managing page tokens. This approach is particularly useful for automated data processing workflows where you need to iterate through all available data.\n\n## Next steps\n\nThis article demonstrates how to make requests to the API. For more practice, try listing threat detections with different filters or retrieving a specific threat detection by ID. If you encounter any issues or have questions, refer to our [Support](/#contact-us-247-over-chat-email-or-slack) through various channels.\n\nHappy coding!\n"
+  title: Introduction access-management threats API
+  version: '1.0'
+servers:
+- description: Production endpoint (US)
+  url: https://api.upwind.io
+- description: Production endpoint (EU)
+  url: https://api.eu.upwind.io
+- description: Production endpoint (ME)
+  url: https://api.me.upwind.io
+tags:
+- description: The Threats resource offers a range of methods for listing, retrieving, and deleting threat detections.
+  x-displayName: Threats
+  name: threats
+paths:
+  /v1/organizations/{organization-id}/threat-detections:
+    get:
+      description: A `GET` request sent to the endpoint root returns a list of Threat Detection objects that are associated with the specified organization. To learn more about Threat Detections, refer to the [Detections Overview](/threats/detections/overview) page.
+      x-order:
+        value: '2'
+      operationId: list-threat-detections
+      parameters:
+      - $ref: '#/components/parameters/organization-id'
+      - description: Filters by the level of severity.
+        in: query
+        name: severity
+        required: false
+        schema:
+          type: string
+      - description: Filters detections by their type.
+        in: query
+        name: type
+        required: false
+        schema:
+          type: string
+      - description: Filters detections by their category.
+        in: query
+        name: category
+        required: false
+        schema:
+          type: string
+      - description: Filters detections by their Upwind asset ID.
+        in: query
+        name: upwind-asset-id
+        required: false
+        schema:
+          type: string
+      - description: Filters detections by the earliest timestamp (in ISO8601 format) when they were first seen.
+        in: query
+        name: min-first-seen-time
+        required: false
+        schema:
+          type: string
+      - description: Filters detections by the latest timestamp (in ISO8601 format) when they were first seen.
+        in: query
+        name: max-first-seen-time
+        required: false
+        schema:
+          type: string
+      - description: Filters detections by the latest timestamp (in ISO8601 format) when they were last seen.
+        in: query
+        name: max-last-seen-time
+        required: false
+        schema:
+          type: string
+      - description: Filters detections by the earliest timestamp (in ISO8601 format) when they were last seen.
+        in: query
+        name: min-last-seen-time
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ThreatDetection'
+          description: Received list of detections
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '429':
+          description: Rate Limit Exceeded
+      summary: List detections
+      tags:
+      - threats
+  /v1/organizations/{organization-id}/threat-detections/{detection-id}:
+    get:
+      description: A `GET` request sent to the endpoint root followed by a unique identifier returns detailed information about a specific Threat Detection. This endpoint provides access to comprehensive details such as the triggers (policy violations) and attributes related to the associated resource. To learn more about Threat Detections, refer to the [Detections Overview](/threats/detections/overview) page.
+      x-order:
+        value: '3'
+      operationId: get-threat-detection
+      parameters:
+      - $ref: '#/components/parameters/organization-id'
+      - description: The unique identifier for this detection.
+        in: path
+        name: detection-id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThreatDetection'
+          description: Received detection by id
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Rate Limit Exceeded
+      summary: Get a detection
+      tags:
+      - threats
+    patch:
+      description: A `PATCH` request sent to the endpoint root followed by a unique identifier allows for updating specific fields of an existing Threat Detection. This endpoint facilitates the modification of attributes such the detection status. To modify a Threat Detection, provide the necessary changes in the request body. To learn more about Threat Detections, refer to the [Detections Overview](/threats/detections/overview) page.
+      x-order:
+        value: '4'
+      operationId: update-threat-detection
+      parameters:
+      - $ref: '#/components/parameters/organization-id'
+      - description: The unique identifier for this detection.
+        in: path
+        name: detection-id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDetectionRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThreatDetection'
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Rate Limit Exceeded
+      summary: Update a detection
+      tags:
+      - threats
+  /v1/organizations/{organization-id}/threat-events:
+    get:
+      description: A `GET` request sent to the endpoint root returns a list of Threat Events objects that are associated with the specified organization. To learn more about Threat Events, refer to the [Events Overview](/threats/events/overview) page.
+      x-order:
+        value: '1'
+      operationId: getEventsList
+      parameters:
+      - $ref: '#/components/parameters/organization-id'
+      - description: The page number to retrieve. Used for pagination along with the `per-page` parameter.
+        in: query
+        name: page
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - description: Specifies how many results are returned on a page.
+        in: query
+        name: per-page
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 100
+      - description: Filters by the specified cloud account ID.
+        in: query
+        name: cloud-account-id
+        required: false
+        schema:
+          type: string
+      - description: Filters events by the earliest timestamp (in ISO8601 format) when they were first seen.
+        in: query
+        name: min-first-seen-time
+        required: false
+        schema:
+          type: string
+      - description: Filters events by the latest timestamp (in ISO8601 format) when they were first seen.
+        in: query
+        name: max-first-seen-time
+        required: false
+        schema:
+          type: string
+      - description: Filters events by the latest timestamp (in ISO8601 format) when they were last seen.
+        in: query
+        name: max-last-seen-time
+        required: false
+        schema:
+          type: string
+      - description: Filters events by the earliest timestamp (in ISO8601 format) when they were last seen.
+        in: query
+        name: min-last-seen-time
+        required: false
+        schema:
+          type: string
+      - description: Filters events by their category.
+        in: query
+        name: category
+        required: false
+        schema:
+          type: string
+      - description: Filters by the level of severity.
+        in: query
+        name: severity
+        required: false
+        schema:
+          type: string
+      - description: Filters events by the Upwind asset ID.
+        in: query
+        name: upwind-asset-id
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EventSummary'
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '429':
+          description: Rate Limit Exceeded
+      summary: List events
+      tags:
+      - threats
+  /v1/organizations/{organization-id}/threat-policies:
+    get:
+      description: A `GET` request sent to the endpoint root returns a list of Threat Policy objects that are associated with the specified organization. To learn more about Threat Policies, refer to the [Policies Overview](/threats/policies/overview) page.
+      x-order:
+        value: '5'
+      operationId: list-threat-policies
+      parameters:
+      - $ref: '#/components/parameters/organization-id'
+      - description: Filters the policy list to include only policies managed by the specified entity.
+        in: query
+        name: managed-by
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ThreatPolicy'
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '429':
+          description: Rate Limit Exceeded
+      summary: List policies
+      tags:
+      - threats
+  /v1/organizations/{organization-id}/threat-policies/{policy-id}:
+    patch:
+      description: A `PATCH` request sent to the endpoint root followed by a unique identifier allows for updating specific fields of an existing Threat Policy. This endpoint facilitates the modification of attributes such the enablement status. To modify a Threat Policy, provide the necessary changes in the request body. To learn more about Threat Policies, refer to the [Policies Overview](/threats/policies/overview) page.
+      x-order:
+        value: '6'
+      operationId: updateThreatPolicy
+      parameters:
+      - $ref: '#/components/parameters/organization-id'
+      - description: The unique identifier for this policy.
+        in: path
+        name: policy-id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ThreatPolicyUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThreatPolicy'
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Rate Limit Exceeded
+      summary: Update a policy
+      tags:
+      - threats
+  /v2/organizations/{organization-id}/threats/policies/{policy-id}:
+    get:
+      description: A GET request sent to the endpoint root followed by a unique identifier returns detailed information about a specific policy.
+      x-order:
+        value: '1'
+      operationId: getPolicy
+      parameters:
+      - $ref: '#/components/parameters/organization-id'
+      - description: The unique identifier of the policy
+        in: path
+        name: policy-id
+        required: true
+        schema:
+          type: string
+          minLength: 1
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResponseApiPolicy'
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Rate Limit Exceeded
+      summary: Get a policy
+      tags:
+      - threats
+  /v2/organizations/{organization-id}/threats/policies/{policy-id}/rules/{policy-rule-id}:
+    get:
+      description: A GET request sent to the endpoint root followed by a unique identifier returns detailed information about a specific policy rule.
+      x-order:
+        value: '1'
+      operationId: getPolicyRule
+      parameters:
+      - $ref: '#/components/parameters/organization-id'
+      - description: The unique identifier of the policy
+        in: path
+        name: policy-id
+        required: true
+        schema:
+          type: string
+          minLength: 1
+      - description: The unique identifier of the policy rule
+        in: path
+        name: policy-rule-id
+        required: true
+        schema:
+          type: string
+          minLength: 1
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResponseApiPolicyRule'
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Rate Limit Exceeded
+      summary: Get a policy rule
+      tags:
+      - threats
+  /v2/organizations/{organization-id}/threats/rule-definitions/{rule-definition-id}:
+    get:
+      description: A GET request sent to the endpoint root followed by a unique identifier returns detailed information about a specific rule definition.
+      x-order:
+        value: '1'
+      operationId: getRuleDefinition
+      parameters:
+      - $ref: '#/components/parameters/organization-id'
+      - description: The unique identifier of the rule definition
+        in: path
+        name: rule-definition-id
+        required: true
+        schema:
+          type: string
+          minLength: 1
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResponseApiRuleDefinition'
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Rate Limit Exceeded
+      summary: Get a rule definition
+      tags:
+      - threats
+  /v2/organizations/{organization-id}/threats/stories:
+    get:
+      description: A GET request sent to the endpoint root returns a list of threat stories objects that are associated with the specified organization.
+      x-order:
+        value: '1'
+      operationId: listStories
+      parameters:
+      - $ref: '#/components/parameters/organization-id'
+      - description: Specifies the maximum number of items to be returned.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 50
+          maximum: 100
+          minimum: 1
+      - description: A cursor for pagination to retrieve the next set of results.
+        example: eyJvZmZzZXQiOjIwfQ
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+      - description: 'Sort results by one or more fields. Format: `field` or `field:asc` or `field:desc`. Multiple fields: `field1,field2:desc`. Allowed fields: `update_time`, `create_time`. Default: `update_time:asc`.'
+        example: update_time:asc
+        in: query
+        name: sort
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiPaginatedResponseApiListStoryItem'
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Rate Limit Exceeded
+      summary: List stories
+      tags:
+      - threats
+  /v2/organizations/{organization-id}/threats/policies/search:
+    post:
+      description: A POST request sent to the search endpoint returns a filtered list of policy objects that are associated with the specified organization based on the specified search criteria.
+      x-order:
+        value: '2'
+      operationId: searchPolicies
+      parameters:
+      - $ref: '#/components/parameters/organization-id'
+      - description: Specifies the maximum number of items to be returned.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 50
+          maximum: 100
+          minimum: 1
+      - description: A cursor for pagination to retrieve the next set of results.
+        example: eyJvZmZzZXQiOjIwfQ
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+      - description: 'Sort results by one or more fields. Format: `field` or `field:asc` or `field:desc`. Multiple fields: `field1,field2:desc`. Allowed fields: `name`, `severity`, `create_time`, `update_time`. Default: `create_time:asc`.'
+        example: create_time:asc
+        in: query
+        name: sort
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: Search request body.
+              properties:
+                conditions:
+                  type: array
+                  description: List of filter conditions to apply to the search
+                  items:
+                    type: object
+                    description: A filter condition for search queries
+                    properties:
+                      field:
+                        type: string
+                        description: The field name to filter on.
+                        enum:
+                        - name
+                        - policy_id
+                        - source_type
+                        - severity
+                        - is_enabled
+                        - creator_id
+                        - last_modifier_id
+                        - create_time
+                        - update_time
+                        example: source_type
+                      operator:
+                        type: string
+                        description: '`like` is supported for string fields (`name`, `creator_id`, `last_modifier_id`).'
+                        enum:
+                        - eq
+                        - in
+                        - gte
+                        - lte
+                        - like
+                        example: eq
+                      value:
+                        type: array
+                        description: The values to compare against.
+                        example:
+                        - cloud_logs
+                        items: {}
+                    required:
+                    - operator
+                    - value
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiPaginatedResponseApiPolicy'
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Rate Limit Exceeded
+      summary: Search policies
+      tags:
+      - threats
+  /v2/organizations/{organization-id}/threats/policies/{policy-id}/rules/search:
+    post:
+      description: A POST request sent to the search endpoint returns a filtered list of policy rule objects for the specified policy, based on the given search criteria.
+      x-order:
+        value: '2'
+      operationId: searchPolicyRules
+      parameters:
+      - $ref: '#/components/parameters/organization-id'
+      - description: The unique identifier of the policy
+        in: path
+        name: policy-id
+        required: true
+        schema:
+          type: string
+          minLength: 1
+      - description: Specifies the maximum number of items to be returned.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 50
+          maximum: 100
+          minimum: 1
+      - description: A cursor for pagination to retrieve the next set of results.
+        example: eyJvZmZzZXQiOjIwfQ
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+      - description: 'Sort results by one or more fields. Format: `field` or `field:asc` or `field:desc`. Multiple fields: `field1,field2:desc`. Allowed fields: `severity`, `create_time`, `update_time`. Default: `create_time:asc`.'
+        example: create_time:asc
+        in: query
+        name: sort
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: Search request body.
+              properties:
+                conditions:
+                  type: array
+                  description: List of filter conditions to apply to the search
+                  items:
+                    type: object
+                    description: A filter condition for search queries
+                    properties:
+                      field:
+                        type: string
+                        description: The field name to filter on.
+                        enum:
+                        - policy_rule_id
+                        - rule_definition_id
+                        - threat_category
+                        - severity
+                        - scope_type
+                        - is_enabled
+                        - is_suspended
+                        - creator_id
+                        - last_modifier_id
+                        - create_time
+                        - update_time
+                        example: severity
+                      operator:
+                        type: string
+                        description: The comparison operator to apply.
+                        enum:
+                        - eq
+                        - in
+                        - gte
+                        - lte
+                        example: eq
+                      value:
+                        type: array
+                        description: The values to compare against.
+                        example:
+                        - high
+                        items: {}
+                    required:
+                    - operator
+                    - value
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiPaginatedResponseApiPolicyRule'
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Rate Limit Exceeded
+      summary: Search policy rules
+      tags:
+      - threats
+  /v2/organizations/{organization-id}/threats/rule-definitions/search:
+    post:
+      description: A POST request sent to the search endpoint returns a filtered list of rule definition objects that are associated with the specified organization based on the specified search criteria.
+      x-order:
+        value: '2'
+      operationId: searchRuleDefinitions
+      parameters:
+      - $ref: '#/components/parameters/organization-id'
+      - description: Specifies the maximum number of items to be returned.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 50
+          maximum: 100
+          minimum: 1
+      - description: A cursor for pagination to retrieve the next set of results.
+        example: eyJvZmZzZXQiOjIwfQ
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+      - description: 'Sort results by one or more fields. Format: `field` or `field:asc` or `field:desc`. Multiple fields: `field1,field2:desc`. Allowed fields: `name`, `create_time`, `update_time`. Default: `create_time:asc`.'
+        example: create_time:asc
+        in: query
+        name: sort
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: Search request body.
+              properties:
+                conditions:
+                  type: array
+                  description: List of filter conditions to apply to the search
+                  items:
+                    type: object
+                    description: A filter condition for search queries
+                    properties:
+                      field:
+                        type: string
+                        description: The field name to filter on.
+                        enum:
+                        - name
+                        - rule_definition_id
+                        - engine
+                        - threat_category
+                        - creator_id
+                        - last_modifier_id
+                        - create_time
+                        - update_time
+                        example: threat_category
+                      operator:
+                        type: string
+                        description: The comparison operator to apply.
+                        enum:
+                        - eq
+                        - in
+                        - gte
+                        - lte
+                        example: eq
+                      value:
+                        type: array
+                        description: The values to compare against.
+                        example:
+                        - cloud_trail_logs
+                        items: {}
+                    required:
+                    - operator
+                    - value
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiPaginatedResponseApiRuleDefinition'
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Rate Limit Exceeded
+      summary: Search rule definitions
+      tags:
+      - threats
+  /v2/organizations/{organization-id}/threats/stories/search:
+    post:
+      description: A POST request sent to the search endpoint returns a filtered list of threat stories objects that are associated with the specified organization based on the specified search criteria.
+      x-order:
+        value: '2'
+      operationId: searchStories
+      parameters:
+      - $ref: '#/components/parameters/organization-id'
+      - description: Specifies the maximum number of items to be returned.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 50
+          maximum: 100
+          minimum: 1
+      - description: A cursor for pagination to retrieve the next set of results.
+        example: eyJvZmZzZXQiOjIwfQ
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+      - description: 'Sort results by one or more fields. Format: `field` or `field:asc` or `field:desc`. Multiple fields: `field1,field2:desc`. Allowed fields: `update_time`, `create_time`. Default: `update_time:asc`.'
+        example: update_time:asc
+        in: query
+        name: sort
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: Search request body.
+              properties:
+                conditions:
+                  type: array
+                  description: List of filter conditions to apply to the search
+                  items:
+                    type: object
+                    description: A filter condition for search queries
+                    properties:
+                      field:
+                        type: string
+                        description: The field name to filter on.
+                        enum:
+                        - severity
+                        - status
+                        - create_time
+                        - update_time
+                        example: severity
+                      operator:
+                        type: string
+                        description: The comparison operator to apply.
+                        enum:
+                        - eq
+                        - in
+                        - gte
+                        - lte
+                        example: eq
+                      value:
+                        type: array
+                        description: The values to compare against.
+                        example:
+                        - high
+                        items: {}
+                    required:
+                    - operator
+                    - value
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiPaginatedResponseApiListStoryItem'
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Rate Limit Exceeded
+      summary: Search stories
+      tags:
+      - threats
+  /v2/organizations/{organization-id}/threats/policies/bulk:
+    post:
+      description: A POST request sent to the bulk endpoint creates multiple policies. If any policy in the request fails validation, no policies are created.
+      x-order:
+        value: '3'
+      operationId: bulkCreatePolicies
+      parameters:
+      - $ref: '#/components/parameters/organization-id'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiCreatePoliciesRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResponseApiPolicy'
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Rate Limit Exceeded
+      summary: Bulk create policies
+      tags:
+      - threats
+    patch:
+      description: A PATCH request sent to the bulk endpoint updates multiple policies. If any policy in the request is not found or fails validation, no updates are applied.
+      x-order:
+        value: '4'
+      operationId: bulkEditPolicies
+      parameters:
+      - $ref: '#/components/parameters/organization-id'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiEditPoliciesRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResponseApiPolicy'
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Rate Limit Exceeded
+      summary: Bulk edit policies
+      tags:
+      - threats
+    delete:
+      description: A DELETE request sent to the bulk endpoint removes multiple policies and their rule attachments. If any ID in the request is invalid, no policies are removed.
+      x-order:
+        value: '5'
+      operationId: bulkDeletePolicies
+      parameters:
+      - $ref: '#/components/parameters/organization-id'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiDeletePoliciesRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Rate Limit Exceeded
+      summary: Bulk delete policies
+      tags:
+      - threats
+  /v2/organizations/{organization-id}/threats/policies/{policy-id}/rules/bulk:
+    post:
+      description: A POST request sent to the bulk endpoint attaches multiple rule definitions to the policy. Returns 400 if any rule definition's category is incompatible with the policy source type, or if the rule definition and policy have mismatched management types. If any item in the request fails, no policy rules are created.
+      x-order:
+        value: '3'
+      operationId: bulkAttachRuleDefinitions
+      parameters:
+      - $ref: '#/components/parameters/organization-id'
+      - description: The unique identifier of the policy
+        in: path
+        name: policy-id
+        required: true
+        schema:
+          type: string
+          minLength: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiCreatePolicyRulesRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResponseApiPolicyRule'
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Rate Limit Exceeded
+      summary: Bulk create policy rules
+      tags:
+      - threats
+    patch:
+      description: A PATCH request sent to the bulk endpoint updates multiple policy rules. Each item must include id plus at least one of severity, scope, or is_enabled. If any item in the request is not found or fails validation, no updates are applied.
+      x-order:
+        value: '4'
+      operationId: bulkEditPolicyRules
+      parameters:
+      - $ref: '#/components/parameters/organization-id'
+      - description: The unique identifier of the policy
+        in: path
+        name: policy-id
+        required: true
+        schema:
+          type: string
+          minLength: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiEditPolicyRulesRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResponseApiPolicyRule'
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Rate Limit Exceeded
+      summary: Bulk edit policy rules
+      tags:
+      - threats
+    delete:
+      description: A DELETE request sent to the bulk endpoint detaches multiple rule definitions from the policy. The rule definitions themselves are not affected. If any ID in the request is invalid, no policy rules are removed.
+      x-order:
+        value: '5'
+      operationId: bulkDeletePolicyRules
+      parameters:
+      - $ref: '#/components/parameters/organization-id'
+      - description: The unique identifier of the policy
+        in: path
+        name: policy-id
+        required: true
+        schema:
+          type: string
+          minLength: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiDeletePolicyRulesRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Rate Limit Exceeded
+      summary: Bulk delete policy rules
+      tags:
+      - threats
+  /v2/organizations/{organization-id}/threats/rule-definitions/bulk:
+    post:
+      description: A POST request sent to the bulk endpoint creates multiple rule definitions. If any rule definition in the request fails validation, no rule definitions are created.
+      x-order:
+        value: '3'
+      operationId: bulkCreateRuleDefinitions
+      parameters:
+      - $ref: '#/components/parameters/organization-id'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiCreateRuleDefinitionsRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResponseApiRuleDefinition'
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Rate Limit Exceeded
+      summary: Bulk create rule definitions
+      tags:
+      - threats
+    patch:
+      description: A PATCH request sent to the bulk endpoint updates multiple rule definitions. If any rule definition in the request is not found or fails validation, no updates are applied.
+      x-order:
+        value: '4'
+      operationId: bulkEditRuleDefinitions
+      parameters:
+      - $ref: '#/components/parameters/organization-id'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiEditRuleDefinitionsRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResponseApiRuleDefinition'
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Rate Limit Exceeded
+      summary: Bulk edit rule definitions
+      tags:
+      - threats
+    delete:
+      description: A DELETE request sent to the bulk endpoint removes multiple rule definitions and their policy attachments. If any ID in the request is invalid, no rule definitions are removed.
+      x-order:
+        value: '5'
+      operationId: bulkDeleteRuleDefinitions
+      parameters:
+      - $ref: '#/components/parameters/organization-id'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiDeleteRuleDefinitionsRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Rate Limit Exceeded
+      summary: Bulk delete rule definitions
+      tags:
+      - threats
+  /v2/organizations/{organization-id}/threats/stories/{story-id}:
+    get:
+      description: A GET request sent to the endpoint root followed by a unique identifier returns detailed information about a specific story.
+      x-order:
+        value: '3'
+      operationId: getStory
+      parameters:
+      - $ref: '#/components/parameters/organization-id'
+      - description: The unique identifier of the story
+        in: path
+        name: story-id
+        required: true
+        schema:
+          type: string
+          minLength: 1
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResponseApiGetStoryItem'
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Rate Limit Exceeded
+      summary: Get a story
+      tags:
+      - threats
+  /v2/organizations/{organization-id}/threats/rule-definitions/{rule-definition-id}/policies:
+    get:
+      description: Returns the list of policies this rule definition is attached to, with per-attachment effective values (severity, scope, scope_type, is_enabled, is_suspended). An unknown or unattached rule-definition ID returns an empty items list with 200 OK, not 404 — the upstream service does not validate ID existence on this route.
+      x-order:
+        value: '6'
+      operationId: getAttachedPolicies
+      parameters:
+      - $ref: '#/components/parameters/organization-id'
+      - description: The unique identifier of the rule definition
+        in: path
+        name: rule-definition-id
+        required: true
+        schema:
+          type: string
+          minLength: 1
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResponseApiAttachedPolicy'
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Rate Limit Exceeded
+      summary: Get the policies a rule definition is attached to
+      tags:
+      - threats
+components:
+  schemas:
+    ApiCreateRuleDefinitionsRequest:
+      type: object
+      description: A bulk threat rule definition create request object.
+      properties:
+        rule_definitions:
+          type: array
+          description: The list of rule definitions to create.
+          items:
+            $ref: '#/components/schemas/ApiCreateRuleDefinition'
+          maxItems: 100
+          minItems: 1
+      required:
+      - rule_definitions
+    EventSummary:
+      type: object
+      description: Base schema for threat events
+      discriminator:
+        mapping:
+          AUDIT_LOG_EVENT: '#/components/schemas/AuditLogSummary'
+          AWS_CLOUDTRAIL_EVENT: '#/components/schemas/AwsCloudtrailSummary'
+          MALICIOUS_FILE_ACTIVITY: '#/components/schemas/FileSummary'
+          NETWORK_ACTIVITY: '#/components/schemas/NetworkActivitySummary'
+          PROCESS_EXECUTION: '#/components/schemas/ProcessExecutionSummary'
+        propertyName: type
+      properties:
+        description:
+          type: string
+          description: The description of this event.
+        event_time:
+          type: string
+          format: date-time
+          description: The timestamp when this event occurred.
+        event_type:
+          type: string
+          description: The specific type identifier for this event.
+        id:
+          type: string
+          description: The unique identifier for this event.
+        resource:
+          $ref: '#/components/schemas/EventResource'
+          description: The resource associated with this event.
+        type:
+          type: string
+      required:
+      - type
+    ThreatPolicy:
+      type: object
+      properties:
+        category:
+          type: string
+          description: The category of this policy.
+          enum:
+          - PROCESS_EXECUTION
+        display_name:
+          type: string
+          description: The display name for this policy.
+        enabled:
+          type: boolean
+          description: Indicates whether this policy is currently enabled.
+        id:
+          type: string
+          description: The unique identifier for this policy.
+        managed_by:
+          type: string
+          description: The entity responsible for managing this policy.
+          enum:
+          - UPWIND
+        open_issues:
+          type: integer
+          format: int32
+          description: The number of open issues associated with this policy.
+        scope:
+          type: string
+          description: Specifies whether the policy applies to all resources or a subset.
+          enum:
+          - ALL_RESOURCES
+          - SUBSET
+        severity:
+          type: string
+          description: The severity level of a threat as assessed by this policy.
+          enum:
+          - LOW
+          - MEDIUM
+          - HIGH
+          - CRITICAL
+    ApiCreatePolicyRulesRequest:
+      type: object
+      description: A bulk policy rule create request object.
+      properties:
+        policy_rules:
+          type: array
+          description: The list of policy rules to create.
+          items:
+            $ref: '#/components/schemas/ApiCreatePolicyRuleItem'
+          maxItems: 100
+          minItems: 1
+      required:
+      - policy_rules
+    ApiLabelScopeCondition:
+      allOf:
+      - $ref: '#/components/schemas/ApiScopeCondition'
+      - type: object
+        properties:
+          field:
+            type: string
+            description: The field to match against.
+            minLength: 1
+          operator:
+            type: string
+            description: The match operator.
+            enum:
+            - equals
+            - not_equals
+            - in
+            - not_in
+            minLength: 1
+          value:
+            type: array
+            description: The values to match against.
+            items:
+              type: string
+            minItems: 1
+      description: A condition that matches resources by label.
+      required:
+      - field
+      - operator
+      - value
+    ApiEditPolicyMetadata:
+      type: object
+      description: Partial display detection metadata for editing a policy.
+      properties:
+        detection_description:
+          type: string
+          description: The new detection description of this policy.
+          example: Surfaces role or permission changes that grant elevated access.
+        detection_title:
+          type: string
+          description: The new detection title of this policy.
+          example: Privilege Escalation Attempt
+    ApiEditRuleDefinitionsRequest:
+      type: object
+      description: A bulk threat rule definition edit request object.
+      properties:
+        rule_definitions:
+          type: array
+          description: The list of rule definitions to edit. If any item is not found or fails validation, no updates are applied.
+          items:
+            $ref: '#/components/schemas/ApiEditRuleDefinition'
+          maxItems: 100
+          minItems: 1
+      required:
+      - rule_definitions
+    DetectionAwsCloudtrailInitiatorDetails:
+      type: object
+      properties:
+        accessKeyId:
+          type: string
+        accountId:
+          type: string
+        arn:
+          type: string
+        name:
+          type: string
+        principalId:
+          type: string
+        sessionContext:
+          $ref: '#/components/schemas/DetectionAwsCloudtrailInitiatorSessionContextDetails'
+        type:
+          type: string
+        userName:
+          type: string
+    ApiScopeTag:
+      type: object
+      description: A tag value used in tag-based scope conditions.
+      properties:
+        key:
+          type: string
+          description: The tag key.
+        value:
+          type: string
+          description: The tag value.
+    ApiEditPoliciesRequest:
+      type: object
+      description: A bulk threat policy edit request object.
+      properties:
+        policies:
+          type: array
+          description: The list of policies to edit. If any item is not found or fails validation, no updates are applied.
+          items:
+            $ref: '#/components/schemas/ApiEditPolicy'
+          maxItems: 100
+          minItems: 1
+      required:
+      - policies
+    DetectionAwsCloudtrailInitiatorSessionAttributes:
+      type: object
+      properties:
+        creationDate:
+          type: string
+          format: date-time
+        mfaAuthenticated:
+          type: string
+    ThreatDetection:
+      type: object
+      properties:
+        category:
+          type: string
+          description: The category of this detection.
+          enum:
+          - NETWORK
+          - PROCESS
+          - CLOUD_LOGS
+        description:
+          type: string
+          description: A detailed description of this detection.
+        first_seen_time:
+          type: string
+          format: date-time
+          description: The timestamp when this detection was first seen.
+        id:
+          type: string
+          description: The unique identifier for this detection.
+        last_seen_time:
+          type: string
+          format: date-time
+          description: The timestamp when this detection was last seen.
+        mitre_attacks:
+          type: array
+          description: The MITRE ATT&CK framework information related to this detection.
+          items:
+            $ref: '#/components/schemas/MitreAttackDetails'
+        occurrence_count:
+          type: integer
+          format: int32
+          description: The count of occurrences for this detection.
+        resource:
+          $ref: '#/components/schemas/DetectionResource'
+          description: The resource associated with this detection.
+        severity:
+          type: string
+          description: The severity level of this detection.
+          enum:
+          - LOW
+          - MEDIUM
+          - HIGH
+          - CRITICAL
+        status:
+          type: string
+          description: The status of this detection.
+          enum:
+          - PENDING
+          - OPEN
+          - ARCHIVED
+        title:
+          type: string
+          description: The title of this detection.
+        triggers:
+          type: array
+          description: List of triggers associated with this detection. Each trigger indicates a policy violation that caused this detection. It comprises the policy identifier and a list of events related to the violation.
+          items:
+            $ref: '#/components/schemas/EventSummaryList'
+        type:
+          type: string
+          description: The type of detection.
+    ProcessExecutionSummary:
+      allOf:
+      - $ref: '#/components/schemas/EventSummary'
+      - type: object
+        properties:
+          data:
+            $ref: '#/components/schemas/ProcessExecutionData'
+    ApiCreatePolicy:
+      type: object
+      description: A threat policy create request object.
+      properties:
+        default_severity:
+          type: string
+          description: The default severity of this policy.
+          enum:
+          - low
+          - medium
+          - high
+          - critical
+          minLength: 1
+        is_enabled:
+          type: boolean
+          default: true
+          description: Whether this policy is enabled.
+        metadata:
+          $ref: '#/components/schemas/ApiCreatePolicyMetadata'
+          description: The display metadata of this policy.
+        name:
+          type: string
+          description: The name of this policy.
+          minLength: 1
+        resource_scope:
+          $ref: '#/components/schemas/ApiResourceScope'
+          description: The resource scope of this policy.
+        source_type:
+          type: string
+          description: The telemetry source type of this policy.
+          enum:
+          - cloud_logs
+          - sensor
+          minLength: 1
+      required:
+      - default_severity
+      - metadata
+      - name
+      - source_type
+    ApiCreatePolicyMetadata:
+      type: object
+      description: The display metadata of this policy.
+      properties:
+        detection_description:
+          type: string
+          description: The detection description of this policy.
+          example: Surfaces role or permission changes that grant elevated access.
+          minLength: 1
+        detection_title:
+          type: string
+          description: The detection title of this policy.
+          example: Privilege Escalation Attempt
+          minLength: 1
+      required:
+      - detection_description
+      - detection_title
+    RestApiPaginatedResponseApiListStoryItem:
+      type: object
+      description: Successful paginated API response containing items and pagination metadata
+      properties:
+        items:
+          type: array
+          description: The list of items in the response
+          items:
+            $ref: '#/components/schemas/ApiListStoryItem'
+        metadata:
+          $ref: '#/components/schemas/ApiPaginationMetadata'
+          description: Pagination metadata containing cursor information for navigating results
+    Initiator:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/InitiatorData'
+        type:
+          type: string
+    ApiScopeCondition:
+      description: A scope condition. The type field determines the structure.
+      discriminator:
+        mapping:
+          cloud_account_organization_rule: '#/components/schemas/ApiCloudAccountOrganizationScopeCondition'
+          cloud_account_ou_rule: '#/components/schemas/ApiCloudAccountOUScopeCondition'
+          cloud_account_rule: '#/components/schemas/ApiCloudAccountScopeCondition'
+          filter: '#/components/schemas/ApiScopeConditionFilter'
+          label_rule: '#/components/schemas/ApiLabelScopeCondition'
+          resource_id_rule: '#/components/schemas/ApiResourceIdScopeCondition'
+          resource_kind_rule: '#/components/schemas/ApiResourceKindScopeCondition'
+          resource_name_rule: '#/components/schemas/ApiResourceNameScopeCondition'
+          tag_rule: '#/components/schemas/ApiTagScopeCondition'
+        propertyName: type
+      properties:
+        type:
+          type: string
+      required:
+      - type
+    ApiPolicyRule:
+      type: object
+      description: A policy rule object.
+      properties:
+        create_time:
+          type: string
+          format: date-time
+          description: The policy rule's creation timestamp (in ISO8601 format).
+        creator_id:
+          type: string
+          description: The identifier of the user or client that created this policy rule.
+        default_values:
+          $ref: '#/components/schemas/ApiPolicyRuleDefaultValues'
+          description: The Upwind default values for fields that have been overridden on this policy rule.
+        is_enabled:
+          type: boolean
+          description: Whether this policy rule is enabled.
+        is_suspended:
+          type: boolean
+          description: Whether this policy rule is currently suspended (silenced).
+        last_modifier_id:
+          type: string
+          description: The identifier of the user or client that last modified this policy rule.
+        policy_id:
+          type: string
+          description: The identifier of the policy this rule definition is attached to.
+        policy_rule_id:
+          type: string
+          description: The unique identifier for this policy rule.
+        rule_definition_id:
+          type: string
+          description: The identifier of the rule definition attached to the policy.
+        rule_definition_name:
+          type: string
+          description: The display name of the rule definition.
+        scope:
+          $ref: '#/components/schemas/ApiResourceScope'
+          description: The effective resource scope for this policy rule.
+        scope_type:
+          type: string
+          description: The source of the effective scope for this policy rule.
+          enum:
+          - policy_scope
+          - rule_scope
+          - override
+          - no_scope
+        severity:
+          type: string
+          description: The effective severity for this policy rule.
+          enum:
+          - low
+          - medium
+          - high
+          - critical
+        threat_category:
+          type: string
+          description: The threat category of this policy rule.
+          enum:
+          - network_traffic
+          - process_execution
+          - file_events
+          - files
+          - cloud_trail_logs
+          - syscall_event
+          - network_baseline
+          - azure_activity_logs
+          - azure_entra_id_logs
+        update_time:
+          type: string
+          format: date-time
+          description: The policy rule's last update timestamp (in ISO8601 format).
+    Tag:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+    ApiRuleDefinition:
+      type: object
+      description: A threat rule definition object.
+      properties:
+        create_time:
+          type: string
+          format: date-time
+          description: The rule definition's creation timestamp (in ISO8601 format).
+        creator_id:
+          type: string
+          description: The identifier of the user or client that created this rule definition.
+        engine:
+          type: string
+          description: The detection engine of this rule definition.
+          enum:
+          - rego
+        last_modifier_id:
+          type: string
+          description: The identifier of the user or client that last modified this rule definition.
+        metadata:
+          $ref: '#/components/schemas/ApiRuleDefinitionMetadata'
+          description: The display and MITRE ATT&CK metadata of this rule definition.
+        name:
+          type: string
+          description: The name of this rule definition.
+        rule_definition_id:
+          type: string
+          description: The unique identifier for this rule definition.
+        rule_expression:
+          type: string
+          description: 'The rule expression body of this rule definition. Must be a valid Rego expression and must include a package declaration as the first line, following the pattern: `package policy.custom.<threat_category>` (e.g. `package policy.custom.cloud_trail_logs` for threat_category `cloud_trail_logs`).'
+        threat_category:
+          type: string
+          description: The threat category of this rule definition.
+          enum:
+          - network_traffic
+          - process_execution
+          - file_events
+          - files
+          - cloud_trail_logs
+          - syscall_event
+          - network_baseline
+          - azure_activity_logs
+          - azure_entra_id_logs
+          - gcp_audit_logs
+        update_time:
+          type: string
+          format: date-time
+          description: The rule definition's last update timestamp (in ISO8601 format).
+    ProcessExecutionData:
+      type: object
+      properties:
+        command:
+          type: string
+        description:
+          type: string
+        execution_count:
+          type: integer
+          format: int32
+        last_process_tree:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcessTreeData'
+        name:
+          type: string
+        pattern:
+          type: string
+        status:
+          type: string
+        user_name:
+          type: string
+        validation:
+          type: array
+          items:
+            type: string
+    ApiPolicyDefaultValues:
+      type: object
+      description: The default (pre-override) values of a threat policy.
+      properties:
+        is_enabled:
+          type: boolean
+          description: The enablement state of this policy before tenant overrides are applied.
+        resource_scope:
+          $ref: '#/components/schemas/ApiResourceScope'
+          description: The resource scope of this policy before tenant overrides are applied.
+        severity:
+          type: string
+          description: The severity level of this policy before tenant overrides are applied.
+          enum:
+          - low
+          - medium
+          - high
+          - critical
+    ApiRuleDefinitionMetadata:
+      type: object
+      description: The display and MITRE ATT&CK metadata of a rule definition.
+      properties:
+        detection_description:
+          type: string
+          description: The detection description of this rule definition.
+          example: Detects API calls made without proper authorization
+        detection_title:
+          type: string
+          description: The detection title of this rule definition.
+          example: Unauthorized API Call Detection
+        mitre_tactic_code:
+          type: string
+          description: The MITRE ATT&CK tactic code associated with this rule definition.
+          example: TA0001
+        mitre_tactic_name:
+          type: string
+          description: The name of the MITRE ATT&CK tactic associated with this rule definition.
+          example: Initial Access
+        mitre_technique_code:
+          type: string
+          description: The MITRE ATT&CK technique code associated with this rule definition.
+          example: T1078
+        mitre_technique_name:
+          type: string
+          description: The name of the MITRE ATT&CK technique associated with this rule definition.
+          example: Valid Accounts
+    RestApiPaginatedResponseApiRuleDefinition:
+      type: object
+      description: Successful paginated API response containing items and pagination metadata
+      properties:
+        items:
+          type: array
+          description: The list of items in the response
+          items:
+            $ref: '#/components/schemas/ApiRuleDefinition'
+        metadata:
+          $ref: '#/components/schemas/ApiPaginationMetadata'
+          description: Pagination metadata containing cursor information for navigating results
+    ApiEditPolicyRulesRequest:
+      type: object
+      description: A bulk policy rule edit request object.
+      properties:
+        policy_rules:
+          type: array
+          description: The list of policy rules to edit. If any item is not found or fails validation, no updates are applied.
+          items:
+            $ref: '#/components/schemas/ApiEditPolicyRuleItem'
+          maxItems: 100
+          minItems: 1
+    DetectionAwsCloudtrailInitiatorSessionContextDetails:
+      type: object
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DetectionAwsCloudtrailInitiatorSessionAttributes'
+        sessionIssuer:
+          $ref: '#/components/schemas/DetectionAwsCloudtrailInitiatorSessionIssuer'
+    RestApiResponseApiPolicy:
+      type: object
+      description: Successful API response containing items
+      properties:
+        items:
+          type: array
+          description: The list of items in the response
+          items:
+            $ref: '#/components/schemas/ApiPolicy'
+    ApiCloudAccountScopeCondition:
+      allOf:
+      - $ref: '#/components/schemas/ApiScopeCondition'
+      - type: object
+        properties:
+          field:
+            type: string
+            description: The field to match against.
+            minLength: 1
+          operator:
+            type: string
+            description: The match operator.
+            enum:
+            - equals
+            - not_equals
+            - in
+            - not_in
+            minLength: 1
+          value:
+            type: array
+            description: The values to match against.
+            items:
+              type: string
+            minItems: 1
+      description: A condition that matches cloud accounts by ID.
+      required:
+      - field
+      - operator
+      - value
+    ApiCreateRuleDefinition:
+      type: object
+      description: A threat rule definition create request object.
+      properties:
+        engine:
+          type: string
+          description: The detection engine of this rule definition.
+          enum:
+          - rego
+          minLength: 1
+        metadata:
+          $ref: '#/components/schemas/ApiCreateRuleDefinitionMetadata'
+          description: The display and MITRE ATT&CK metadata of this rule definition.
+        name:
+          type: string
+          description: The name of this rule definition.
+          minLength: 1
+        rule_expression:
+          type: string
+          description: 'The rule expression body of this rule definition. Must be a valid Rego expression and must include a package declaration as the first line, following the pattern: `package policy.custom.<threat_category>` (e.g. `package policy.custom.cloud_trail_logs` for threat_category `cloud_trail_logs`).'
+          minLength: 1
+        threat_category:
+          type: string
+          description: The threat category of this rule definition.
+          enum:
+          - network_traffic
+          - process_execution
+          - file_events
+          - cloud_trail_logs
+          - syscall_event
+          - azure_activity_logs
+          - azure_entra_id_logs
+          - gcp_audit_logs
+          minLength: 1
+      required:
+      - engine
+      - metadata
+      - name
+      - rule_expression
+      - threat_category
+    ApiTagScopeCondition:
+      allOf:
+      - $ref: '#/components/schemas/ApiScopeCondition'
+      - type: object
+        properties:
+          field:
+            type: string
+            description: The field to match against.
+            minLength: 1
+          operator:
+            type: string
+            description: The match operator.
+            enum:
+            - equals
+            - not_equals
+            - in
+            - not_in
+            minLength: 1
+          value:
+            type: array
+            description: The tag values to match against.
+            items:
+              $ref: '#/components/schemas/ApiScopeTag'
+            minItems: 1
+      description: A condition that matches resources by tag.
+      required:
+      - field
+      - operator
+      - value
+    ApiCreatePolicyRuleItem:
+      type: object
+      description: A policy rule create request item.
+      properties:
+        is_enabled:
+          type: boolean
+          description: Whether this policy rule is enabled. Defaults to true when omitted.
+        rule_definition_id:
+          type: string
+          description: The identifier of the rule definition to attach.
+          minLength: 1
+        scope:
+          $ref: '#/components/schemas/ApiResourceScope'
+          description: The resource scope override for this policy rule. Defaults to the policy scope when omitted.
+        severity:
+          type: string
+          description: The severity override for this policy rule. Defaults to the policy severity when omitted.
+          enum:
+          - low
+          - medium
+          - high
+          - critical
+      required:
+      - rule_definition_id
+    InitiatorData:
+      type: object
+      properties:
+        groups:
+          type: array
+          items:
+            type: string
+        source_ips:
+          type: array
+          items:
+            type: string
+        uid:
+          type: string
+        user_agent:
+          type: string
+        user_name:
+          type: string
+    ApiAttachedPolicy:
+      type: object
+      description: A policy that a rule definition is attached to, with effective values per policy rule.
+      properties:
+        create_time:
+          type: string
+          format: date-time
+          description: The time the policy was created (in ISO8601 format).
+        creator_id:
+          type: string
+          description: The identifier of the user or client that created the policy.
+        is_enabled:
+          type: boolean
+          description: Whether this policy rule is enabled.
+        is_suspended:
+          type: boolean
+          description: Whether this policy rule is currently suspended (silenced).
+        last_modifier_id:
+          type: string
+          description: The identifier of the user or client that last modified the policy.
+        policy_id:
+          type: string
+          description: The unique identifier of the policy.
+        policy_name:
+          type: string
+          description: The display name of the policy.
+        scope:
+          $ref: '#/components/schemas/ApiResourceScope'
+          description: The effective resource scope for this policy rule.
+        scope_type:
+          type: string
+          description: The source of the effective scope for this policy rule.
+          enum:
+          - policy_scope
+          - rule_scope
+          - override
+          - no_scope
+        severity:
+          type: string
+          description: The effective severity for this policy rule.
+          enum:
+          - low
+          - medium
+          - high
+          - critical
+        update_time:
+          type: string
+          format: date-time
+          description: The time the policy was last modified (in ISO8601 format).
+    RestApiResponseApiAttachedPolicy:
+      type: object
+      description: Successful API response containing items
+      properties:
+        items:
+          type: array
+          description: The list of items in the response
+          items:
+            $ref: '#/components/schemas/ApiAttachedPolicy'
+    ThreatPolicyUpdateRequest:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Indicates whether this policy should be enabled.
+    FileSummaryData:
+      type: object
+      properties:
+        file_hash:
+          type: string
+        file_hash_type:
+          type: string
+        file_name:
+          type: string
+        file_path:
+          type: string
+        image_name:
+          type: string
+    ApiCloudAccountOUScopeCondition:
+      allOf:
+      - $ref: '#/components/schemas/ApiScopeCondition'
+      - type: object
+        properties:
+          field:
+            type: string
+            description: The field to match against.
+            minLength: 1
+          operator:
+            type: string
+            description: The match operator.
+            enum:
+            - equals
+            - not_equals
+            - in
+            - not_in
+            minLength: 1
+          value:
+            type: array
+            description: The values to match against.
+            items:
+              type: string
+            minItems: 1
+      description: A condition that matches cloud accounts by organizational unit.
+      required:
+      - field
+      - operator
+      - value
+    ApiScopeConditionFilter:
+      allOf:
+      - $ref: '#/components/schemas/ApiScopeCondition'
+      - type: object
+        properties:
+          conditions:
+            type: array
+            description: The sub-conditions to combine.
+            items:
+              description: A scope condition. The type field determines the structure.
+            minItems: 1
+          match:
+            type: string
+            description: The match strategy for combining sub-conditions.
+            enum:
+            - all
+            - any
+            - not_any
+            - not_all
+            minLength: 1
+      description: A composite condition that combines multiple sub-conditions.
+      required:
+      - conditions
+      - match
+    AuditLogData:
+      type: object
+      properties:
+        initiator:
+          $ref: '#/components/schemas/Initiator'
+    ApiEditRuleDefinition:
+      type: object
+      description: A threat rule definition edit request object. All fields except id are optional; at least one mutable field must be present.
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the rule definition to edit.
+          minLength: 1
+        metadata:
+          $ref: '#/components/schemas/ApiEditRuleDefinitionMetadata'
+          description: The new display and MITRE ATT&CK metadata.
+        name:
+          type: string
+          description: The new name of this rule definition.
+        rule_expression:
+          type: string
+          description: The new rule expression body of this rule definition. Re-validated upstream on change.
+      required:
+      - id
+    ApiDeletePolicyRulesRequest:
+      type: object
+      description: A bulk policy rule delete request object.
+      properties:
+        policy_rule_ids:
+          type: array
+          description: The IDs of the policy rules to delete. If any ID is invalid, no policy rules are removed.
+          items:
+            type: string
+            minLength: 1
+          maxItems: 100
+          minItems: 1
+    ApiPolicyMetadata:
+      type: object
+      description: The display metadata of a threat policy.
+      properties:
+        detection_description:
+          type: string
+          description: The detection description of this policy.
+          example: Detects unauthorized changes to cloud audit configurations
+        detection_title:
+          type: string
+          description: The detection title of this policy.
+          example: Cloud Audit Configuration Tampering
+    InternetExposureDetails:
+      type: object
+      properties:
+        active_communication:
+          type: boolean
+          description: An indicator signaling whether there is active incoming communication from the internet to the resource.
+    ProcessTreeData:
+      type: object
+      properties:
+        command:
+          type: string
+        end_time:
+          type: string
+          format: date-time
+        host_parent_process_id:
+          type: integer
+          format: int32
+        host_process_id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        start_time:
+          type: string
+          format: date-time
+    RestApiResponseApiRuleDefinition:
+      type: object
+      description: Successful API response containing items
+      properties:
+        items:
+          type: array
+          description: The list of items in the response
+          items:
+            $ref: '#/components/schemas/ApiRuleDefinition'
+    EventSummaryList:
+      type: object
+      properties:
+        events:
+          type: array
+          description: List of event summaries.
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/AuditLogSummary'
+            - $ref: '#/components/schemas/AwsCloudtrailSummary'
+            - $ref: '#/components/schemas/FileSummary'
+            - $ref: '#/components/schemas/NetworkActivitySummary'
+            - $ref: '#/components/schemas/ProcessExecutionSummary'
+        policy_id:
+          type: string
+          description: The unique identifier for the policy.
+        policy_name:
+          type: string
+          description: The name of the policy.
+    RestApiResponseApiGetStoryItem:
+      type: object
+      description: Successful API response containing items
+      properties:
+        items:
+          type: array
+          description: The list of items in the response
+          items:
+            $ref: '#/components/schemas/ApiGetStoryItem'
+    EventResource:
+      type: object
+      properties:
+        cloud_account_id:
+          type: string
+          description: The unique identifier for the cloud account associated with this resource.
+        cloud_provider:
+          type: string
+          description: The cloud provider of this resource.
+          enum:
+          - AWS
+          - GCP
+          - AZURE
+          - ORACLE
+        id:
+          type: string
+          description: The unique identifier for this resource.
+        name:
+          type: string
+          description: The name of this resource.
+        region:
+          type: string
+          description: The region where this resource is located.
+        risk_categories:
+          type: array
+          description: List of risk categories associated with this resource.
+          items:
+            type: string
+          uniqueItems: true
+        upwind_asset_id:
+          type: string
+          description: The Upwind asset identifier for this resource.
+    BadReputationIpsData:
+      type: object
+      properties:
+        abuse_rate:
+          type: string
+        city:
+          type: string
+        country:
+          type: string
+        direction:
+          type: string
+        domain:
+          type: string
+    ApiResourceNameScopeCondition:
+      allOf:
+      - $ref: '#/components/schemas/ApiScopeCondition'
+      - type: object
+        properties:
+          field:
+            type: string
+            description: The field to match against.
+            minLength: 1
+          operator:
+            type: string
+            description: The match operator.
+            enum:
+            - equals
+            - not_equals
+            - in
+            - not_in
+            minLength: 1
+          value:
+            type: array
+            description: The values to match against.
+            items:
+              type: string
+            minItems: 1
+      description: A condition that matches resources by name.
+      required:
+      - field
+      - operator
+      - value
+    InternetExposure:
+      type: object
+      properties:
+        ingress:
+          $ref: '#/components/schemas/InternetExposureDetails'
+          description: The information about incoming internet-facing communication activities of the resource.
+    ApiCreateRuleDefinitionMetadata:
+      type: object
+      description: The display and MITRE ATT&CK metadata of a rule definition create request.
+      properties:
+        detection_description:
+          type: string
+          description: The detection description of this rule definition.
+          example: Detects API calls made without proper authorization
+          minLength: 1
+        detection_title:
+          type: string
+          description: The detection title of this rule definition.
+          example: Unauthorized API Call Detection
+          minLength: 1
+        mitre_tactic_code:
+          type: string
+          description: The MITRE ATT&CK tactic code associated with this rule definition.
+          example: TA0001
+        mitre_tactic_name:
+          type: string
+          description: The name of the MITRE ATT&CK tactic associated with this rule definition.
+          example: Initial Access
+        mitre_technique_code:
+          type: string
+          description: The MITRE ATT&CK technique code associated with this rule definition.
+          example: T1078
+        mitre_technique_name:
+          type: string
+          description: The name of the MITRE ATT&CK technique associated with this rule definition.
+          example: Valid Accounts
+      required:
+      - detection_description
+      - detection_title
+    ApiPolicyRuleDefaultValues:
+      type: object
+      description: A default values object containing the Upwind-managed values overridden on this policy rule.
+      properties:
+        is_enabled:
+          type: boolean
+          description: Whether this policy rule is enabled by default.
+        is_suspended:
+          type: boolean
+          description: Whether this policy rule is suspended by default.
+        scope:
+          $ref: '#/components/schemas/ApiResourceScope'
+          description: The Upwind default resource scope for this policy rule.
+        severity:
+          type: string
+          description: The Upwind default severity for this policy rule.
+    FileSummary:
+      allOf:
+      - $ref: '#/components/schemas/EventSummary'
+      - type: object
+        properties:
+          data:
+            $ref: '#/components/schemas/FileSummaryData'
+    DetectionResource:
+      type: object
+      properties:
+        cloud_account_id:
+          type: string
+          description: The unique identifier for the cloud account associated with this resource.
+        cloud_account_name:
+          type: string
+          description: The name of the cloud account associated with this resource.
+        cloud_account_tags:
+          type: array
+          description: List of tags associated with the cloud account the resource belongs to.
+          items:
+            $ref: '#/components/schemas/Tag'
+        cloud_provider:
+          type: string
+          description: The cloud provider of this resource.
+          enum:
+          - AWS
+          - GCP
+          - AZURE
+          - ORACLE
+        cluster_id:
+          type: string
+          description: The unique identifier for the cluster associated with this resource.
+        external_id:
+          type: string
+          description: The external unique identifier for this resource.
+        id:
+          type: string
+          description: The unique identifier for this resource.
+        internet_exposure:
+          $ref: '#/components/schemas/InternetExposure'
+        name:
+          type: string
+          description: The name of this resource.
+        namespace:
+          type: string
+        region:
+          type: string
+          description: The region where this resource is located.
+        risk_categories:
+          type: array
+          items:
+            type: string
+          uniqueItems: true
+        type:
+          type: string
+          description: The type of this resource.
+        upwind_asset_id:
+          type: string
+          description: The Upwind asset identifier for this resource.
+    RestApiResponseApiPolicyRule:
+      type: object
+      description: Successful API response containing items
+      properties:
+        items:
+          type: array
+          description: The list of items in the response
+          items:
+            $ref: '#/components/schemas/ApiPolicyRule'
+    ApiCloudAccountOrganizationScopeCondition:
+      allOf:
+      - $ref: '#/components/schemas/ApiScopeCondition'
+      - type: object
+        properties:
+          field:
+            type: string
+            description: The field to match against.
+            minLength: 1
+          operator:
+            type: string
+            description: The match operator.
+            enum:
+            - equals
+            - not_equals
+            - in
+            - not_in
+            minLength: 1
+          value:
+            type: array
+            description: The values to match against.
+            items:
+              type: string
+            minItems: 1
+      description: A condition that matches cloud accounts by organization.
+      required:
+      - field
+      - operator
+      - value
+    MitreAttackDetails:
+      type: object
+      properties:
+        tactic_id:
+          type: string
+          description: The unique identifier for the tactic.
+        tactic_name:
+          type: string
+          description: The name of the tactic.
+        technique_id:
+          type: string
+          description: The unique identifier for the technique.
+        technique_name:
+          type: string
+          description: The name of the technique.
+    ApiEditRuleDefinitionMetadata:
+      type: object
+      description: Partial display and MITRE ATT&CK metadata for editing a rule definition.
+      properties:
+        detection_description:
+          type: string
+          description: The new detection description of this rule definition.
+          example: Detects API calls made without proper authorization
+        detection_title:
+          type: string
+          description: The new detection title of this rule definition.
+          example: Unauthorized API Call Detection
+        mitre_tactic_code:
+          type: string
+          description: The new MITRE ATT&CK tactic code associated with this rule definition.
+          example: TA0001
+        mitre_tactic_name:
+          type: string
+          description: The new name of the MITRE ATT&CK tactic associated with this rule definition.
+          example: Initial Access
+        mitre_technique_code:
+          type: string
+          description: The new MITRE ATT&CK technique code associated with this rule definition.
+          example: T1078
+        mitre_technique_name:
+          type: string
+          description: The new name of the MITRE ATT&CK technique associated with this rule definition.
+          example: Valid Accounts
+    ApiEditPolicyRuleItem:
+      type: object
+      description: A policy rule edit request item. All fields except id are optional; at least one mutable field must be present.
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the policy rule to edit.
+          minLength: 1
+        is_enabled:
+          type: boolean
+          description: The new enabled state for this policy rule.
+        scope:
+          $ref: '#/components/schemas/ApiResourceScope'
+          description: The new resource scope override for this policy rule. Pass {} to clear the scope.
+        severity:
+          type: string
+          description: The new severity override for this policy rule.
+          enum:
+          - low
+          - medium
+          - high
+          - critical
+      required:
+      - id
+    ApiPaginationMetadata:
+      type: object
+      description: Pagination metadata for navigating through result pages
+      properties:
+        limit:
+          type: integer
+          format: int32
+          description: The maximum number of items returned per page
+          example: 20
+        next_cursor:
+          type: string
+          description: Cursor for fetching the next page of results. Absent if there are no more pages.
+          example: eyJvZmZzZXQiOjIwfQ
+        previous_cursor:
+          type: string
+          description: Cursor for fetching the previous page of results. Absent if this is the first page.
+          example: eyJvZmZzZXQiOjB9
+    ApiResourceKindScopeCondition:
+      allOf:
+      - $ref: '#/components/schemas/ApiScopeCondition'
+      - type: object
+        properties:
+          field:
+            type: string
+            description: The field to match against.
+            minLength: 1
+          operator:
+            type: string
+            description: The match operator.
+            enum:
+            - equals
+            - not_equals
+            - in
+            - not_in
+            minLength: 1
+          value:
+            type: array
+            description: The values to match against.
+            items:
+              type: string
+            minItems: 1
+      description: A condition that matches resources by kind.
+      required:
+      - field
+      - operator
+      - value
+    AuditLogSummary:
+      allOf:
+      - $ref: '#/components/schemas/EventSummary'
+      - type: object
+        properties:
+          data:
+            $ref: '#/components/schemas/AuditLogData'
+    ApiDeletePoliciesRequest:
+      type: object
+      description: A bulk threat policy delete request object.
+      properties:
+        policy_ids:
+          type: array
+          description: The IDs of the policies to delete. If any ID is invalid, no policies are deleted.
+          items:
+            type: string
+            minLength: 1
+          maxItems: 100
+          minItems: 1
+    UpdateDetectionRequest:
+      type: object
+      properties:
+        status:
+          type: string
+          description: The status for this detection.
+          enum:
+          - ARCHIVED
+    ApiDeleteRuleDefinitionsRequest:
+      type: object
+      description: A bulk threat rule definition delete request object.
+      properties:
+        rule_definition_ids:
+          type: array
+          description: The IDs of the rule definitions to delete. If any ID is invalid, no rule definitions are deleted.
+          items:
+            type: string
+            minLength: 1
+          maxItems: 100
+          minItems: 1
+    ApiResourceIdScopeCondition:
+      allOf:
+      - $ref: '#/components/schemas/ApiScopeCondition'
+      - type: object
+        properties:
+          field:
+            type: string
+            description: The field to match against.
+            minLength: 1
+          operator:
+            type: string
+            description: The match operator.
+            enum:
+            - equals
+            - not_equals
+            - in
+            - not_in
+            minLength: 1
+          value:
+            type: array
+            description: The values to match against.
+            items:
+              type: string
+            minItems: 1
+      description: A condition that matches resources by ID.
+      required:
+      - field
+      - operator
+      - value
+    ApiPolicy:
+      type: object
+      description: A threat policy object.
+      properties:
+        create_time:
+          type: string
+          format: date-time
+          description: The policy's creation timestamp (in ISO8601 format).
+        creator_id:
+          type: string
+          description: The identifier of the user or client that created this policy.
+        default_values:
+          $ref: '#/components/schemas/ApiPolicyDefaultValues'
+          description: The default (pre-override) values of this policy. Populated only when a tenant override is in effect on a managed policy.
+        is_enabled:
+          type: boolean
+          description: Whether this policy is enabled.
+        last_modifier_id:
+          type: string
+          description: The identifier of the user or client that last modified this policy.
+        metadata:
+          $ref: '#/components/schemas/ApiPolicyMetadata'
+          description: The display metadata of this policy.
+        name:
+          type: string
+          description: The name of this policy.
+        policy_id:
+          type: string
+          description: The unique identifier for this policy.
+        resource_scope:
+          $ref: '#/components/schemas/ApiResourceScope'
+          description: The resource scope of this policy.
+        severity:
+          type: string
+          description: The severity level of this policy.
+          enum:
+          - low
+          - medium
+          - high
+          - critical
+        source_type:
+          type: string
+          description: The telemetry source type of this policy.
+          enum:
+          - cloud_logs
+          - sensor
+        update_time:
+          type: string
+          format: date-time
+          description: The policy's last update timestamp (in ISO8601 format).
+    ApiGetStoryItem:
+      type: object
+      description: A threat story object with full details
+      properties:
+        create_time:
+          type: string
+          format: date-time
+          description: The story's creation timestamp (in ISO8601 format).
+        description:
+          type: string
+          description: The detailed description of this story.
+        detection_ids:
+          type: array
+          description: List of detection IDs associated with this story.
+          items:
+            type: string
+        id:
+          type: string
+          description: The unique identifier for this story.
+        severity:
+          type: string
+          description: The severity level of this story.
+          enum:
+          - CRITICAL
+          - HIGH
+          - MEDIUM
+          - LOW
+          - INFO
+        status:
+          type: string
+          description: The status of this story.
+          enum:
+          - OPEN
+          - ARCHIVED
+        title:
+          type: string
+          description: The title of this story.
+        update_time:
+          type: string
+          format: date-time
+          description: The story's last update timestamp (in ISO8601 format).
+    RestApiPaginatedResponseApiPolicy:
+      type: object
+      description: Successful paginated API response containing items and pagination metadata
+      properties:
+        items:
+          type: array
+          description: The list of items in the response
+          items:
+            $ref: '#/components/schemas/ApiPolicy'
+        metadata:
+          $ref: '#/components/schemas/ApiPaginationMetadata'
+          description: Pagination metadata containing cursor information for navigating results
+    BadReputationIpsDataList:
+      type: object
+      properties:
+        bad_reputation_ips:
+          type: array
+          items:
+            $ref: '#/components/schemas/BadReputationIpsData'
+    ApiResourceScope:
+      type: object
+      description: The resource scope defining which cloud resources this policy applies to.
+      properties:
+        condition:
+          description: The scope condition. Null means no scope is applied (empty/clear).
+          oneOf:
+          - $ref: '#/components/schemas/ApiCloudAccountOUScopeCondition'
+          - $ref: '#/components/schemas/ApiCloudAccountOrganizationScopeCondition'
+          - $ref: '#/components/schemas/ApiCloudAccountScopeCondition'
+          - $ref: '#/components/schemas/ApiLabelScopeCondition'
+          - $ref: '#/components/schemas/ApiResourceIdScopeCondition'
+          - $ref: '#/components/schemas/ApiResourceKindScopeCondition'
+          - $ref: '#/components/schemas/ApiResourceNameScopeCondition'
+          - $ref: '#/components/schemas/ApiScopeConditionFilter'
+          - $ref: '#/components/schemas/ApiTagScopeCondition'
+    ApiListStoryItem:
+      type: object
+      description: A threat story object
+      properties:
+        create_time:
+          type: string
+          format: date-time
+          description: The story's creation timestamp (in ISO8601 format).
+        detection_ids:
+          type: array
+          description: List of detection IDs associated with this story.
+          items:
+            type: string
+        id:
+          type: string
+          description: The unique identifier for this story.
+        severity:
+          type: string
+          description: The severity level of this story.
+          enum:
+          - CRITICAL
+          - HIGH
+          - MEDIUM
+          - LOW
+          - INFO
+        status:
+          type: string
+          description: The status of this story.
+          enum:
+          - OPEN
+          - ARCHIVED
+        title:
+          type: string
+          description: The title of this story.
+        update_time:
+          type: string
+          format: date-time
+          description: The story's last update timestamp (in ISO8601 format).
+    NetworkActivitySummary:
+      allOf:
+      - $ref: '#/components/schemas/EventSummary'
+      - type: object
+        properties:
+          data:
+            $ref: '#/components/schemas/BadReputationIpsDataList'
+    RestApiPaginatedResponseApiPolicyRule:
+      type: object
+      description: Successful paginated API response containing items and pagination metadata
+      properties:
+        items:
+          type: array
+          description: The list of items in the response
+          items:
+            $ref: '#/components/schemas/ApiPolicyRule'
+        metadata:
+          $ref: '#/components/schemas/ApiPaginationMetadata'
+          description: Pagination metadata containing cursor information for navigating results
+    DetectionAwsCloudtrailInitiatorSessionIssuer:
+      type: object
+      properties:
+        accountId:
+          type: string
+        arn:
+          type: string
+        principalId:
+          type: string
+        type:
+          type: string
+        userName:
+          type: string
+    ApiEditPolicy:
+      type: object
+      description: A threat policy edit request object. All fields except id are optional; at least one mutable field must be present.
+      properties:
+        default_severity:
+          type: string
+          description: The new default severity of this policy.
+          enum:
+          - low
+          - medium
+          - high
+          - critical
+        id:
+          type: string
+          description: The ID of the policy to edit.
+          minLength: 1
+        is_enabled:
+          type: boolean
+          description: Whether this policy is enabled.
+        metadata:
+          $ref: '#/components/schemas/ApiEditPolicyMetadata'
+          description: The new display detection metadata of this policy. Omit to keep the existing value.
+        name:
+          type: string
+          description: The new name of this policy.
+        resource_scope:
+          $ref: '#/components/schemas/ApiResourceScope'
+          description: The new resource scope. Omit to keep the existing scope; pass `{}` to clear it; pass an object with a condition to replace it.
+      required:
+      - id
+    AwsCloudtrailSummary:
+      allOf:
+      - $ref: '#/components/schemas/EventSummary'
+      - type: object
+        properties:
+          endpointId:
+            type: string
+          initiator:
+            $ref: '#/components/schemas/DetectionAwsCloudtrailInitiatorDetails'
+          rawLog:
+            type: string
+    ApiCreatePoliciesRequest:
+      type: object
+      description: A bulk threat policy create request object.
+      properties:
+        policies:
+          type: array
+          description: The list of policies to create.
+          items:
+            $ref: '#/components/schemas/ApiCreatePolicy'
+          maxItems: 100
+          minItems: 1
+      required:
+      - policies
+  parameters:
+    organization-id:
+      description: The unique identifier for the Upwind organization.
+      example: org_Xk9mPq7RtYwN2vLs
+      in: path
+      name: organization-id
+      required: true
+      schema:
+        type: string

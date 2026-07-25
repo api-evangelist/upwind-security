@@ -1,0 +1,1167 @@
+openapi: 3.1.0
+info:
+  description: "## Overview\n\nThe Management REST API v1 represents a collection of endpoints designed for the execution of administrative tasks programmatically. Tailored for utilization by back-end servers or trusted entities, the API facilitates integration, data retrieval, and workflow automation.\n\nThe API provides a powerful set of tools to interact with your organization's resources, including [Threats](/restapi/v1/threats), [Vulnerabilities](/restapi/v1/vulnerabilities), [Configurations](/restapi/v1/configurations), and [Workflows](/restapi/v1/workflows). Whether you are building applications, integrating services, or exploring data, this documentation serves as your guide through the various endpoints and functionalities offered by our API.\n\nWhen you make a request to the API, you will specify an HTTP method and a path. Additionally, you might also specify request headers and path, query, or body parameters. The API will return the response status code, response headers, and potentially a response body.\n\nThe API reference documentation describes the HTTP method, path, and parameters for every operation. It also displays example requests and responses for each operation.\n\n## Authentication\n\nTo access the endpoints of the API, you need to authenticate your requests. We use OAuth 2.0, a widely adopted industry standard for authorization, to secure and control access to the API.\n\nThe API uses [JSON Web Tokens (JWTs)](https://datatracker.ietf.org/doc/html/rfc7519) access tokens to authenticate requests. The API access token's scopes claim indicates which request methods can be performed when calling the API. Trying to perform any request method not permitted within the set scopes will result in a **403 Forbidden** response.\n\nYou can authenticate your request by adding an access token in the [Authorization](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-bearer-20#section-2.1) HTTP header using the [Bearer authentication scheme](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-bearer-20). To obtain an access token, you must first obtain client credentials.\n\n### Obtaining client credentials\n\nBefore you can make requests to the API, you will need to obtain client credentials. Follow the steps in the [Generate New Credentials](/settings/credentials#generate-new-credentials) section of the [Credentials](/settings/credentials) page to generate a client ID and client secret unique to your application.\n\n### Obtaining access token\n\nNow that you have your client credentials, proceed with obtaining an access token. To get a token by using the client credentials grant, send a POST request to the OAuth 2.0 token endpoint URL (`/oauth/token`). All requests to the token endpoint should be an HTTP POST.\n\n:::important\nThe `audience` parameter in your token request must match the regional API endpoint you plan to use. This ensures your access token is valid for the correct region. An access token obtained with `audience=https://api.upwind.io` will only work with the US API endpoint and cannot be used with EU or ME endpoints.\n:::\n\n#### For US region\n```bash\ncurl --request POST \\\n  --url \"https://auth.upwind.io/oauth/token\" \\\n  --data-urlencode 'client_id=YOUR_CLIENT_ID' \\\n  --data-urlencode 'client_secret=YOUR_CLIENT_SECRET' \\\n  --data-urlencode 'audience=https://api.upwind.io' \\\n  --data-urlencode 'grant_type=client_credentials'\n```\n\n#### For EU region\n```bash\ncurl --request POST \\\n  --url \"https://auth.upwind.io/oauth/token\" \\\n  --data-urlencode 'client_id=YOUR_CLIENT_ID' \\\n  --data-urlencode 'client_secret=YOUR_CLIENT_SECRET' \\\n  --data-urlencode 'audience=https://api.eu.upwind.io' \\\n  --data-urlencode 'grant_type=client_credentials'\n```\n\n#### For ME region\n```bash\ncurl --request POST \\\n  --url \"https://auth.upwind.io/oauth/token\" \\\n  --data-urlencode 'client_id=YOUR_CLIENT_ID' \\\n  --data-urlencode 'client_secret=YOUR_CLIENT_SECRET' \\\n  --data-urlencode 'audience=https://api.me.upwind.io' \\\n  --data-urlencode 'grant_type=client_credentials'\n```\n\n:::warning\nTreat your access token like a password and consider using another service to store your token securely.\n:::\n\n### Authenticating\n\nOnce you have obtained an access token, you can authenticate your API requests by including it in the [Authorization](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-bearer-20#section-2.1) HTTP header using the [Bearer authentication scheme](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-bearer-20).\n\nFor example, to authenticate a request to list threat detections, include your access token in the `Authorization` header:\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\n## Requests\n\nTo make a request, first find the HTTP method and the path for the operation that you want to use. For example, the \"List Threat Detections\" operation uses the `GET` method and the `/threat-detections` path. For the full reference documentation for this operation, see [List Threat Detections](/restapi/v1/list-threat-detections).\n\nPrepend the base URL for the API to the path to get the full URL. Choose the appropriate regional endpoint:\n- **US**: `https://api.upwind.io`\n- **EU**: `https://api.eu.upwind.io`\n- **ME**: `https://api.me.upwind.io`\n\nFor instance, on the command line, use the `curl` command. Specify the HTTP method using the `--request` or `-X` flag, and provide the full URL using the `--url` flag.\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\n:::note\nIf you get a message similar to \"command not found: curl\", you may need to download and install `curl`. For more information, see [the curl project download page](https://curl.se/download.html).\n:::\n\n### Using headers\n\nMost operations do not require specifying headers other than the `Authorization` header. Other operations may specify that you should pass an `Content-Type` header with a value of `application/json` or additional headers.\n\nTo send a header in a `curl` command, use the `--header` or `-H` flag followed by the header in `key: value` format.\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\n### Using path parameters\n\nPath parameters modify the operation path. For example, the \"List threat detections\" path is `/v1/organizations/{organization-id}/threat-detections`. The curly brackets `{}` denote path parameters that you need to specify. In this case, you must specify your Upwind organization identifier. For the full reference documentation for this operation, see [List Threat Detections](/restapi/v1/list-threat-detections).\n\nFor example, to get a list of Threat Detection objects from the `org_Xk9mPq7RtYwN2vLs` organization, replace `{organization-id}` with `org_Xk9mPq7RtYwN2vLs` and prepend the base URL for the API. The full path is `https://api.upwind.io/v1/organizations/org_Xk9mPq7RtYwN2vLs/threat-detections`.\n\n### Using query parameters\n\nQuery parameters allow you to control what data is returned for a request. For example, a query parameter may let you specify how many items are returned when the response is paginated.\n\nFor `curl` commands, add a `?` to the end of the path, then append your query parameter name and value in the form `name=value`. Separate multiple query parameters with `&`.\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections?severity=CRITICAL\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\n### Using body parameters\n\nBody parameters allow you to pass additional data to the API. For example, the \"Update a threat detection\" operation allows you to change the status of a detection. For the full reference documentation for this operation, see [Update a threat detection](/restapi/v1/update-threat-detection).\n\nFor `curl` commands, use the `--data` flag to pass the body parameters in a JSON object.\n\n```bash\ncurl --request PATCH \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections/{detection-id}\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\" \\\n  --header \"Content-Type: application/json\" \\\n  --data '{\n    \"status\": \"ARCHIVED\"\n  }'\n```\n\nThe operation updates the threat detection and returns data about the modified detection. For more information about using the response, see the [Using the response](#using-the-response) section.\n\n### Using the response\n\nEvery request will return an HTTP status code that indicates the success of the response. For more information about response codes, see [the MDN HTTP response status code documentation](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status).\n\n### About the response code and headers\n\nTo view the status code and headers, use the `--include` or `--i` flag when you send your request.\n\nFor example, this request:\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\" \\\n  --include\n```\n\nReturns the response code and headers like:\n\n```bash\nHTTP/2 200\n```\n\nIn this example, the response code is `200`, which indicates a successful request.\n\n### About the response body\n\nMost operations will return a response body. Unless otherwise specified, the response body is in JSON format.\n\nFor example, this request returns a list of Threat Detection objects with data about each detection:\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\nYou can also filter threat detections using query parameters. For example, to get all HIGH severity threat detections:\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections?severity=HIGH\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\n## Pagination\n\nMany list endpoints return large datasets that are divided into smaller, manageable chunks called pages. The API supports two types of pagination to help you navigate through these results efficiently.\n\nEach list endpoint supports one of the two pagination methods based on the potential amount of data that the endpoint can return. Information about which pagination method is used can be found on the specific endpoint's reference page.\n\n### Page-based Pagination\n\nPage-based pagination uses traditional page numbers to navigate through results. This method is useful when you need to jump to specific pages or when the total number of pages is known.\n\n#### Parameters\n- `page`: Specifies the page number for pagination (default: 1)\n- `per-page`: Specifies how many results are returned on a page (default: 100)\n\nFor example, to get the first page with 50 results per page:\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections?page=1&per-page=50\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\nTo get the second page:\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections?page=2&per-page=50\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\n### Token-based Pagination\n\nToken-based pagination uses opaque tokens to navigate through results. This method is more efficient for large datasets and ensures consistent results even when data is being modified during pagination.\n\n#### Parameters\n- `page-token`: Specifies the token for fetching subsequent pages in a paginated result set\n- `per-page`: Specifies how many results are returned on a page (default: 100)\n\n#### Response Headers\n- `Link`: Provides pagination links for navigating through the result set, formatted as HTTP link headers\n\nFor example, to get the first page:\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/coniguration-findings?per-page=50\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\nTo get the next page, use the page-token from the previous response:\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/coniguration-findings?page-token=eyJjdXJzb3IiOiIxMjM0NTY3ODkwIn0&per-page=50\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\n#### Working with Link Headers\n\nWhen using token-based pagination, the response includes a `Link` header with navigation URLs. This header follows the [RFC 5988](https://datatracker.ietf.org/doc/html/rfc5988) standard for web linking and provides ready-to-use URLs for pagination navigation.\n\n```bash\nLink: <https://api.upwind.io/v1/organizations/org_Xk9mPq7RtYwN2vLs/configuration-findings?page-token=eyJjdXJzb3IiOiIxMjM0NTY3ODkwIn0&per-page=50>; rel=\"next\"\n```\n\nThe Link header may contain multiple relationships:\n- `rel=\"first\"`: URL for the first page of results\n- `rel=\"next\"`: URL for the next page of results (if available)\n- `rel=\"prev\"`: URL for the previous page of results (if available)\n- `rel=\"last\"`: URL for the last page of results (when determinable)\n\nMultiple links are comma-separated. For example:\n\n```bash\nLink: <https://api.upwind.io/v1/organizations/org_Xk9mPq7RtYwN2vLs/configuration-findings?page-token=abc123>; rel=\"first\", <https://api.upwind.io/v1/organizations/org_Xk9mPq7RtYwN2vLs/configuration-findings?page-token=xyz789>; rel=\"next\"\n```\n\nYou can parse this header to automatically navigate through pages without manually constructing URLs or managing page tokens. This approach is particularly useful for automated data processing workflows where you need to iterate through all available data.\n\n## Next steps\n\nThis article demonstrates how to make requests to the API. For more practice, try listing threat detections with different filters or retrieving a specific threat detection by ID. If you encounter any issues or have questions, refer to our [Support](/#contact-us-247-over-chat-email-or-slack) through various channels.\n\nHappy coding!\n"
+  title: Introduction access-management API
+  version: '1.0'
+servers:
+- description: Production endpoint (US)
+  url: https://api.upwind.io
+- description: Production endpoint (EU)
+  url: https://api.eu.upwind.io
+- description: Production endpoint (ME)
+  url: https://api.me.upwind.io
+tags:
+- description: The Access Management resource offers methods for managing groups, members, roles, and scopes.
+  x-displayName: Access Management
+  name: access-management
+paths:
+  /v2/organizations/{organization-id}/access-management/groups/search:
+    post:
+      description: A POST request sent to the endpoint root's search path returns a paginated list of access-management groups matching the specified filter conditions.
+      operationId: searchGroups
+      parameters:
+      - $ref: '#/components/parameters/organization-id'
+      - description: Specifies the maximum number of items to be returned.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 50
+          maximum: 100
+          minimum: 1
+      - description: A cursor for pagination to retrieve the next set of results.
+        example: eyJvZmZzZXQiOjIwfQ
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+      - description: 'Sort results by one or more fields. Format: `field` or `field:asc` or `field:desc`. Multiple fields: `field1,field2:desc`. Allowed fields: `name`, `create_time`. Default: `create_time:asc`.'
+        example: create_time:asc
+        in: query
+        name: sort
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: Search request body.
+              properties:
+                conditions:
+                  type: array
+                  description: List of filter conditions to apply to the search
+                  items:
+                    type: object
+                    description: A filter condition for search queries
+                    properties:
+                      field:
+                        type: string
+                        description: The field name to filter on.
+                        enum:
+                        - id
+                        - name
+                        - permissions_scope_id
+                        - permissions_scope_name
+                        - permissions_role_id
+                        - permissions_role_name
+                        - identity_provider_name
+                        - create_time
+                        example: name
+                      operator:
+                        type: string
+                        description: The comparison operator to apply.
+                        enum:
+                        - eq
+                        - in
+                        - gt
+                        - lt
+                        example: eq
+                      value:
+                        type: array
+                        description: The values to compare against.
+                        example:
+                        - Admins
+                        items: {}
+                    required:
+                    - operator
+                    - value
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiPaginatedResponseApiGroup'
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '429':
+          description: Rate Limit Exceeded
+      summary: Search groups
+      tags:
+      - access-management
+  /v2/organizations/{organization-id}/access-management/groups/{group-id}:
+    get:
+      description: A GET request sent to the endpoint root followed by a unique identifier returns detailed information about a specific access-management group.
+      operationId: getGroup
+      parameters:
+      - $ref: '#/components/parameters/organization-id'
+      - description: The unique identifier for the group.
+        in: path
+        name: group-id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResponseApiGroup'
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Rate Limit Exceeded
+      summary: Get a group
+      tags:
+      - access-management
+    patch:
+      description: A PATCH request sent to the endpoint root followed by a unique identifier updates the properties of a specific access-management group.
+      operationId: updateGroup
+      parameters:
+      - $ref: '#/components/parameters/organization-id'
+      - description: The unique identifier for the group.
+        in: path
+        name: group-id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiUpdateAccessManagementGroupRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResponseApiGroup'
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Rate Limit Exceeded
+      summary: Update a group
+      tags:
+      - access-management
+  /v2/organizations/{organization-id}/access-management/groups/{group-id}/members/bulk:
+    post:
+      description: A POST request adds the specified members to an access-management group.
+      operationId: addGroupMembers
+      parameters:
+      - $ref: '#/components/parameters/organization-id'
+      - description: The unique identifier for the group.
+        in: path
+        name: group-id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiBulkGroupMembersRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Rate Limit Exceeded
+      summary: Add members to a group
+      tags:
+      - access-management
+    delete:
+      description: A DELETE request removes the specified members from an access-management group.
+      operationId: removeGroupMembers
+      parameters:
+      - $ref: '#/components/parameters/organization-id'
+      - description: The unique identifier for the group.
+        in: path
+        name: group-id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiBulkGroupMembersRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Rate Limit Exceeded
+      summary: Remove members from a group
+      tags:
+      - access-management
+  /v2/organizations/{organization-id}/access-management/members:
+    post:
+      description: A POST request sent to the endpoint root invites a new member to the organization with optional permissions and group assignments.
+      operationId: addMember
+      parameters:
+      - $ref: '#/components/parameters/organization-id'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiAddMemberRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResponseApiAddMemberResponse'
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '429':
+          description: Rate Limit Exceeded
+      summary: Add a member
+      tags:
+      - access-management
+  /v2/organizations/{organization-id}/access-management/members/search:
+    post:
+      description: A POST request sent to the endpoint root's search path returns a paginated list of organization members matching the specified filter conditions.
+      operationId: searchMembers
+      parameters:
+      - $ref: '#/components/parameters/organization-id'
+      - description: Specifies the maximum number of items to be returned.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 50
+          maximum: 100
+          minimum: 1
+      - description: A cursor for pagination to retrieve the next set of results.
+        example: eyJvZmZzZXQiOjIwfQ
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+      - description: 'Sort results by one or more fields. Format: `field` or `field:asc` or `field:desc`. Multiple fields: `field1,field2:desc`. Allowed fields: `email`, `name`, `create_time`. Default: `create_time:asc`.'
+        example: create_time:asc
+        in: query
+        name: sort
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: Search request body.
+              properties:
+                conditions:
+                  type: array
+                  description: List of filter conditions to apply to the search
+                  items:
+                    type: object
+                    description: A filter condition for search queries
+                    properties:
+                      field:
+                        type: string
+                        description: The field name to filter on.
+                        enum:
+                        - member_name
+                        - email
+                        - identity_provider_name
+                        - create_time
+                        - permissions_scope_id
+                        - permissions_scope_name
+                        - permissions_role_id
+                        - permissions_role_name
+                        example: email
+                      operator:
+                        type: string
+                        description: The comparison operator to apply.
+                        enum:
+                        - eq
+                        - in
+                        - gt
+                        - lt
+                        example: eq
+                      value:
+                        type: array
+                        description: The values to compare against.
+                        example:
+                        - user@example.com
+                        items: {}
+                    required:
+                    - operator
+                    - value
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiPaginatedResponseApiMember'
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '429':
+          description: Rate Limit Exceeded
+      summary: Search members
+      tags:
+      - access-management
+  /v2/organizations/{organization-id}/access-management/roles/search:
+    post:
+      description: A POST request sent to the endpoint returns a paginated list of access-management roles matching the specified filter conditions.
+      operationId: searchRoles
+      parameters:
+      - $ref: '#/components/parameters/organization-id'
+      - description: Specifies the maximum number of items to be returned.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 50
+          maximum: 100
+          minimum: 1
+      - description: A cursor for pagination to retrieve the next set of results.
+        example: eyJvZmZzZXQiOjIwfQ
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+      - description: 'Sort results by one or more fields. Format: `field` or `field:asc` or `field:desc`. Multiple fields: `field1,field2:desc`. Allowed fields: `name`. Default: `name:asc`.'
+        example: name:asc
+        in: query
+        name: sort
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: Search request body.
+              properties:
+                conditions:
+                  type: array
+                  description: List of filter conditions to apply to the search
+                  items:
+                    type: object
+                    description: A filter condition for search queries
+                    properties:
+                      field:
+                        type: string
+                        description: The field name to filter on.
+                        enum:
+                        - id
+                        - name
+                        - type
+                        example: name
+                      operator:
+                        type: string
+                        description: The comparison operator to apply.
+                        enum:
+                        - eq
+                        - in
+                        example: eq
+                      value:
+                        type: array
+                        description: The values to compare against.
+                        example:
+                        - Security
+                        items: {}
+                    required:
+                    - operator
+                    - value
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiPaginatedResponseApiRoleSearchItem'
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '429':
+          description: Rate Limit Exceeded
+      summary: Search roles
+      tags:
+      - access-management
+  /v2/organizations/{organization-id}/access-management/roles/{role-id}:
+    get:
+      description: A GET request sent to the endpoint root followed by a unique identifier returns detailed information about a specific access-management role.
+      operationId: getRole
+      parameters:
+      - $ref: '#/components/parameters/organization-id'
+      - description: The unique identifier for the role.
+        in: path
+        name: role-id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResponseApiRole'
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Rate Limit Exceeded
+      summary: Get a role
+      tags:
+      - access-management
+  /v2/organizations/{organization-id}/access-management/scopes:
+    post:
+      description: A POST request sent to the endpoint root creates a new access-management scope with the specified name, description, and resource filters.
+      operationId: createScope
+      parameters:
+      - $ref: '#/components/parameters/organization-id'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiCreateScopeRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResponseApiScope'
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '429':
+          description: Rate Limit Exceeded
+      summary: Create a scope
+      tags:
+      - access-management
+  /v2/organizations/{organization-id}/access-management/scopes/search:
+    post:
+      description: A POST request sent to the endpoint returns a paginated list of access-management scopes matching the specified filter conditions.
+      operationId: searchScopes
+      parameters:
+      - $ref: '#/components/parameters/organization-id'
+      - description: Specifies the maximum number of items to be returned.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 50
+          maximum: 100
+          minimum: 1
+      - description: A cursor for pagination to retrieve the next set of results.
+        example: eyJvZmZzZXQiOjIwfQ
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+      - description: 'Sort results by one or more fields. Format: `field` or `field:asc` or `field:desc`. Multiple fields: `field1,field2:desc`. Allowed fields: `name`, `create_time`, `update_time`. Default: `create_time:asc`.'
+        example: create_time:asc
+        in: query
+        name: sort
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: Search request body.
+              properties:
+                conditions:
+                  type: array
+                  description: List of filter conditions to apply to the search
+                  items:
+                    type: object
+                    description: A filter condition for search queries
+                    properties:
+                      field:
+                        type: string
+                        description: The field name to filter on.
+                        enum:
+                        - id
+                        - name
+                        - creator_id
+                        - create_time
+                        - update_time
+                        example: name
+                      operator:
+                        type: string
+                        description: The comparison operator to apply.
+                        enum:
+                        - eq
+                        - in
+                        - gt
+                        - lt
+                        example: eq
+                      value:
+                        type: array
+                        description: The values to compare against.
+                        example:
+                        - Production
+                        items: {}
+                    required:
+                    - operator
+                    - value
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiPaginatedResponseApiScope'
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '429':
+          description: Rate Limit Exceeded
+      summary: Search scopes
+      tags:
+      - access-management
+  /v2/organizations/{organization-id}/access-management/scopes/{scope-id}:
+    get:
+      description: A GET request sent to the endpoint root followed by a unique identifier returns detailed information about a specific access-management scope.
+      operationId: getScope
+      parameters:
+      - $ref: '#/components/parameters/organization-id'
+      - description: The unique identifier for the scope.
+        in: path
+        name: scope-id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResponseApiScope'
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Rate Limit Exceeded
+      summary: Get a scope
+      tags:
+      - access-management
+    delete:
+      description: A DELETE request sent to the endpoint root followed by a unique identifier deletes a specific access-management scope.
+      operationId: deleteScope
+      parameters:
+      - $ref: '#/components/parameters/organization-id'
+      - description: The unique identifier for the scope.
+        in: path
+        name: scope-id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Rate Limit Exceeded
+      summary: Delete a scope
+      tags:
+      - access-management
+    patch:
+      description: A PATCH request sent to the endpoint root followed by a unique identifier updates an existing access-management scope's name, description, and/or resource filters.
+      operationId: updateScope
+      parameters:
+      - $ref: '#/components/parameters/organization-id'
+      - description: The unique identifier for the scope.
+        in: path
+        name: scope-id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiUpdateScopeRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResponseApiScope'
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Rate Limit Exceeded
+      summary: Update a scope
+      tags:
+      - access-management
+components:
+  schemas:
+    RestApiResponseApiScope:
+      type: object
+      description: Successful API response containing items
+      properties:
+        items:
+          type: array
+          description: The list of items in the response
+          items:
+            $ref: '#/components/schemas/ApiScope'
+    ApiAddMemberResponse:
+      type: object
+      description: Response containing details of the invited member
+      properties:
+        email:
+          type: string
+          description: Email of the invited member
+          example: user@example.com
+    ApiScope:
+      type: object
+      description: The scope defining resource boundaries for access control.
+      properties:
+        create_time:
+          type: string
+          format: date-time
+          description: The timestamp when the scope was created (in ISO8601 format).
+          example: 2024-01-15 10:30:00+00:00
+        creator_id:
+          type: string
+          description: The identifier of the user who created this scope.
+          example: user-456
+        description:
+          type: string
+          description: The description of the scope.
+          example: All production resources
+        id:
+          type: string
+          description: The unique identifier for this scope.
+          example: scope-123
+        name:
+          type: string
+          description: The name of the scope.
+          example: Production Environment
+        resource_filters:
+          type: array
+          description: The list of resource filters that define the scope boundaries.
+          items:
+            $ref: '#/components/schemas/ApiResourceFilter'
+        update_time:
+          type: string
+          format: date-time
+          description: The timestamp when the scope was last updated (in ISO8601 format).
+          example: 2024-01-20 14:45:00+00:00
+    ApiAddMemberPermission:
+      type: object
+      description: A permission binding for adding a member, associating a scope with role IDs
+      properties:
+        role_ids:
+          type: array
+          description: List of role IDs to assign for this scope
+          items:
+            type: string
+          minItems: 1
+        scope_id:
+          type: string
+          description: Scope identifier
+          example: scope-prod-123
+          minLength: 1
+      required:
+      - role_ids
+      - scope_id
+    RestApiPaginatedResponseApiGroup:
+      type: object
+      description: Successful paginated API response containing items and pagination metadata
+      properties:
+        items:
+          type: array
+          description: The list of items in the response
+          items:
+            $ref: '#/components/schemas/ApiGroup'
+        metadata:
+          $ref: '#/components/schemas/ApiPaginationMetadata'
+          description: Pagination metadata containing cursor information for navigating results
+    ApiUpdateGroupPermission:
+      type: object
+      properties:
+        role_ids:
+          type: array
+          items:
+            type: string
+          minItems: 1
+        scope_id:
+          type: string
+          minLength: 1
+      required:
+      - role_ids
+      - scope_id
+    RestApiResponseApiRole:
+      type: object
+      description: Successful API response containing items
+      properties:
+        items:
+          type: array
+          description: The list of items in the response
+          items:
+            $ref: '#/components/schemas/ApiRole'
+    ApiRoleSearchItem:
+      type: object
+      description: The role item returned by the search endpoint.
+      properties:
+        description:
+          type: string
+          description: The description of the role.
+          example: Full access to security features
+        id:
+          type: string
+          description: The unique identifier for this role.
+          example: uamr_security_architect
+        name:
+          type: string
+          description: The name of the role.
+          example: Security Architect
+        type:
+          type: string
+          description: The type of the role.
+          enum:
+          - Feature
+          - Persona
+          example: Persona
+    ApiUpdateAccessManagementGroupRequest:
+      type: object
+      properties:
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiUpdateGroupPermission'
+    ApiMember:
+      type: object
+      description: A member of the organization
+      properties:
+        create_time:
+          type: string
+          format: date-time
+          description: Timestamp when the member was created (in ISO8601 format).
+          example: 2024-01-15 10:30:00+00:00
+        email:
+          type: string
+          description: Member email address
+          example: user@example.com
+        id:
+          type: string
+          description: Unique identifier for this member
+          example: auth0|abc123
+        identity_provider_name:
+          type: string
+          description: Identity provider name
+          example: okta
+        member_name:
+          type: string
+          description: Member display name
+          example: John Doe
+        permissions:
+          type: array
+          description: List of permission bindings (scope-roles) for this member
+          items:
+            $ref: '#/components/schemas/ApiMemberPermission'
+    ApiGroupPermission:
+      type: object
+      description: A permission binding for a group, associating a scope with role IDs
+      properties:
+        role_ids:
+          type: array
+          description: List of role IDs assigned for this scope
+          example:
+          - uamr_security_architect
+          items:
+            type: string
+        scope_id:
+          type: string
+          description: Scope identifier
+          example: scope-prod-123
+        scope_name:
+          type: string
+          description: Scope name
+          example: Production Environment
+    RestApiPaginatedResponseApiScope:
+      type: object
+      description: Successful paginated API response containing items and pagination metadata
+      properties:
+        items:
+          type: array
+          description: The list of items in the response
+          items:
+            $ref: '#/components/schemas/ApiScope'
+        metadata:
+          $ref: '#/components/schemas/ApiPaginationMetadata'
+          description: Pagination metadata containing cursor information for navigating results
+    ApiAddMemberRequest:
+      type: object
+      description: Request to add (invite) a new member to the organization
+      properties:
+        connection_type:
+          type: string
+          description: Connection type for authentication
+          enum:
+          - social-google
+          - social-microsoft
+          - otp
+          - saml
+          example: social-google
+          minLength: 1
+        email:
+          type: string
+          description: Email of the member to invite
+          example: user@example.com
+          minLength: 1
+        first_name:
+          type: string
+          description: First name of the member
+          example: John
+        group_ids:
+          type: array
+          description: Group IDs to add the member to
+          items:
+            type: string
+        last_name:
+          type: string
+          description: Last name of the member
+          example: Doe
+        permissions:
+          type: array
+          description: Permission bindings to assign to the member
+          items:
+            $ref: '#/components/schemas/ApiAddMemberPermission'
+      required:
+      - connection_type
+      - email
+    RestApiPaginatedResponseApiMember:
+      type: object
+      description: Successful paginated API response containing items and pagination metadata
+      properties:
+        items:
+          type: array
+          description: The list of items in the response
+          items:
+            $ref: '#/components/schemas/ApiMember'
+        metadata:
+          $ref: '#/components/schemas/ApiPaginationMetadata'
+          description: Pagination metadata containing cursor information for navigating results
+    ApiResourceFilter:
+      type: object
+      description: The resource filter within a scope definition.
+      properties:
+        attribute:
+          type: string
+          description: The resource attribute the scope applies to.
+          example: cloud_account_id
+        operator:
+          type: string
+          description: The filter operator.
+          example: in
+        values:
+          type: array
+          description: The values to include or exclude based on the operator.
+          example:
+          - aws-acc-prod-001
+          items:
+            type: string
+    ApiRole:
+      type: object
+      description: A role defining a set of permissions that can be assigned to users or groups
+      properties:
+        based_on_role_ids:
+          type: array
+          description: List of role IDs that this role is based on
+          example:
+          - uamr_security_reader
+          items:
+            type: string
+        description:
+          type: string
+          description: Role description
+          example: Full access to security features
+        id:
+          type: string
+          description: Unique identifier for this role
+          example: uamr_security_architect
+        name:
+          type: string
+          description: Role name
+          example: Security Architect
+        permissions:
+          type: array
+          description: List of permission strings granted by this role
+          example:
+          - vulnerabilities:read
+          - configurations:write
+          items:
+            type: string
+        type:
+          type: string
+          description: Role type
+          enum:
+          - Feature
+          - Persona
+          example: Persona
+    RestApiResponseApiAddMemberResponse:
+      type: object
+      description: Successful API response containing items
+      properties:
+        items:
+          type: array
+          description: The list of items in the response
+          items:
+            $ref: '#/components/schemas/ApiAddMemberResponse'
+    ApiBulkGroupMembersRequest:
+      type: object
+      properties:
+        emails:
+          type: array
+          description: List of member email addresses to add or remove.
+          example:
+          - user@example.com
+          items:
+            type: string
+            format: email
+            minLength: 1
+          minItems: 1
+      required:
+      - emails
+    ApiScopeRequestResourceFilter:
+      type: object
+      properties:
+        attribute:
+          type: string
+          minLength: 1
+        operator:
+          type: string
+          minLength: 1
+        values:
+          type: array
+          items:
+            type: string
+          minItems: 1
+      required:
+      - attribute
+      - operator
+      - values
+    ApiMemberPermission:
+      type: object
+      description: A permission binding for a member, associating a scope with roles and source
+      properties:
+        group_id:
+          type: string
+          description: Identifier of the group that granted this permission. Populated only when source is 'group'.
+          example: uamg_security_team
+        role_ids:
+          type: array
+          description: List of role IDs assigned for this scope
+          example:
+          - uamr_security_architect
+          items:
+            type: string
+        scope_id:
+          type: string
+          description: Scope identifier
+          example: scope-prod-123
+        scope_name:
+          type: string
+          description: Scope name
+          example: Production Environment
+        source:
+          type: string
+          description: Source of the permission assignment
+          enum:
+          - group
+          - direct
+          example: direct
+    RestApiPaginatedResponseApiRoleSearchItem:
+      type: object
+      description: Successful paginated API response containing items and pagination metadata
+      properties:
+        items:
+          type: array
+          description: The list of items in the response
+          items:
+            $ref: '#/components/schemas/ApiRoleSearchItem'
+        metadata:
+          $ref: '#/components/schemas/ApiPaginationMetadata'
+          description: Pagination metadata containing cursor information for navigating results
+    ApiPaginationMetadata:
+      type: object
+      description: Pagination metadata for navigating through result pages
+      properties:
+        limit:
+          type: integer
+          format: int32
+          description: The maximum number of items returned per page
+          example: 20
+        next_cursor:
+          type: string
+          description: Cursor for fetching the next page of results. Absent if there are no more pages.
+          example: eyJvZmZzZXQiOjIwfQ
+        previous_cursor:
+          type: string
+          description: Cursor for fetching the previous page of results. Absent if this is the first page.
+          example: eyJvZmZzZXQiOjB9
+    ApiGroup:
+      type: object
+      description: A group representing a collection of users with assigned permissions
+      properties:
+        create_time:
+          type: string
+          format: date-time
+          description: Timestamp when the group was created (in ISO8601 format).
+          example: 2024-01-15 10:30:00+00:00
+        id:
+          type: string
+          description: Unique identifier for this group
+          example: upwind_readers
+        identity_provider_name:
+          type: string
+          description: Identity provider name for this group
+          example: okta
+        name:
+          type: string
+          description: Group name
+          example: Upwind Readers
+        permissions:
+          type: array
+          description: List of permission bindings (scope-roles) for this group
+          items:
+            $ref: '#/components/schemas/ApiGroupPermission'
+        update_time:
+          type: string
+          format: date-time
+          description: Timestamp when the group was last updated (in ISO8601 format).
+          example: 2024-01-20 14:45:00+00:00
+        user_count:
+          type: integer
+          format: int32
+          description: Number of users in this group
+          example: 25
+    ApiCreateScopeRequest:
+      type: object
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+          minLength: 1
+        resource_filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiScopeRequestResourceFilter'
+      required:
+      - name
+      - resource_filters
+    RestApiResponseApiGroup:
+      type: object
+      description: Successful API response containing items
+      properties:
+        items:
+          type: array
+          description: The list of items in the response
+          items:
+            $ref: '#/components/schemas/ApiGroup'
+    ApiUpdateScopeRequest:
+      type: object
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+        resource_filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiScopeRequestResourceFilter'
+  parameters:
+    organization-id:
+      description: The unique identifier for the Upwind organization.
+      example: org_Xk9mPq7RtYwN2vLs
+      in: path
+      name: organization-id
+      required: true
+      schema:
+        type: string

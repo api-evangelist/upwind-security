@@ -1,0 +1,653 @@
+openapi: 3.1.0
+info:
+  description: "## Overview\n\nThe Management REST API v1 represents a collection of endpoints designed for the execution of administrative tasks programmatically. Tailored for utilization by back-end servers or trusted entities, the API facilitates integration, data retrieval, and workflow automation.\n\nThe API provides a powerful set of tools to interact with your organization's resources, including [Threats](/restapi/v1/threats), [Vulnerabilities](/restapi/v1/vulnerabilities), [Configurations](/restapi/v1/configurations), and [Workflows](/restapi/v1/workflows). Whether you are building applications, integrating services, or exploring data, this documentation serves as your guide through the various endpoints and functionalities offered by our API.\n\nWhen you make a request to the API, you will specify an HTTP method and a path. Additionally, you might also specify request headers and path, query, or body parameters. The API will return the response status code, response headers, and potentially a response body.\n\nThe API reference documentation describes the HTTP method, path, and parameters for every operation. It also displays example requests and responses for each operation.\n\n## Authentication\n\nTo access the endpoints of the API, you need to authenticate your requests. We use OAuth 2.0, a widely adopted industry standard for authorization, to secure and control access to the API.\n\nThe API uses [JSON Web Tokens (JWTs)](https://datatracker.ietf.org/doc/html/rfc7519) access tokens to authenticate requests. The API access token's scopes claim indicates which request methods can be performed when calling the API. Trying to perform any request method not permitted within the set scopes will result in a **403 Forbidden** response.\n\nYou can authenticate your request by adding an access token in the [Authorization](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-bearer-20#section-2.1) HTTP header using the [Bearer authentication scheme](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-bearer-20). To obtain an access token, you must first obtain client credentials.\n\n### Obtaining client credentials\n\nBefore you can make requests to the API, you will need to obtain client credentials. Follow the steps in the [Generate New Credentials](/settings/credentials#generate-new-credentials) section of the [Credentials](/settings/credentials) page to generate a client ID and client secret unique to your application.\n\n### Obtaining access token\n\nNow that you have your client credentials, proceed with obtaining an access token. To get a token by using the client credentials grant, send a POST request to the OAuth 2.0 token endpoint URL (`/oauth/token`). All requests to the token endpoint should be an HTTP POST.\n\n:::important\nThe `audience` parameter in your token request must match the regional API endpoint you plan to use. This ensures your access token is valid for the correct region. An access token obtained with `audience=https://api.upwind.io` will only work with the US API endpoint and cannot be used with EU or ME endpoints.\n:::\n\n#### For US region\n```bash\ncurl --request POST \\\n  --url \"https://auth.upwind.io/oauth/token\" \\\n  --data-urlencode 'client_id=YOUR_CLIENT_ID' \\\n  --data-urlencode 'client_secret=YOUR_CLIENT_SECRET' \\\n  --data-urlencode 'audience=https://api.upwind.io' \\\n  --data-urlencode 'grant_type=client_credentials'\n```\n\n#### For EU region\n```bash\ncurl --request POST \\\n  --url \"https://auth.upwind.io/oauth/token\" \\\n  --data-urlencode 'client_id=YOUR_CLIENT_ID' \\\n  --data-urlencode 'client_secret=YOUR_CLIENT_SECRET' \\\n  --data-urlencode 'audience=https://api.eu.upwind.io' \\\n  --data-urlencode 'grant_type=client_credentials'\n```\n\n#### For ME region\n```bash\ncurl --request POST \\\n  --url \"https://auth.upwind.io/oauth/token\" \\\n  --data-urlencode 'client_id=YOUR_CLIENT_ID' \\\n  --data-urlencode 'client_secret=YOUR_CLIENT_SECRET' \\\n  --data-urlencode 'audience=https://api.me.upwind.io' \\\n  --data-urlencode 'grant_type=client_credentials'\n```\n\n:::warning\nTreat your access token like a password and consider using another service to store your token securely.\n:::\n\n### Authenticating\n\nOnce you have obtained an access token, you can authenticate your API requests by including it in the [Authorization](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-bearer-20#section-2.1) HTTP header using the [Bearer authentication scheme](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-bearer-20).\n\nFor example, to authenticate a request to list threat detections, include your access token in the `Authorization` header:\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\n## Requests\n\nTo make a request, first find the HTTP method and the path for the operation that you want to use. For example, the \"List Threat Detections\" operation uses the `GET` method and the `/threat-detections` path. For the full reference documentation for this operation, see [List Threat Detections](/restapi/v1/list-threat-detections).\n\nPrepend the base URL for the API to the path to get the full URL. Choose the appropriate regional endpoint:\n- **US**: `https://api.upwind.io`\n- **EU**: `https://api.eu.upwind.io`\n- **ME**: `https://api.me.upwind.io`\n\nFor instance, on the command line, use the `curl` command. Specify the HTTP method using the `--request` or `-X` flag, and provide the full URL using the `--url` flag.\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\n:::note\nIf you get a message similar to \"command not found: curl\", you may need to download and install `curl`. For more information, see [the curl project download page](https://curl.se/download.html).\n:::\n\n### Using headers\n\nMost operations do not require specifying headers other than the `Authorization` header. Other operations may specify that you should pass an `Content-Type` header with a value of `application/json` or additional headers.\n\nTo send a header in a `curl` command, use the `--header` or `-H` flag followed by the header in `key: value` format.\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\n### Using path parameters\n\nPath parameters modify the operation path. For example, the \"List threat detections\" path is `/v1/organizations/{organization-id}/threat-detections`. The curly brackets `{}` denote path parameters that you need to specify. In this case, you must specify your Upwind organization identifier. For the full reference documentation for this operation, see [List Threat Detections](/restapi/v1/list-threat-detections).\n\nFor example, to get a list of Threat Detection objects from the `org_Xk9mPq7RtYwN2vLs` organization, replace `{organization-id}` with `org_Xk9mPq7RtYwN2vLs` and prepend the base URL for the API. The full path is `https://api.upwind.io/v1/organizations/org_Xk9mPq7RtYwN2vLs/threat-detections`.\n\n### Using query parameters\n\nQuery parameters allow you to control what data is returned for a request. For example, a query parameter may let you specify how many items are returned when the response is paginated.\n\nFor `curl` commands, add a `?` to the end of the path, then append your query parameter name and value in the form `name=value`. Separate multiple query parameters with `&`.\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections?severity=CRITICAL\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\n### Using body parameters\n\nBody parameters allow you to pass additional data to the API. For example, the \"Update a threat detection\" operation allows you to change the status of a detection. For the full reference documentation for this operation, see [Update a threat detection](/restapi/v1/update-threat-detection).\n\nFor `curl` commands, use the `--data` flag to pass the body parameters in a JSON object.\n\n```bash\ncurl --request PATCH \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections/{detection-id}\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\" \\\n  --header \"Content-Type: application/json\" \\\n  --data '{\n    \"status\": \"ARCHIVED\"\n  }'\n```\n\nThe operation updates the threat detection and returns data about the modified detection. For more information about using the response, see the [Using the response](#using-the-response) section.\n\n### Using the response\n\nEvery request will return an HTTP status code that indicates the success of the response. For more information about response codes, see [the MDN HTTP response status code documentation](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status).\n\n### About the response code and headers\n\nTo view the status code and headers, use the `--include` or `--i` flag when you send your request.\n\nFor example, this request:\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\" \\\n  --include\n```\n\nReturns the response code and headers like:\n\n```bash\nHTTP/2 200\n```\n\nIn this example, the response code is `200`, which indicates a successful request.\n\n### About the response body\n\nMost operations will return a response body. Unless otherwise specified, the response body is in JSON format.\n\nFor example, this request returns a list of Threat Detection objects with data about each detection:\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\nYou can also filter threat detections using query parameters. For example, to get all HIGH severity threat detections:\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections?severity=HIGH\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\n## Pagination\n\nMany list endpoints return large datasets that are divided into smaller, manageable chunks called pages. The API supports two types of pagination to help you navigate through these results efficiently.\n\nEach list endpoint supports one of the two pagination methods based on the potential amount of data that the endpoint can return. Information about which pagination method is used can be found on the specific endpoint's reference page.\n\n### Page-based Pagination\n\nPage-based pagination uses traditional page numbers to navigate through results. This method is useful when you need to jump to specific pages or when the total number of pages is known.\n\n#### Parameters\n- `page`: Specifies the page number for pagination (default: 1)\n- `per-page`: Specifies how many results are returned on a page (default: 100)\n\nFor example, to get the first page with 50 results per page:\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections?page=1&per-page=50\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\nTo get the second page:\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections?page=2&per-page=50\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\n### Token-based Pagination\n\nToken-based pagination uses opaque tokens to navigate through results. This method is more efficient for large datasets and ensures consistent results even when data is being modified during pagination.\n\n#### Parameters\n- `page-token`: Specifies the token for fetching subsequent pages in a paginated result set\n- `per-page`: Specifies how many results are returned on a page (default: 100)\n\n#### Response Headers\n- `Link`: Provides pagination links for navigating through the result set, formatted as HTTP link headers\n\nFor example, to get the first page:\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/coniguration-findings?per-page=50\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\nTo get the next page, use the page-token from the previous response:\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/coniguration-findings?page-token=eyJjdXJzb3IiOiIxMjM0NTY3ODkwIn0&per-page=50\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\n#### Working with Link Headers\n\nWhen using token-based pagination, the response includes a `Link` header with navigation URLs. This header follows the [RFC 5988](https://datatracker.ietf.org/doc/html/rfc5988) standard for web linking and provides ready-to-use URLs for pagination navigation.\n\n```bash\nLink: <https://api.upwind.io/v1/organizations/org_Xk9mPq7RtYwN2vLs/configuration-findings?page-token=eyJjdXJzb3IiOiIxMjM0NTY3ODkwIn0&per-page=50>; rel=\"next\"\n```\n\nThe Link header may contain multiple relationships:\n- `rel=\"first\"`: URL for the first page of results\n- `rel=\"next\"`: URL for the next page of results (if available)\n- `rel=\"prev\"`: URL for the previous page of results (if available)\n- `rel=\"last\"`: URL for the last page of results (when determinable)\n\nMultiple links are comma-separated. For example:\n\n```bash\nLink: <https://api.upwind.io/v1/organizations/org_Xk9mPq7RtYwN2vLs/configuration-findings?page-token=abc123>; rel=\"first\", <https://api.upwind.io/v1/organizations/org_Xk9mPq7RtYwN2vLs/configuration-findings?page-token=xyz789>; rel=\"next\"\n```\n\nYou can parse this header to automatically navigate through pages without manually constructing URLs or managing page tokens. This approach is particularly useful for automated data processing workflows where you need to iterate through all available data.\n\n## Next steps\n\nThis article demonstrates how to make requests to the API. For more practice, try listing threat detections with different filters or retrieving a specific threat detection by ID. If you encounter any issues or have questions, refer to our [Support](/#contact-us-247-over-chat-email-or-slack) through various channels.\n\nHappy coding!\n"
+  title: Introduction access-management inventory API
+  version: '1.0'
+servers:
+- description: Production endpoint (US)
+  url: https://api.upwind.io
+- description: Production endpoint (EU)
+  url: https://api.eu.upwind.io
+- description: Production endpoint (ME)
+  url: https://api.me.upwind.io
+tags:
+- description: The Inventory resource offers a range of methods for listing and retrieving inventory assets.
+  x-displayName: Inventory
+  name: inventory
+paths:
+  /v2/organizations/{organization-id}/inventory/catalog/assets/search:
+    post:
+      description: 'A `POST` request sent to the search endpoint retrieves a comprehensive list of assets based on the direct attributes described below. It is purpose-built for high-volume inventory queries, allowing you to filter the catalog by specific properties, tags, or security posture.
+
+
+        **When to Use This API**
+
+
+        Use this endpoint for flat searches where the filtering criteria are contained within the asset itself. This is the ideal tool for:
+
+        - **Bulk Data Retrieval**: Generating large lists of resources across the entire environment.
+
+        - **Attribute Filtering**: Narrowing down assets by status, type, etc.
+
+        - **Risk Assessment**: Identifying assets based on specific vulnerability severity levels.'
+      x-order:
+        value: '1'
+      operationId: searchAssets
+      parameters:
+      - $ref: '#/components/parameters/organization-id'
+      - description: Specifies the maximum number of items to be returned.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 20
+          maximum: 200
+          minimum: 1
+      - description: A cursor for pagination to retrieve the next set of results.
+        example: eyJvZmZzZXQiOjIwfQ
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: Search request body.
+              properties:
+                conditions:
+                  type: array
+                  description: List of filter conditions to apply to the search
+                  items:
+                    type: object
+                    description: A filter condition for search queries
+                    properties:
+                      field:
+                        type: string
+                        description: The field name to filter on.
+                        example: category
+                      operator:
+                        type: string
+                        description: The comparison operator to apply.
+                        enum:
+                        - eq
+                        - in
+                        - gt
+                        - gte
+                        - lt
+                        - lte
+                        - exists
+                        - contains
+                        example: eq
+                      value:
+                        type: array
+                        description: The values to compare against.
+                        example:
+                        - compute_platform
+                        items: {}
+                    required:
+                    - operator
+                    - value
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiPaginatedResponseApiCatalogAsset'
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Rate Limit Exceeded
+      summary: Search catalog assets
+      tags:
+      - inventory
+  /v2/organizations/{organization-id}/inventory/schema:
+    get:
+      description: Retrieves the inventory schema containing all asset labels and their searchable fields with their types. Use this endpoint to discover available asset labels and their queryable attributes for building search requests.
+      x-order:
+        value: '1'
+      operationId: getSchema
+      parameters:
+      - $ref: '#/components/parameters/organization-id'
+      - description: Specifies the maximum number of items to be returned.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 50
+          maximum: 100
+          minimum: 1
+      - description: A cursor for pagination to retrieve the next set of results.
+        example: eyJvZmZzZXQiOjIwfQ
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiInventorySchemaItemsResponse'
+          description: The inventory schema containing all asset labels and their searchable fields
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Rate Limit Exceeded
+      summary: List asset schemas
+      tags:
+      - inventory
+  /v2/organizations/{organization-id}/inventory/catalog/assets/{id}:
+    get:
+      description: A `GET` request sent to the endpoint root followed by a unique identifier returns detailed information about a specific asset.
+      x-order:
+        value: '2'
+      operationId: getAsset
+      parameters:
+      - $ref: '#/components/parameters/organization-id'
+      - description: Upwind asset ID
+        example: uwr-b7d8d158c28ab7ca281fd424311e9d19
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResponseApiCatalogAssetDetailResponse'
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Rate Limit Exceeded
+      summary: Get an asset
+      tags:
+      - inventory
+  /v2/organizations/{organization-id}/inventory/schema/{label-name}:
+    get:
+      description: Retrieves the schema for a specific asset label containing its searchable fields with their types. Use this endpoint to discover the queryable attributes for a specific asset label.
+      x-order:
+        value: '2'
+      operationId: getSchemaByLabelName
+      parameters:
+      - $ref: '#/components/parameters/organization-id'
+      - description: The name of the asset label to retrieve
+        example: '`aws_ec2_instance`'
+        in: path
+        name: label-name
+        required: true
+        schema:
+          type: string
+          minLength: 1
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiInventorySchemaItemsResponse'
+          description: The schema for the specified asset label
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResponseApiInventorySchemaAsset'
+          description: Asset schema not found
+        '429':
+          description: Rate Limit Exceeded
+      summary: Get asset schema
+      tags:
+      - inventory
+  /v2/organizations/{organization-id}/inventory/assets/{id}:
+    patch:
+      description: A `PATCH` request sent to the endpoint updates fields on a specific inventory asset. The request body supports updating `custom_tags` only; additional patchable fields may be added in the future. The provided list of custom tags **replaces any existing custom tags on the asset**.
+      operationId: patchAsset
+      parameters:
+      - $ref: '#/components/parameters/organization-id'
+      - description: Upwind asset ID
+        example: uwr-b7d8d158c28ab7ca281fd424311e9d19
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiPatchAssetRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiResponseApiCatalogAsset'
+          description: The updated asset
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestApiErrorResponse'
+          description: Asset not found
+        '429':
+          description: Rate Limit Exceeded
+      summary: Update an inventory asset
+      tags:
+      - inventory
+components:
+  schemas:
+    ApiCustomTag:
+      type: object
+      properties:
+        key:
+          type: string
+          description: The custom tag key.
+          example: env
+          minLength: 1
+        value:
+          type: string
+          description: The custom tag value.
+          example: production
+          minLength: 1
+      required:
+      - key
+      - value
+    ApiInventorySchemaField:
+      type: object
+      description: A field in an inventory asset schema
+      properties:
+        name:
+          type: string
+          description: The name of the field, or the label name of another asset for nested queries.
+          example: cloud_account_id
+        type:
+          type: string
+          description: The data type of the field, or the asset label for nested query conditions.
+          example: String
+    ApiInventorySchemaItemsResponse:
+      type: object
+      description: Response containing inventory schema assets
+      example:
+        items:
+        - label: aws_ec2_instance
+          schema:
+            fields:
+            - name: cloud_account_id
+              type: String
+            - name: clusters
+              type: aws_eks_cluster
+      properties:
+        items:
+          type: array
+          description: List of inventory schema assets
+          items:
+            $ref: '#/components/schemas/ApiInventorySchemaAsset'
+    ApiInventorySchemaAsset:
+      type: object
+      description: An asset label in the inventory schema
+      properties:
+        fields:
+          type: array
+          description: 'List of fields for this asset label.<br><br> <b>Primitive</b> types: String, Numeric, Date, Boolean<br><b>Complex</b> types: any asset label'
+          example:
+          - name: cloud_account_id
+            type: String
+          - name: clusters
+            type: aws_eks_cluster
+          items:
+            $ref: '#/components/schemas/ApiInventorySchemaField'
+        label:
+          type: string
+          description: The identifier of the asset label
+          example: aws_ec2_instance
+    ApiCatalogAssetDetailResponse:
+      type: object
+      description: Detailed asset document with its raw data
+      properties:
+        id:
+          type: string
+          description: Upwind asset ID
+        raw_data:
+          description: The asset's data as provided by its source provider. Structure varies by asset type.
+        resource_type:
+          type: string
+          description: Resource type (e.g. aws_ec2_instance)
+    ApiError:
+      type: object
+      properties:
+        code:
+          type: string
+        details:
+          type: object
+          description: Optional structured details for this error, supplied by the service that produced it. Present only on errors that carry additional machine-readable context.
+        field:
+          type: string
+        message:
+          type: string
+    RestApiResponseApiCatalogAsset:
+      type: object
+      description: Successful API response containing items
+      properties:
+        items:
+          type: array
+          description: The list of items in the response
+          items:
+            $ref: '#/components/schemas/ApiCatalogAsset'
+    RestApiPaginatedResponseApiCatalogAsset:
+      type: object
+      description: Successful paginated API response containing items and pagination metadata
+      properties:
+        items:
+          type: array
+          description: The list of items in the response
+          items:
+            $ref: '#/components/schemas/ApiCatalogAsset'
+        metadata:
+          $ref: '#/components/schemas/ApiPaginationMetadata'
+          description: Pagination metadata containing cursor information for navigating results
+    RestApiResponseApiCatalogAssetDetailResponse:
+      type: object
+      description: Successful API response containing items
+      properties:
+        items:
+          type: array
+          description: The list of items in the response
+          items:
+            $ref: '#/components/schemas/ApiCatalogAssetDetailResponse'
+    ApiPatchAssetRequest:
+      type: object
+      description: Request body for updating an inventory asset. Currently supports updating custom tags only; additional fields may be added in the future.
+      properties:
+        custom_tags:
+          type: array
+          description: List of custom tags to set on the asset. **The provided list replaces any existing custom tags**.
+          items:
+            $ref: '#/components/schemas/ApiCustomTag'
+      required:
+      - custom_tags
+    RestApiResponseApiInventorySchemaAsset:
+      type: object
+      description: Successful API response containing items
+      properties:
+        items:
+          type: array
+          description: The list of items in the response
+          items:
+            $ref: '#/components/schemas/ApiInventorySchemaAsset'
+    RestApiErrorResponse:
+      type: object
+      description: Error API response containing a list of errors
+      properties:
+        errors:
+          type: array
+          description: The list of errors describing what went wrong
+          items:
+            $ref: '#/components/schemas/ApiError'
+    ApiDetectionRiskData:
+      type: object
+      description: Detection risk information for an asset
+      properties:
+        critical_count:
+          type: integer
+          format: int64
+          description: Number of critical severity detections
+        high_count:
+          type: integer
+          format: int64
+          description: Number of high severity detections
+        low_count:
+          type: integer
+          format: int64
+          description: Number of low severity detections
+        medium_count:
+          type: integer
+          format: int64
+          description: Number of medium severity detections
+        total_count:
+          type: integer
+          format: int64
+          description: Total number of detections
+    ApiCatalogAsset:
+      type: object
+      properties:
+        category:
+          type: string
+          description: Category of the asset (e.g. compute, storage)
+        cloud_account_id:
+          type: string
+          description: Cloud account identifier of the asset
+        cloud_provider:
+          type: string
+          description: Cloud provider (AWS, Azure, GCP, etc.) of the asset
+        cloud_resource_id:
+          type: string
+          description: Cloud provider specific asset identifier
+        custom_tags:
+          type: array
+          description: Custom tags associated with the asset
+          items:
+            type: string
+        detection_risk:
+          $ref: '#/components/schemas/ApiDetectionRiskData'
+          description: Detection risk information of the asset
+        high_privilege_risk:
+          $ref: '#/components/schemas/ApiHighPrivilegedRiskData'
+          description: High-privilege access risk information of the asset
+        id:
+          type: string
+          description: Upwind asset ID
+        name:
+          type: string
+          description: Display name of the asset
+        network_risk:
+          $ref: '#/components/schemas/ApiNetworkRiskData'
+          description: Network risk information of the asset
+        private_ip_addresses:
+          type: array
+          description: List of private IP addresses associated with the asset
+          items:
+            type: string
+        protected_by:
+          type: string
+          description: Upwind protection mechanism covering the asset
+        public_ip_addresses:
+          type: array
+          description: List of public IP addresses associated with the asset
+          items:
+            type: string
+        region:
+          type: string
+          description: Cloud region where the asset is deployed
+        resource_type:
+          type: string
+          description: Resource type (e.g. aws_ec2_instance) of the asset
+        sensitive_data_at_rest:
+          $ref: '#/components/schemas/ApiSensitiveData'
+          description: Sensitive data at rest information of the asset
+        sensitive_data_in_transit:
+          $ref: '#/components/schemas/ApiSensitiveData'
+          description: Sensitive data in transit information of the asset
+        status:
+          type: string
+          description: Current status of the asset
+        sub_category:
+          type: string
+          description: Sub-category of the asset
+        tags:
+          type: array
+          description: Tags associated with the asset
+          items:
+            type: string
+        technologies:
+          type: array
+          description: Technologies identified on the asset
+          items:
+            $ref: '#/components/schemas/ApiTechnology'
+        vulnerability_risk:
+          $ref: '#/components/schemas/ApiVulnerabilityRiskData'
+          description: Vulnerability risk information of the asset
+    ApiVulnerabilityRiskData:
+      type: object
+      description: Vulnerability risk information for an asset
+      properties:
+        critical_count:
+          type: integer
+          format: int32
+          description: Number of critical severity vulnerabilities
+        high_count:
+          type: integer
+          format: int32
+          description: Number of high severity vulnerabilities
+        low_count:
+          type: integer
+          format: int32
+          description: Number of low severity vulnerabilities
+        medium_count:
+          type: integer
+          format: int32
+          description: Number of medium severity vulnerabilities
+        total_count:
+          type: integer
+          format: int32
+          description: Total number of vulnerabilities
+        unclassified_count:
+          type: integer
+          format: int32
+          description: Number of unclassified severity vulnerabilities
+    ApiHighPrivilegedRiskData:
+      type: object
+      description: Elevated-privilege access risk information for an asset
+      properties:
+        has_elevated_privilege:
+          type: boolean
+          description: Indicates whether the asset has elevated or high-level privileges that could increase its security risk.
+    ApiPaginationMetadata:
+      type: object
+      description: Pagination metadata for navigating through result pages
+      properties:
+        limit:
+          type: integer
+          format: int32
+          description: The maximum number of items returned per page
+          example: 20
+        next_cursor:
+          type: string
+          description: Cursor for fetching the next page of results. Absent if there are no more pages.
+          example: eyJvZmZzZXQiOjIwfQ
+        previous_cursor:
+          type: string
+          description: Cursor for fetching the previous page of results. Absent if this is the first page.
+          example: eyJvZmZzZXQiOjB9
+    ApiTechnology:
+      type: object
+      description: Technology identified on an asset
+      properties:
+        category:
+          type: string
+          description: Technology category
+        end_of_life_time:
+          type: string
+          format: date-time
+          description: End of life timestamp (in ISO8601 format).
+        end_of_support_time:
+          type: string
+          format: date-time
+          description: End of support timestamp (in ISO8601 format).
+        name:
+          type: string
+          description: Technology name
+        sub_category:
+          type: string
+          description: Technology sub-category
+        version:
+          type: string
+          description: Technology version
+    ApiSensitiveData:
+      type: object
+      description: Sensitive data information for an asset
+      properties:
+        has_pci:
+          type: boolean
+          description: Whether the asset contains payment card industry data
+        has_phi:
+          type: boolean
+          description: Whether the asset contains protected health information
+        has_pii:
+          type: boolean
+          description: Whether the asset contains personally identifiable information
+    ApiNetworkRiskData:
+      type: object
+      description: Network risk information for an asset
+      properties:
+        internet_exposure_type:
+          type: string
+          description: Type of internet exposure
+        last_access_from_internet_in_ssh_or_rdp_time:
+          type: string
+          format: date-time
+          description: Last time the asset was accessed from the internet via SSH or RDP (in ISO8601 format).
+        last_access_from_internet_time:
+          type: string
+          format: date-time
+          description: Last time the asset was accessed from the internet (in ISO8601 format).
+        last_application_layer_internet_ingress_time:
+          type: string
+          format: date-time
+          description: Last application layer internet ingress time (in ISO8601 format).
+        last_communication_with_database_time:
+          type: string
+          format: date-time
+          description: Last time the asset communicated with a database (in ISO8601 format).
+        last_communication_with_internet_time:
+          type: string
+          format: date-time
+          description: Last time the asset communicated with the internet (in ISO8601 format).
+        last_imds_v1_access_time:
+          type: string
+          format: date-time
+          description: Last IMDSv1 access time (in ISO8601 format).
+        last_imds_v2_access_time:
+          type: string
+          format: date-time
+          description: Last IMDSv2 access time (in ISO8601 format).
+  parameters:
+    organization-id:
+      description: The unique identifier for the Upwind organization.
+      example: org_Xk9mPq7RtYwN2vLs
+      in: path
+      name: organization-id
+      required: true
+      schema:
+        type: string
