@@ -1,0 +1,105 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/upwind-security-management-v2-openapi.yml, openapi/upwind-security-management-v1-openapi.yml
+notes: >-
+  Entity graph derived from schema $ref links and id-reference fields in the
+  published OpenAPI specs. All resources are scoped under an Organization
+  (every path begins /v{n}/organizations/{organization-id}/...).
+entities:
+  - name: Organization
+    description: Root scope for every API resource (path parameter organization-id)
+  - name: CloudAccount
+    id_field: cloud-account-id
+    apis: [v1]
+  - name: CatalogAsset
+    schema: ApiCatalogAsset
+    id_fields: [id, cloud_account_id, cloud_resource_id]
+    apis: [v2]
+  - name: ThreatStory
+    apis: [v2]
+  - name: ThreatDetection
+    apis: [v1]
+  - name: ThreatPolicy
+    apis: [v1]
+  - name: Policy
+    schema: ApiPolicy
+    id_fields: [policy_id, creator_id, last_modifier_id]
+    apis: [v2]
+  - name: PolicyRule
+    schema: ApiPolicyRule
+    id_fields: [policy_rule_id, policy_id, rule_definition_id]
+    apis: [v2]
+  - name: RuleDefinition
+    schema: ApiRuleDefinition
+    id_fields: [rule_definition_id]
+    apis: [v2]
+  - name: ConfigurationFinding
+    schema: ApiConfigurationFinding
+    apis: [v1, v2]
+  - name: ConfigurationFramework
+    schema: ApiConfigurationFramework
+    apis: [v1, v2]
+  - name: ConfigurationRule
+    schema: ApiConfigurationRule
+    apis: [v1, v2]
+  - name: VulnerabilityFinding
+    apis: [v1]
+  - name: ApiEndpoint
+    schema: ApiEndpoint
+    id_fields: [id, resource_id]
+    apis: [v1, v2]
+  - name: SbomPackage
+    apis: [v1]
+  - name: Workflow
+    apis: [v1]
+  - name: WebhookIntegration
+    apis: [v1]
+  - name: Group
+    schema: ApiGroup
+    apis: [v2]
+  - name: Member
+    schema: ApiMember
+    apis: [v2]
+  - name: Role
+    schema: ApiRole
+    apis: [v2]
+  - name: Scope
+    schema: ApiScope
+    apis: [v2]
+relationships:
+  - from: Organization
+    to: [CloudAccount, CatalogAsset, ThreatStory, ThreatDetection, Policy, ConfigurationFinding, VulnerabilityFinding, ApiEndpoint, SbomPackage, Workflow, WebhookIntegration, Group, Member, Role, Scope]
+    type: has_many
+    via: organization-id path parameter
+  - from: PolicyRule
+    to: Policy
+    type: belongs_to
+    via: policy_id
+  - from: PolicyRule
+    to: RuleDefinition
+    type: belongs_to
+    via: rule_definition_id
+  - from: Policy
+    to: Scope
+    type: has_one
+    via: ApiResourceScope ref
+  - from: ConfigurationFinding
+    to: ConfigurationFramework
+    type: belongs_to
+    via: ApiConfigurationFramework ref
+  - from: ConfigurationFinding
+    to: ConfigurationRule
+    type: belongs_to
+    via: ApiConfigurationRule ref
+  - from: CatalogAsset
+    to: CloudAccount
+    type: belongs_to
+    via: cloud_account_id
+  - from: Group
+    to: Member
+    type: has_many
+    via: addGroupMembers / removeGroupMembers operations
+  - from: ThreatDetection
+    to: CatalogAsset
+    type: belongs_to
+    via: upwind-asset-id query parameter

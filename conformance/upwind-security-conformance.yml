@@ -1,0 +1,46 @@
+generated: '2026-07-21'
+method: searched
+sources:
+  - https://docs.upwind.io/restapi/v2/introduction
+  - https://api.upwind.io/.well-known/openid-configuration
+  - https://trust.upwind.io/
+standards:
+  - id: oauth2
+    conforms: true
+    evidence: Client Credentials grant documented for all Management REST API access (token endpoint https://auth.upwind.io/oauth/token)
+  - id: oidc
+    conforms: true
+    evidence: OpenID Connect discovery documents served at api.upwind.io, mcp.upwind.io (Keycloak realm) and auth.upwind.io (Auth0)
+  - id: rfc8414-oauth-authorization-server-metadata
+    conforms: true
+    evidence: /.well-known/oauth-authorization-server returns 200 with metadata on api.upwind.io, mcp.upwind.io, auth.upwind.io
+  - id: rfc7519-jwt
+    conforms: true
+    evidence: API access tokens are JWTs per the API introduction docs
+  - id: rfc9116-security-txt
+    conforms: false
+    evidence: /.well-known/security.txt absent on www, api, auth, and mcp hosts (probed 2026-07-21)
+  - id: rfc9457-problem-details
+    conforms: partial
+    evidence: v1 ErrorResponse embeds a ProblemDetail body (type/title/status/detail/instance) but serves it as application/json, not application/problem+json; v2 uses a distinct errors[] envelope
+  - id: cursor-pagination
+    conforms: true
+    evidence: v2 documents cursor pagination (limit/cursor + metadata.next_cursor); v1 token-based pagination with RFC 8288 Link headers
+  - id: rfc8288-web-linking
+    conforms: true
+    evidence: v1 pagination returns Link headers with rel="next"/rel="prev"
+  - id: mcp
+    conforms: true
+    evidence: Hosted Model Context Protocol server at https://mcp.upwind.io/mcp (streamable HTTP, OAuth)
+  - id: scim
+    conforms: unverified
+    evidence: get:scim/create:scim scopes appear in the platform OIDC discovery scopes_supported; no public SCIM docs found
+  - id: soc2
+    conforms: true
+    evidence: SOC 2 Type 2 listed on https://trust.upwind.io/ (SafeBase trust center)
+  - id: gdpr
+    conforms: true
+    evidence: GDPR listed on https://trust.upwind.io/; DPA at https://www.upwind.io/data-processing-addendum
+  - id: idempotency
+    conforms: false
+    evidence: No idempotency-key contract documented or declared in the OpenAPI specs

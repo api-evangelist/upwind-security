@@ -1,0 +1,27 @@
+generated: '2026-07-21'
+method: searched
+sources:
+  - https://docs.upwind.io/ai/SKILL
+  - https://status.upwind.io/
+  - https://www.upwind.io/service-level-agreement
+versioning:
+  scheme: uri-path
+  current: v2
+  versions:
+    - version: v1
+      status: 'maintenance mode (provider guidance: prefer v2 when available)'
+    - version: v2
+      status: current
+deprecation:
+  policy_url: null
+  sunset_header: not-documented
+  notes: >-
+    No formal published deprecation policy page. Deprecation posture is
+    visible in docs: V1 is described as "in maintenance mode", and V1
+    page-based pagination is explicitly marked deprecated in favor of
+    token-based pagination.
+sla:
+  url: https://www.upwind.io/service-level-agreement
+status_page: https://status.upwind.io/
+release_notes: https://docs.upwind.io/release-notes/sensor
+deprecated_operations: []

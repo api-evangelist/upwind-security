@@ -1,0 +1,36 @@
+{
+  "provider": "upwind-security",
+  "sources": [
+    "upwind-security-access-management-api-openapi.yml",
+    "upwind-security-api-security-api-openapi.yml",
+    "upwind-security-cloud-accounts-api-openapi.yml",
+    "upwind-security-configurations-api-openapi.yml",
+    "upwind-security-events-api-openapi.yml",
+    "upwind-security-integrations-api-openapi.yml",
+    "upwind-security-inventory-api-openapi.yml",
+    "upwind-security-packages-api-openapi.yml",
+    "upwind-security-shiftleft-api-openapi.yml",
+    "upwind-security-threats-api-openapi.yml",
+    "upwind-security-vulnerabilities-api-openapi.yml",
+    "upwind-security-workflows-api-openapi.yml"
+  ],
+  "outputs": [
+    "upwind-security-access-management-api-openapi.yml",
+    "upwind-security-api-security-api-openapi.yml",
+    "upwind-security-cloud-accounts-api-openapi.yml",
+    "upwind-security-configurations-api-openapi.yml",
+    "upwind-security-events-api-openapi.yml",
+    "upwind-security-integrations-api-openapi.yml",
+    "upwind-security-inventory-api-openapi.yml",
+    "upwind-security-packages-api-openapi.yml",
+    "upwind-security-shiftleft-api-openapi.yml",
+    "upwind-security-threats-api-openapi.yml",
+    "upwind-security-vulnerabilities-api-openapi.yml",
+    "upwind-security-workflows-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

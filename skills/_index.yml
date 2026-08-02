@@ -1,0 +1,25 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.upwind.io/ai/SKILL
+notes: >-
+  Upwind publishes an official Agent Skill ("Upwind API Skill") for AI coding
+  assistants like Claude Code. Both files below are saved verbatim from the
+  provider's docs page (docs.upwind.io/ai/SKILL); the provider instructs users
+  to install them at .claude/skills/upwind-api/SKILL.md and
+  .claude/skills/upwind-api/references/api-endpoints.md.
+skills:
+  - file: upwind-security-api.md
+    name: upwind-api
+    description: Query and manage Upwind cloud security data via the Management REST API (threats, vulnerabilities, configurations, inventory, workflows, integrations).
+    api: openapi/upwind-security-management-v2-openapi.yml
+    provider_published: true
+    operations:
+      - list-threat-detections
+      - searchStories
+      - getVulnerabilityFindingList
+  - file: upwind-security-api-endpoints.md
+    name: upwind-api-endpoints-reference
+    description: Provider-published endpoint catalog reference used by the upwind-api skill (V1 + V2 endpoint tables, pagination, search operators, enums).
+    api: openapi/upwind-security-management-v1-openapi.yml
+    provider_published: true
+    reference: true

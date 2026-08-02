@@ -1,0 +1,35 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Upwind Management REST API v2
+  version: 1.0.0
+extends: openapi/upwind-security-management-v2-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist:
+        provider: upwind-security
+        harvested: '2026-07-21'
+        source: https://docs.upwind.io/restapi/management/v2/openapi.yaml
+        current: true
+  - target: $.info
+    update:
+      x-authentication:
+        style: oauth2 client_credentials
+        tokenUrl: https://auth.upwind.io/oauth/token
+        audiences:
+          - https://api.upwind.io
+          - https://api.eu.upwind.io
+          - https://api.me.upwind.io
+        note: The published spec declares no components.securitySchemes; auth is documented in the API introduction.
+  - target: $.info
+    update:
+      x-pagination:
+        style: cursor
+        params: [limit, cursor]
+        response_fields: [metadata.limit, metadata.next_cursor, metadata.previous_cursor]
+  - target: $.info
+    update:
+      x-search-convention:
+        style: POST */search with conditions[] body
+        operators: [eq, in, gte, lte, gt, lt, exists, contains, like]
+        sorting: sort=field:direction

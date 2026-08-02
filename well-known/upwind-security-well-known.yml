@@ -1,0 +1,66 @@
+generated: '2026-07-21'
+method: searched
+probed: '2026-07-21'
+hosts:
+  - host: https://api.upwind.io
+    documents:
+      - path: /.well-known/openid-configuration
+        status: 200
+        file: upwind-security-api-openid-configuration.json
+        notes: Keycloak realm (issuer https://oauth.upwind.io/realms/upwind) with scopes_supported listing platform OAuth scopes
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        file: upwind-security-api-oauth-authorization-server.json
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: https://auth.upwind.io
+    documents:
+      - path: /.well-known/openid-configuration
+        status: 200
+        file: upwind-security-auth-openid-configuration.json
+        notes: Auth0 tenant (issuer https://auth.upwind.io/); token endpoint https://auth.upwind.io/oauth/token used by the Management REST API client_credentials flow
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        file: upwind-security-auth-oauth-authorization-server.json
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: https://mcp.upwind.io
+    documents:
+      - path: /.well-known/openid-configuration
+        status: 200
+        file: upwind-security-mcp-openid-configuration.json
+        notes: Same Keycloak realm discovery as api.upwind.io; backs the hosted MCP server OAuth flow
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        file: upwind-security-mcp-oauth-authorization-server.json
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: https://www.upwind.io
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: https://docs.upwind.io
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        notes: SPA fallback — returns the Docusaurus HTML shell for every path, not a real security.txt; treated as absent

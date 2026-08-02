@@ -1,0 +1,44 @@
+generated: '2026-07-21'
+method: searched
+name: upwindctl
+sources:
+  - https://docs.upwind.io/getting-started/install-sensor/amazon-ecs/fargate/upwindctl
+  - https://docs.upwind.io/release-notes/upwindctl
+install:
+  - method: install script
+    command: curl -fsSL https://get.upwind.io/upwindctl.sh | bash
+    notes: Downloads the latest upwindctl and installs it locally; the host install script honors non-interactive installs.
+latest_version: 0.30.0
+release_notes: https://docs.upwind.io/release-notes/upwindctl
+commands:
+  - group: core
+    commands:
+      - name: upwindctl version
+        summary: Verify the installation / print version
+      - name: upwindctl tool update
+        summary: Fetch the latest upwindctl binary
+      - name: upwindctl tool uninstall
+        summary: Remove the installed binary
+  - group: ecs
+    commands:
+      - name: upwindctl ecs patch <taskdef>
+        summary: >-
+          Patch an ECS task definition (file, ARN, or stdin) to inject the
+          Upwind Tracer sidecar — adds the sidecar container, volume mounts,
+          Linux capabilities, and updates entrypoint/command. Supports
+          patching specific containers, custom tracer images, and saving to
+          file; designed for Terraform and CI/CD pipeline integration.
+  - group: onboarding preflight
+    commands:
+      - name: upwindctl gcp onboarding preflight
+        summary: Read-only validation that a Google Cloud organization is ready for org-level onboarding before running the Terraform module (checks org-level caller permissions).
+      - name: upwindctl azure preflight
+        summary: SaaS onboarding preflight for Azure; an RBAC-only mode runs just the RBAC and directory-role checks.
+  - group: instrumentation
+    commands:
+      - name: upwindctl lambda ...
+        summary: Lambda instrumentation commands (referenced in release notes; shared flags supported across backend/credentials checks, Kubernetes survey, Lambda, and Azure instrumentation)
+notes: >-
+  upwindctl is Upwind's first-party CLI for deploying and operating the
+  platform's sensors/tracers (not a general Management REST API client).
+  Container images are published for multiple platforms including Windows.

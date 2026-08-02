@@ -1,0 +1,49 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/upwind-security-management-v1-openapi.yml, openapi/upwind-security-management-v2-openapi.yml
+format: mixed
+envelopes:
+  - api_version: v1
+    schema: ErrorResponse
+    shape: >-
+      ErrorResponse wraps a ProblemDetail body (RFC 9457-style fields: type
+      (uri), title, status, detail, instance (uri), properties) plus
+      detailMessageCode/detailMessageArguments and headers. Content type is
+      application/json (not application/problem+json).
+  - api_version: v2
+    schema: RestApiErrorResponse
+    shape: >-
+      'errors[]' list of ApiError objects: code, message, field, and optional
+      structured details supplied by the producing service.
+problems:
+  - status: 400
+    title: Bad Request
+    apis: [v1]
+    notes: Declared on 10 v1 operations (validation failures on create/update requests)
+  - status: 401
+    title: Unauthorized
+    apis: [v1, v2]
+    remediation: >-
+      Token missing, expired (24h lifetime), or audience mismatch — regenerate
+      the client_credentials token with an audience matching the regional base
+      URL (documented in the API skill troubleshooting guide).
+  - status: 403
+    title: Forbidden
+    apis: [v1, v2]
+    remediation: Credential RBAC scope/roles do not authorize the resource; adjust credential permissions in Settings -> Access Management -> Credentials.
+  - status: 404
+    title: Not Found
+    apis: [v1, v2]
+    notes: v2 variants include resource-specific descriptions such as "Asset not found" / "Asset schema not found" with a RestApiErrorResponse body.
+  - status: 429
+    title: Rate Limit Exceeded
+    apis: [v1, v2]
+    notes: Declared on every operation in both specs; no numeric limits or rate-limit headers are published.
+  - status: 500
+    title: Internal Server Error
+    apis: [v1]
+    notes: Declared on 11 v1 operations.
+  - status: 206
+    title: Partial Content
+    apis: [v1]
+    notes: One v1 list operation declares a 206 partial response.

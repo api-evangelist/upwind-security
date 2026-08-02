@@ -1,0 +1,69 @@
+generated: '2026-07-21'
+method: searched
+source: https://api.upwind.io/.well-known/openid-configuration
+docs: https://docs.upwind.io/settings/credentials
+notes: >-
+  Upwind's Management REST API uses OAuth 2.0 client_credentials (Auth0 tenant
+  at auth.upwind.io for API tokens; a Keycloak realm at
+  oauth.upwind.io/realms/upwind backs the platform and MCP hosts). The
+  platform scope strings below are published in scopes_supported of the
+  OIDC discovery document served at api.upwind.io and mcp.upwind.io. Public
+  docs do not map scopes to endpoints; API credential permissions are
+  assigned as RBAC scope + roles in the console (Settings -> Access
+  Management -> Credentials) and tokens inherit them.
+schemes:
+  - name: OAuth2 (client_credentials)
+    source: well-known/upwind-security-auth-openid-configuration.json
+    flows:
+      - flow: clientCredentials
+        tokenUrl: https://auth.upwind.io/oauth/token
+        audiences:
+          - https://api.upwind.io
+          - https://api.eu.upwind.io
+          - https://api.me.upwind.io
+  - name: OpenID Connect (platform realm)
+    source: well-known/upwind-security-api-openid-configuration.json
+    issuer: https://oauth.upwind.io/realms/upwind
+    flows:
+      - flow: authorizationCode
+        authorizationUrl: https://oauth.upwind.io/realms/upwind/protocol/openid-connect/auth
+        tokenUrl: https://oauth.upwind.io/realms/upwind/protocol/openid-connect/token
+scopes:
+  - scope: get:client-credentials
+  - scope: list:client-credentials
+  - scope: create:client-credentials
+  - scope: update:client-credentials
+  - scope: delete:client-credentials
+  - scope: get:credentials
+  - scope: create:credentials
+  - scope: delete:credentials
+  - scope: get:byoc-credentials
+  - scope: create:byoc-credentials
+  - scope: update:byoc-credentials
+  - scope: delete:byoc-credentials
+  - scope: list:inventory-assets
+  - scope: get:inventory-common-keys
+  - scope: list:detections
+  - scope: create:heartbeats
+  - scope: create:cloud-logs
+  - scope: get:external-ids
+  - scope: get:serverless-reporters
+  - scope: create:serverless-reporters
+  - scope: update:serverless-reporters
+  - scope: delete:serverless-reporters
+  - scope: get:scim
+  - scope: create:scim
+  - scope: org-id-scope
+  - scope: service_account
+standard_oidc_scopes:
+  - openid
+  - profile
+  - email
+  - phone
+  - address
+  - roles
+  - offline_access
+  - acr
+  - basic
+  - web-origins
+  - microprofile-jwt

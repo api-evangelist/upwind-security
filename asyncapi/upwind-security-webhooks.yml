@@ -1,0 +1,37 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.upwind.io/integrations/monitoring-and-logging/custom-webhook
+type: Webhooks
+notes: >-
+  Upwind publishes no AsyncAPI document; this captures the documented
+  outbound webhook surface. Custom Webhooks transmit platform events
+  (threat detections and issue findings) to external tools as they occur.
+delivery:
+  method: POST
+  content_type: application/json
+  authentication:
+    - type: api-key
+      description: Caller supplies the HTTP header name and value where the API key is injected
+    - type: bearer-token
+      description: Token injected into the Authorization HTTP header
+events:
+  - name: Threat Detection
+    description: >-
+      Currently the only supported payload object type; the payload schema
+      matches the Get Threat Detection object in the Management REST API v1
+      reference.
+    schema_ref: openapi/upwind-security-management-v1-openapi.yml#get-threat-detection
+management:
+  console: Upwind Management Console -> Components -> Integrations -> Custom Webhook (Monitoring & Logging)
+  api:
+    - operation: GET /v1/organizations/{org}/integration-webhooks (list, filter by vendor)
+    - operation: POST /v1/organizations/{org}/integration-webhooks (create)
+    - operation: PATCH /v1/organizations/{org}/integration-webhooks/{id} (update)
+    - operation: DELETE /v1/organizations/{org}/integration-webhooks/{id} (delete)
+  vendors: [DATADOG, SPLUNK, MSTEAMS, TINES, CUSTOM]
+related_sinks:
+  - Datadog (https://docs.upwind.io/integrations/monitoring-and-logging/datadog)
+  - Splunk (https://docs.upwind.io/integrations/monitoring-and-logging/splunk)
+  - PagerDuty (https://docs.upwind.io/integrations/monitoring-and-logging/pagerduty)
+  - Amazon S3 (https://docs.upwind.io/integrations/monitoring-and-logging/s3)
+  - Tines (https://docs.upwind.io/integrations/monitoring-and-logging/tines)

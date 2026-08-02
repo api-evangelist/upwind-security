@@ -1,0 +1,46 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.upwind.io/ai/mcp/overview
+status: published
+server:
+  name: upwind
+  transport: http
+  url: https://mcp.upwind.io/mcp
+  regional_urls:
+    us: https://mcp.upwind.io/mcp
+    eu: https://mcp.eu.upwind.io/mcp
+  authentication:
+    interactive: OAuth browser-based sign-in (clients store and refresh tokens automatically; no API key to create, paste, or rotate)
+    orchestration: OAuth2 client_credentials — generate Client ID/Secret under Settings -> Access Management -> Credentials (API use case) and exchange at the token URL with a region-matched audience
+    token_url: https://auth.upwind.io/oauth/token
+    audiences:
+      us: https://api.upwind.io
+      eu: https://api.eu.upwind.io
+      me: https://api.me.upwind.io
+  oauth_discovery:
+    - well-known/upwind-security-mcp-openid-configuration.json
+    - well-known/upwind-security-mcp-oauth-authorization-server.json
+access_model: >-
+  All MCP tools are read-only: they retrieve and surface Upwind security data
+  but do not create, modify, or delete resources. Permissions (scope) set on
+  the credentials determine what a connected client is allowed to read. The
+  server sits behind a WAF and only redirects back to allowlisted client
+  redirect URLs.
+clients_documented:
+  - Claude Code (claude mcp add --transport http)
+  - Visual Studio Code (MCP extension JSON config)
+  - Windsurf
+  - Zed
+capability_areas:
+  - Vulnerabilities (CVE impact across workloads/images, remediation paths)
+  - Inventory (flat asset search plus schema and relationship-oriented graph queries)
+  - API security (endpoint method, authentication state, sensitive-data exposure, internet accessibility)
+  - SBOM packages (package metadata, licenses, deployment locations)
+  - Configuration rules and findings
+  - ShiftLeft / CI-CD scan events
+  - Threat stories and detections
+notes: >-
+  Tool names are not enumerated on the public docs page; the page documents
+  capability modules with starter prompts. Setup instructions cover Claude
+  Code and VS Code, plus a client-credentials flow for agent orchestration
+  systems that cannot complete browser sign-in.

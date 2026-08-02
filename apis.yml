@@ -1,27 +1,269 @@
 aid: upwind-security
 name: Upwind Security
-description: 'Upwind Security is a company surfaced as a portfolio company of bessemer-venture-partners
-  and added to the API Evangelist network as a stub for enrichment. Sector: cybersecurity. This profile
-  is a lead awaiting the enrichment pipeline.'
+description: >-
+  Upwind is a cloud security (CNAPP) platform that pairs cloud security
+  posture with eBPF-based runtime protection across AWS, Azure, Google
+  Cloud, and Oracle Cloud, spanning vulnerability management, threat
+  detection, configuration and compliance, API security, identity
+  security, and shift-left CI/CD scanning. Its Management REST API (v1
+  and v2) exposes threats, vulnerabilities, configurations, inventory,
+  SBOM packages, workflows, and access management using OAuth 2.0 client
+  credentials, and the company ships a hosted MCP server plus an official
+  Agent Skill for AI coding assistants.
 url: https://raw.githubusercontent.com/api-evangelist/upwind-security/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/upwind-security.png
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - bessemer-venture-partners
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 29
+  pass: local-v1
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
 tags:
 - Company
 - Cybersecurity
-apis: []
+- Cloud Security
+- CNAPP
+- Runtime Security
+- Vulnerability Management
+- API Security
+- Kubernetes
+apis:
+- aid: upwind-security:upwind-security-access-management-api
+  name: Upwind Security access-management API
+  description: >-
+    The Access Management resource offers methods for managing groups, members, roles, and scopes.
+  humanURL: https://docs.upwind.io/restapi/v2/introduction
+  baseURL: https://api.upwind.io
+  tags:
+  - access-management
+  properties:
+  - type: OpenAPI
+    url: openapi/upwind-security-access-management-api-openapi.yml
+  - type: Documentation
+    url: https://docs.upwind.io/restapi/v2/introduction
+- aid: upwind-security:upwind-security-api-security-api
+  name: Upwind Security api-security API
+  description: >-
+    The API Security resource offers methods for retrieving API catalog endpoints and their security information.
+  humanURL: https://docs.upwind.io/restapi/v2/introduction
+  baseURL: https://api.upwind.io
+  tags:
+  - api-security
+  properties:
+  - type: OpenAPI
+    url: openapi/upwind-security-api-security-api-openapi.yml
+  - type: Documentation
+    url: https://docs.upwind.io/restapi/v2/introduction
+- aid: upwind-security:upwind-security-cloud-accounts-api
+  name: Upwind Security cloud-accounts API
+  description: >-
+    The Cloud Accounts resource offers methods for creating, updating, and deleting cloud accounts for
+    monitoring and security analysis.
+  humanURL: https://docs.upwind.io/restapi/v2/introduction
+  baseURL: https://api.upwind.io
+  tags:
+  - cloud-accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/upwind-security-cloud-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.upwind.io/restapi/v2/introduction
+- aid: upwind-security:upwind-security-configurations-api
+  name: Upwind Security configurations API
+  description: >-
+    The Configurations resource offers a range of methods for listing, retrieving, and deleting configuration
+    findings and rules.
+  humanURL: https://docs.upwind.io/restapi/v2/introduction
+  baseURL: https://api.upwind.io
+  tags:
+  - configurations
+  properties:
+  - type: OpenAPI
+    url: openapi/upwind-security-configurations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.upwind.io/restapi/v2/introduction
+- aid: upwind-security:upwind-security-events-api
+  name: Upwind Security events API
+  description: >-
+    The Events resource offers a range of methods for listing, retrieving, and deleting events.
+  humanURL: https://docs.upwind.io/restapi/v2/introduction
+  baseURL: https://api.upwind.io
+  tags:
+  - events
+  properties:
+  - type: OpenAPI
+    url: openapi/upwind-security-events-api-openapi.yml
+  - type: Documentation
+    url: https://docs.upwind.io/restapi/v2/introduction
+- aid: upwind-security:upwind-security-integrations-api
+  name: Upwind Security integrations API
+  description: >-
+    The Integrations resource offers methods for managing various integrations with external systems,
+    including integration webhooks.
+  humanURL: https://docs.upwind.io/restapi/v2/introduction
+  baseURL: https://api.upwind.io
+  tags:
+  - integrations
+  properties:
+  - type: OpenAPI
+    url: openapi/upwind-security-integrations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.upwind.io/restapi/v2/introduction
+- aid: upwind-security:upwind-security-inventory-api
+  name: Upwind Security inventory API
+  description: >-
+    The Inventory resource offers a range of methods for listing and retrieving inventory assets.
+  humanURL: https://docs.upwind.io/restapi/v2/introduction
+  baseURL: https://api.upwind.io
+  tags:
+  - inventory
+  properties:
+  - type: OpenAPI
+    url: openapi/upwind-security-inventory-api-openapi.yml
+  - type: Documentation
+    url: https://docs.upwind.io/restapi/v2/introduction
+- aid: upwind-security:upwind-security-packages-api
+  name: Upwind Security packages API
+  description: >-
+    The Packages resource offers methods for retrieving Software Bill of Materials (SBOM) package details.
+  humanURL: https://docs.upwind.io/restapi/v2/introduction
+  baseURL: https://api.upwind.io
+  tags:
+  - packages
+  properties:
+  - type: OpenAPI
+    url: openapi/upwind-security-packages-api-openapi.yml
+  - type: Documentation
+    url: https://docs.upwind.io/restapi/v2/introduction
+- aid: upwind-security:upwind-security-shiftleft-api
+  name: Upwind Security shiftleft API
+  description: The ShiftLeft resource offers methods for retrieving ShiftLeft related information
+  humanURL: https://docs.upwind.io/restapi/v2/introduction
+  baseURL: https://api.upwind.io
+  tags:
+  - shiftleft
+  properties:
+  - type: OpenAPI
+    url: openapi/upwind-security-shiftleft-api-openapi.yml
+  - type: Documentation
+    url: https://docs.upwind.io/restapi/v2/introduction
+- aid: upwind-security:upwind-security-threats-api
+  name: Upwind Security threats API
+  description: >-
+    The Threats resource offers a range of methods for listing, retrieving, and deleting threat detections.
+  humanURL: https://docs.upwind.io/restapi/v2/introduction
+  baseURL: https://api.upwind.io
+  tags:
+  - threats
+  properties:
+  - type: OpenAPI
+    url: openapi/upwind-security-threats-api-openapi.yml
+  - type: Documentation
+    url: https://docs.upwind.io/restapi/v2/introduction
+- aid: upwind-security:upwind-security-vulnerabilities-api
+  name: Upwind Security vulnerabilities API
+  description: >-
+    The Vulnerabilities resource offers a range of methods for listing, retrieving, and deleting vulnerability
+    findings.
+  humanURL: https://docs.upwind.io/restapi/v2/introduction
+  baseURL: https://api.upwind.io
+  tags:
+  - vulnerabilities
+  properties:
+  - type: OpenAPI
+    url: openapi/upwind-security-vulnerabilities-api-openapi.yml
+  - type: Documentation
+    url: https://docs.upwind.io/restapi/v2/introduction
+- aid: upwind-security:upwind-security-workflows-api
+  name: Upwind Security workflows API
+  description: >-
+    The Workflows resource offers a range of methods for listing, retrieving, and deleting workflows.
+  humanURL: https://docs.upwind.io/restapi/v2/introduction
+  baseURL: https://api.upwind.io
+  tags:
+  - workflows
+  properties:
+  - type: OpenAPI
+    url: openapi/upwind-security-workflows-api-openapi.yml
+  - type: Documentation
+    url: https://docs.upwind.io/restapi/v2/introduction
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/upwind-security-domain-security.yml
 - type: Website
   url: https://www.upwind.io/
+- type: Documentation
+  url: https://docs.upwind.io/
+- type: APIReference
+  url: https://docs.upwind.io/restapi/v2/introduction
+- type: GettingStarted
+  url: https://docs.upwind.io/getting-started/connect-cloud-account/overview
+- type: Blog
+  url: https://www.upwind.io/feed
+- type: GitHubOrganization
+  url: https://github.com/upwindsecurity
+- type: Login
+  url: https://console.upwind.io/
+- type: TermsOfService
+  url: https://www.upwind.io/terms-of-service
+- type: PrivacyPolicy
+  url: https://www.upwind.io/privacy-policy
+- type: StatusPage
+  url: https://status.upwind.io/
+- type: ChangeLog
+  url: changelog/upwind-security-changelog.yml
+- type: Authentication
+  url: authentication/upwind-security-authentication.yml
+- type: OAuthScopes
+  url: scopes/upwind-security-scopes.yml
+- type: MCPServer
+  url: mcp/upwind-security-mcp.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: LLMsTxt
+  url: llms/upwind-security-llms.txt
+- type: Packages
+  url: packages/upwind-security-packages.yml
+- type: CLI
+  url: cli/upwind-security-cli.yml
+- type: WellKnown
+  url: well-known/upwind-security-well-known.yml
+- type: Webhooks
+  url: asyncapi/upwind-security-webhooks.yml
+- type: Conventions
+  url: conventions/upwind-security-conventions.yml
+- type: ErrorCatalog
+  url: errors/upwind-security-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/upwind-security-lifecycle.yml
+- type: Conformance
+  url: conformance/upwind-security-conformance.yml
+- type: DataModel
+  url: data-model/upwind-security-data-model.yml
+- type: TrustCenter
+  url: security/upwind-security-trust-center.yml
+- type: Compliance
+  url: https://trust.upwind.io/

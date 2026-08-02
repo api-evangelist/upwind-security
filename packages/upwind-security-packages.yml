@@ -1,0 +1,100 @@
+generated: '2026-07-21'
+method: searched
+sources:
+  - https://registry.terraform.io/v1/modules?namespace=upwindsecurity
+  - https://charts.upwind.io/index.yaml
+  - https://github.com/upwindsecurity
+notes: >-
+  Upwind ships first-party infrastructure packages (Terraform modules, Helm
+  charts, GitHub Actions, an installer-script CLI) rather than language SDK
+  client libraries for the Management REST API. npm, PyPI, Maven Central,
+  NuGet, RubyGems, Packagist, and crates.io have no first-party Upwind client
+  libraries as of this pass.
+packages:
+  - language: hcl
+    registry: terraform
+    name: upwindsecurity/onboarding/google
+    url: https://registry.terraform.io/modules/upwindsecurity/onboarding/google
+    version: 3.1.4
+    install: 'module "upwind_onboarding" { source = "upwindsecurity/onboarding/google" }'
+    official: true
+  - language: hcl
+    registry: terraform
+    name: upwindsecurity/onboarding/gcp
+    url: https://registry.terraform.io/modules/upwindsecurity/onboarding/gcp
+    version: 3.5.0
+    official: true
+  - language: hcl
+    registry: terraform
+    name: upwindsecurity/onboarding/aws
+    url: https://registry.terraform.io/modules/upwindsecurity/onboarding/aws
+    version: 2.1.13
+    official: true
+  - language: hcl
+    registry: terraform
+    name: upwindsecurity/onboarding/azurerm
+    url: https://registry.terraform.io/modules/upwindsecurity/onboarding/azurerm
+    version: 1.14.0
+    official: true
+  - language: hcl
+    registry: terraform
+    name: upwindsecurity/onboarding/oci
+    url: https://registry.terraform.io/modules/upwindsecurity/onboarding/oci
+    version: 1.9.0
+    official: true
+  - language: hcl
+    registry: terraform
+    name: upwindsecurity/cloudscanner/google
+    url: https://registry.terraform.io/modules/upwindsecurity/cloudscanner/google
+    version: 1.7.2
+    official: true
+  - language: hcl
+    registry: terraform
+    name: upwindsecurity/cloudscanner/oci
+    url: https://registry.terraform.io/modules/upwindsecurity/cloudscanner/oci
+    version: 1.3.2
+    official: true
+  - language: hcl
+    registry: terraform
+    name: upwindsecurity/cloudlogs/azurerm
+    url: https://registry.terraform.io/modules/upwindsecurity/cloudlogs/azurerm
+    version: 1.1.4
+    official: true
+  - language: helm
+    registry: helm (https://charts.upwind.io)
+    name: upwind
+    url: https://charts.upwind.io/index.yaml
+    install: helm repo add upwind https://charts.upwind.io && helm install upwind upwind/upwind
+    official: true
+    notes: 'Chart repo also serves: upwind-agent, upwind-cluster-agent, upwind-operator, upwind-admission-webhook, upwind-crds, upwind-crds-template, shiftleft-automated, shiftleft-harbor, shiftleft-nexus, upwind-shiftleft-gitlab-automated'
+  - language: shell
+    registry: github-actions
+    name: upwindsecurity/create-image-build-event-action
+    url: https://github.com/upwindsecurity/create-image-build-event-action
+    official: true
+  - language: shell
+    registry: github-actions
+    name: upwindsecurity/shiftleft-create-image-scan-event-action
+    url: https://github.com/upwindsecurity/shiftleft-create-image-scan-event-action
+    official: true
+  - language: shell
+    registry: github-actions
+    name: upwindsecurity/shiftleft-create-image-publish-event-action
+    url: https://github.com/upwindsecurity/shiftleft-create-image-publish-event-action
+    official: true
+  - language: shell
+    registry: github-actions
+    name: upwindsecurity/shiftleft-create-file-scan-event-action
+    url: https://github.com/upwindsecurity/shiftleft-create-file-scan-event-action
+    official: true
+  - language: binary
+    registry: installer-script
+    name: upwindctl
+    url: https://get.upwind.io/upwindctl.sh
+    install: curl -fsSL https://get.upwind.io/upwindctl.sh | bash
+    official: true
+  - language: nix
+    registry: github
+    name: upwindsecurity/nix
+    url: https://github.com/upwindsecurity/nix
+    official: true

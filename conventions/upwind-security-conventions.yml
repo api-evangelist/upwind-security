@@ -1,0 +1,66 @@
+generated: '2026-07-21'
+method: searched
+sources:
+  - https://docs.upwind.io/restapi/v2/introduction
+  - https://docs.upwind.io/ai/SKILL
+authentication:
+  style: OAuth 2.0 client_credentials -> JWT bearer token (Authorization header)
+  token_url: https://auth.upwind.io/oauth/token
+  token_lifetime: 24h
+  region_locked: true
+  see: authentication/upwind-security-authentication.yml
+regions:
+  model: Regional base URLs with matching token audience
+  endpoints:
+    us: https://api.upwind.io
+    eu: https://api.eu.upwind.io
+    me: https://api.me.upwind.io
+versioning:
+  scheme: uri-path
+  current: v2
+  path_pattern: /{version}/organizations/{organization-id}/...
+  notes: v1 is in maintenance mode; the provider recommends preferring v2 endpoints when available.
+  see: lifecycle/upwind-security-lifecycle.yml
+pagination:
+  v1:
+    style: token-based (preferred) or page-based (deprecated)
+    params: [per-page, page-token]
+    default_per_page: 100
+    response_signal: Link header with rel="next" / rel="prev"
+  v2:
+    style: cursor
+    params: [limit, cursor]
+    defaults: 'limit default 50, max 100 (catalog assets: default 20, max 200)'
+    response_fields: [metadata.limit, metadata.next_cursor, metadata.previous_cursor]
+    termination: loop until next_cursor is absent/null
+filtering:
+  v1: kebab-case query parameters (e.g. ?severity=CRITICAL&min-first-seen-time=2024-01-01T00:00:00Z)
+  v2:
+    style: POST to */search endpoints with a JSON conditions[] body
+    condition_shape: '{field, operator, value[]}'
+    operators: [eq, in, gte, lte, gt, lt, exists, contains, like]
+    field_discovery: GET /v2/.../inventory/schema lists searchable fields per asset label
+sorting:
+  v2:
+    param: sort=field:direction (multiple comma-separated; default direction asc)
+    example: sort=update_time:desc
+response_envelope:
+  v2: 'All responses wrap data in items[]; paginated responses add metadata {limit, next_cursor, previous_cursor}'
+  content_type: application/json
+idempotency:
+  supported: false
+  notes: No idempotency-key header or replay-safety contract is documented in the public API docs or declared in the OpenAPI specs.
+request_tracing:
+  supported: not-documented
+rate_limiting:
+  signaling: >-
+    Every operation in both published OpenAPI specs declares a 429 Too Many
+    Requests response; no numeric limits or rate-limit headers are documented.
+error_envelope:
+  see: errors/upwind-security-problem-types.yml
+  notes: Standard HTTP status codes; docs point to MDN status-code semantics. 401 signals expired/mismatched-audience tokens.
+cross_links:
+  authentication: authentication/upwind-security-authentication.yml
+  errors: errors/upwind-security-problem-types.yml
+  lifecycle: lifecycle/upwind-security-lifecycle.yml
+  scopes: scopes/upwind-security-scopes.yml

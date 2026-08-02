@@ -1,0 +1,48 @@
+generated: '2026-07-21'
+method: searched
+docs: https://docs.upwind.io/restapi/v2/introduction
+sources:
+  - https://docs.upwind.io/restapi/v2/introduction
+  - https://docs.upwind.io/settings/credentials
+  - https://api.upwind.io/.well-known/openid-configuration
+  - https://auth.upwind.io/.well-known/openid-configuration
+summary:
+  types: [oauth2]
+  oauth2_flows: [clientCredentials]
+  token_format: JWT (RFC 7519) bearer access tokens
+  token_lifetime: 24h
+  header: 'Authorization: Bearer <access_token>'
+schemes:
+  - name: OAuth2ClientCredentials
+    type: oauth2
+    description: >-
+      All Management REST API requests authenticate with OAuth 2.0
+      client_credentials. Generate a Client ID/Secret in the Upwind console
+      (Settings -> Credentials, "API" credential type), then exchange them at
+      the token endpoint with an audience matching the regional API base URL.
+      Tokens are JWTs, valid 24 hours, and region-locked (a US-audience token
+      will not work against the EU endpoint).
+    flows:
+      clientCredentials:
+        tokenUrl: https://auth.upwind.io/oauth/token
+        audiences:
+          us: https://api.upwind.io
+          eu: https://api.eu.upwind.io
+          me: https://api.me.upwind.io
+    rbac: >-
+      API credentials carry an RBAC scope (which resources — clusters, cloud
+      accounts, environments — the token may access) and roles. Credentials
+      can never exceed the access level of the member who created them, and
+      tokens inherit the credential's permissions.
+    identity_providers:
+      - issuer: https://auth.upwind.io/ (Auth0) — API token endpoint
+      - issuer: https://oauth.upwind.io/realms/upwind (Keycloak) — platform/MCP OIDC discovery on api.upwind.io and mcp.upwind.io
+credential_types:
+  - Cloud account (connect AWS, GCP, Azure, Oracle)
+  - Sensor (Helm/Bash sensor deployment)
+  - API (Management REST API access)
+  - Integration (third-party services such as Slack, Kubernetes Audit Logs, GitHub Actions)
+openapi_note: >-
+  The published OpenAPI 3.1 specs (v1, v2) do not declare
+  components.securitySchemes; the auth contract above is documented in the
+  API introduction and credentials docs.

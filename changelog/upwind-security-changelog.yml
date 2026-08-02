@@ -1,0 +1,51 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.upwind.io/release-notes/sensor
+scheme: >-
+  Per-component semantic versioning. Upwind publishes release notes per
+  platform component (Sensor, upwindctl, Helm Charts, Operator, Cluster
+  Manager, Tracer, Lambda Tracer, Admission Webhook, HostConfig, Sensor Host
+  Installer) rather than a single dated product changelog; entries are keyed
+  by version.
+components:
+  - name: Sensor
+    url: https://docs.upwind.io/release-notes/sensor
+    current_version: 0.98.0
+  - name: upwindctl
+    url: https://docs.upwind.io/release-notes/upwindctl
+    current_version: 0.30.0
+  - name: Helm Charts
+    url: https://docs.upwind.io/release-notes/helm-charts
+  - name: Operator
+    url: https://docs.upwind.io/release-notes/operator
+  - name: Cluster Manager
+    url: https://docs.upwind.io/release-notes/cluster-manager
+  - name: Tracer
+    url: https://docs.upwind.io/release-notes/tracer
+  - name: Lambda Tracer
+    url: https://docs.upwind.io/release-notes/lambda-tracer
+  - name: Admission Webhook
+    url: https://docs.upwind.io/release-notes/admission-webhook
+  - name: HostConfig
+    url: https://docs.upwind.io/release-notes/hostconfig
+  - name: Sensor Host Installer
+    url: https://docs.upwind.io/release-notes/sensor-host-installer
+entries:
+  - component: upwindctl
+    version: 0.30.0
+    highlights:
+      - New `gcp onboarding preflight` command validating Google Cloud org readiness for org-level onboarding (read-only)
+      - RBAC-only flag added to the Azure preflight command for SaaS onboarding
+      - New `tool update` and `tool uninstall` subcommands
+      - Host install script now supports non-interactive installs
+      - Container images published for multiple platforms including Windows
+      - Dependency bump to golang.org/x/net v0.55.0 addressing GO-2026-5026
+  - component: Sensor
+    version: 0.98.0
+    highlights:
+      - Dependency upgrades (go-git v5.19.1, golang.org/x/net v0.55.0, golang.org/x/crypto v0.52.0, moby v2.0.0-beta.14, containerd v2.2.4)
+      - Go toolchain upgraded to 1.26.3
+notes: >-
+  The Management REST API itself is versioned by URI path (v1, v2); v1 is in
+  maintenance mode per the provider's own API skill documentation. No dated
+  REST-API changelog page is published.
