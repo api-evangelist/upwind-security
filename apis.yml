@@ -211,6 +211,8 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Overlay
+  url: overlays/upwind-security-management-v1-overlay.yaml
 - type: DomainSecurity
   url: security/upwind-security-domain-security.yml
 - type: Website
