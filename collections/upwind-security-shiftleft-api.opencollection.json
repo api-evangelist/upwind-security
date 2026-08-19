@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Introduction access-management shiftleft API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "shiftleft",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a scan result",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.upwind.io/v1/organizations/:organization-id/shiftleft/results/:fingerprint",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "fingerprint",
+                "value": "",
+                "type": "path",
+                "description": "The unique fingerprint of a scanned image, computed by Upwind from the image digest and image name. It identifies a scanned image (not an individual scan execution) and cannot be calculated on the client side. Obtain it from the `fingerprint` field of the objects returned by the [search shift-left events](/restapi/v2/search-shift-left-events) endpoint."
+              }
+            ]
+          },
+          "docs": "A `GET` request sent to the endpoint root followed by the fingerprint name returns detailed information about a specific ShiftLeft scan."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

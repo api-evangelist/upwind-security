@@ -1,0 +1,98 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Introduction access-management packages API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "packages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List SBOM packages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.upwind.io/v1/organizations/:organization-id/sbom-packages",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "cloud-account-id",
+                "value": "",
+                "type": "query",
+                "description": "Filters by the specified cloud account ID."
+              },
+              {
+                "name": "framework",
+                "value": "",
+                "type": "query",
+                "description": "Filters packages by the specified framework."
+              },
+              {
+                "name": "image-name",
+                "value": "",
+                "type": "query",
+                "description": "Filters packages by the specified image name."
+              },
+              {
+                "name": "package-name",
+                "value": "",
+                "type": "query",
+                "description": "Filters packages by the specified package name."
+              },
+              {
+                "name": "package-manager",
+                "value": "",
+                "type": "query",
+                "description": "Filters packages by the specified package manager."
+              },
+              {
+                "name": "package-license",
+                "value": "",
+                "type": "query",
+                "description": "Filters packages by the specified package license."
+              }
+            ]
+          },
+          "docs": "A `GET` request sent to the endpoint root returns a list of Software Bill of Materials (SBOM) packages associated with the specified organization. This endpoint provides comprehensive details about packages including their vulnerabilities, affected resources, and usage statistics. The results can be filtered by various criteria including package name, version, framework, and more."
+        },
+        {
+          "info": {
+            "name": "Get SBOM package details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.upwind.io/v1/organizations/:organization-id/sbom-packages/:package-path",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "package-path",
+                "value": "",
+                "type": "path",
+                "description": "The path containing the package name followed by its version (e.g. `lodash/4.17.21`)."
+              }
+            ]
+          },
+          "docs": "A `GET` request sent to the endpoint root followed by package name and version returns detailed information about a specific SBOM package. This endpoint provides comprehensive details about the package including vulnerabilities, affected resources, images, and usage statistics."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

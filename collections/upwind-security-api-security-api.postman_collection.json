@@ -1,0 +1,1238 @@
+{
+  "item": [
+    {
+      "id": "89f37139-60f9-45de-92cb-e4fce649918d",
+      "name": "api-security",
+      "description": {
+        "content": "The API Security resource offers methods for retrieving API catalog endpoints and their security information.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a6a9b4e8-210e-4ac6-8df1-a720de73bec8",
+          "name": "List endpoints",
+          "request": {
+            "name": "List endpoints",
+            "description": {
+              "content": "A `GET` request sent to the endpoint root returns a list of API Endpoint objects that are associated with the specified organization. To learn more about API Security, refer to the [API Security Overview](/api-security/overview) page.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "organizations",
+                ":organization-id",
+                "apisecurity-endpoints"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "per-page",
+                  "value": "100",
+                  "description": "Specifies how many results are returned on a page."
+                },
+                {
+                  "disabled": false,
+                  "key": "page-token",
+                  "value": "<string>",
+                  "description": "Specifies the token for fetching subsequent pages in a paginated result set. Use the token from a previous response to continue retrieving data when the number of results exceeds the current page size."
+                },
+                {
+                  "disabled": false,
+                  "key": "method",
+                  "value": "<string>",
+                  "description": "Filters endpoints by HTTP method (GET, POST, PUT, DELETE, etc.)."
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication-state",
+                  "value": "<string>",
+                  "description": "Filters endpoints by authentication state. Multiple values may be provided, separated by commas."
+                },
+                {
+                  "disabled": false,
+                  "key": "has-internet-ingress",
+                  "value": "<boolean>",
+                  "description": "Filters endpoints that have internet ingress exposure."
+                },
+                {
+                  "disabled": false,
+                  "key": "has-vulnerability",
+                  "value": "<boolean>",
+                  "description": "Filters endpoints that have associated vulnerabilities."
+                },
+                {
+                  "disabled": false,
+                  "key": "has-sensitive-data",
+                  "value": "<boolean>",
+                  "description": "Filters endpoints that handle sensitive data."
+                },
+                {
+                  "disabled": false,
+                  "key": "cloud-account-id",
+                  "value": "<string>",
+                  "description": "Filters by the specified cloud account ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "cloud-provider",
+                  "value": "<string>",
+                  "description": "Filters endpoints by cloud provider (AWS, Azure, GCP, etc.)."
+                },
+                {
+                  "disabled": false,
+                  "key": "resource-type",
+                  "value": "<string>",
+                  "description": "Filters endpoints by resource type."
+                },
+                {
+                  "disabled": false,
+                  "key": "cloud-organization-id",
+                  "value": "<string>",
+                  "description": "Filters endpoints by cloud organization ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "cloud-organization-unit-id",
+                  "value": "<string>",
+                  "description": "Filters endpoints by cloud organization unit ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "domain",
+                  "value": "<string>",
+                  "description": "Filters endpoints by domain name."
+                },
+                {
+                  "disabled": false,
+                  "key": "cluster-id",
+                  "value": "<string>",
+                  "description": "Filters endpoints by cluster ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "namespace",
+                  "value": "<string>",
+                  "description": "Filters by the specified Kubernetes namespace."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organization-id",
+                  "description": "(Required) The unique identifier for the Upwind organization."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4ec44ef3-5820-44f7-8800-b03c8e39e188",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organization-id",
+                    "apisecurity-endpoints"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "per-page",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page-token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "method",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication-state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "has-internet-ingress",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "has-vulnerability",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "has-sensitive-data",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "cloud-account-id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cloud-provider",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "resource-type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cloud-organization-id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cloud-organization-unit-id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "domain",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cluster-id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "namespace",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"domains\": [\n      \"string\"\n    ],\n    \"first_seen_time\": \"2009-11-16T10:36:37.550Z\",\n    \"id\": \"string\",\n    \"last_seen_time\": \"1997-12-07T09:12:26.594Z\",\n    \"method\": \"PATCH\",\n    \"resource_id\": \"string\",\n    \"risk_overview\": {\n      \"authentication\": {\n        \"state\": \"UNKNOWN\"\n      },\n      \"internet_exposure\": {\n        \"ingress\": {\n          \"last_seen_time\": \"1981-07-14T11:55:06.045Z\"\n        }\n      },\n      \"sensitive_data_findings\": [\n        {\n          \"category\": \"string\",\n          \"last_seen_time\": \"1970-09-16T08:16:37.683Z\",\n          \"type\": \"string\"\n        },\n        {\n          \"category\": \"string\",\n          \"last_seen_time\": \"1974-09-28T05:46:53.060Z\",\n          \"type\": \"string\"\n        }\n      ]\n    },\n    \"status_codes\": [\n      \"string\"\n    ],\n    \"uri\": \"string\"\n  },\n  {\n    \"domains\": [\n      \"string\"\n    ],\n    \"first_seen_time\": \"2016-10-18T09:39:47.311Z\",\n    \"id\": \"string\",\n    \"last_seen_time\": \"1980-01-26T11:12:02.816Z\",\n    \"method\": \"GET\",\n    \"resource_id\": \"string\",\n    \"risk_overview\": {\n      \"authentication\": {\n        \"state\": \"UNAUTHENTICATED\"\n      },\n      \"internet_exposure\": {\n        \"ingress\": {\n          \"last_seen_time\": \"1997-11-18T06:55:15.031Z\"\n        }\n      },\n      \"sensitive_data_findings\": [\n        {\n          \"category\": \"string\",\n          \"last_seen_time\": \"1974-07-03T11:08:47.304Z\",\n          \"type\": \"string\"\n        },\n        {\n          \"category\": \"string\",\n          \"last_seen_time\": \"2020-01-05T17:11:22.651Z\",\n          \"type\": \"string\"\n        }\n      ]\n    },\n    \"status_codes\": [\n      \"string\"\n    ],\n    \"uri\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b40b1fe6-59f4-4b56-96bb-face8c79f60d",
+              "name": "Partial Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organization-id",
+                    "apisecurity-endpoints"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "per-page",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page-token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "method",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication-state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "has-internet-ingress",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "has-vulnerability",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "has-sensitive-data",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "cloud-account-id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cloud-provider",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "resource-type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cloud-organization-id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cloud-organization-unit-id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "domain",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cluster-id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "namespace",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Partial Content",
+              "code": 206,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"domains\": [\n      \"string\"\n    ],\n    \"first_seen_time\": \"2009-11-16T10:36:37.550Z\",\n    \"id\": \"string\",\n    \"last_seen_time\": \"1997-12-07T09:12:26.594Z\",\n    \"method\": \"PATCH\",\n    \"resource_id\": \"string\",\n    \"risk_overview\": {\n      \"authentication\": {\n        \"state\": \"UNKNOWN\"\n      },\n      \"internet_exposure\": {\n        \"ingress\": {\n          \"last_seen_time\": \"1981-07-14T11:55:06.045Z\"\n        }\n      },\n      \"sensitive_data_findings\": [\n        {\n          \"category\": \"string\",\n          \"last_seen_time\": \"1970-09-16T08:16:37.683Z\",\n          \"type\": \"string\"\n        },\n        {\n          \"category\": \"string\",\n          \"last_seen_time\": \"1974-09-28T05:46:53.060Z\",\n          \"type\": \"string\"\n        }\n      ]\n    },\n    \"status_codes\": [\n      \"string\"\n    ],\n    \"uri\": \"string\"\n  },\n  {\n    \"domains\": [\n      \"string\"\n    ],\n    \"first_seen_time\": \"2016-10-18T09:39:47.311Z\",\n    \"id\": \"string\",\n    \"last_seen_time\": \"1980-01-26T11:12:02.816Z\",\n    \"method\": \"GET\",\n    \"resource_id\": \"string\",\n    \"risk_overview\": {\n      \"authentication\": {\n        \"state\": \"UNAUTHENTICATED\"\n      },\n      \"internet_exposure\": {\n        \"ingress\": {\n          \"last_seen_time\": \"1997-11-18T06:55:15.031Z\"\n        }\n      },\n      \"sensitive_data_findings\": [\n        {\n          \"category\": \"string\",\n          \"last_seen_time\": \"1974-07-03T11:08:47.304Z\",\n          \"type\": \"string\"\n        },\n        {\n          \"category\": \"string\",\n          \"last_seen_time\": \"2020-01-05T17:11:22.651Z\",\n          \"type\": \"string\"\n        }\n      ]\n    },\n    \"status_codes\": [\n      \"string\"\n    ],\n    \"uri\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9ebf6ec5-7481-458b-a863-ce679698ebca",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organization-id",
+                    "apisecurity-endpoints"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "per-page",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page-token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "method",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication-state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "has-internet-ingress",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "has-vulnerability",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "has-sensitive-data",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "cloud-account-id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cloud-provider",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "resource-type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cloud-organization-id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cloud-organization-unit-id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "domain",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cluster-id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "namespace",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"domains\": [\n      \"string\"\n    ],\n    \"first_seen_time\": \"2009-11-16T10:36:37.550Z\",\n    \"id\": \"string\",\n    \"last_seen_time\": \"1997-12-07T09:12:26.594Z\",\n    \"method\": \"PATCH\",\n    \"resource_id\": \"string\",\n    \"risk_overview\": {\n      \"authentication\": {\n        \"state\": \"UNKNOWN\"\n      },\n      \"internet_exposure\": {\n        \"ingress\": {\n          \"last_seen_time\": \"1981-07-14T11:55:06.045Z\"\n        }\n      },\n      \"sensitive_data_findings\": [\n        {\n          \"category\": \"string\",\n          \"last_seen_time\": \"1970-09-16T08:16:37.683Z\",\n          \"type\": \"string\"\n        },\n        {\n          \"category\": \"string\",\n          \"last_seen_time\": \"1974-09-28T05:46:53.060Z\",\n          \"type\": \"string\"\n        }\n      ]\n    },\n    \"status_codes\": [\n      \"string\"\n    ],\n    \"uri\": \"string\"\n  },\n  {\n    \"domains\": [\n      \"string\"\n    ],\n    \"first_seen_time\": \"2016-10-18T09:39:47.311Z\",\n    \"id\": \"string\",\n    \"last_seen_time\": \"1980-01-26T11:12:02.816Z\",\n    \"method\": \"GET\",\n    \"resource_id\": \"string\",\n    \"risk_overview\": {\n      \"authentication\": {\n        \"state\": \"UNAUTHENTICATED\"\n      },\n      \"internet_exposure\": {\n        \"ingress\": {\n          \"last_seen_time\": \"1997-11-18T06:55:15.031Z\"\n        }\n      },\n      \"sensitive_data_findings\": [\n        {\n          \"category\": \"string\",\n          \"last_seen_time\": \"1974-07-03T11:08:47.304Z\",\n          \"type\": \"string\"\n        },\n        {\n          \"category\": \"string\",\n          \"last_seen_time\": \"2020-01-05T17:11:22.651Z\",\n          \"type\": \"string\"\n        }\n      ]\n    },\n    \"status_codes\": [\n      \"string\"\n    ],\n    \"uri\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a6be38c1-57bf-4273-b00d-f8fbf1f1b7c6",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organization-id",
+                    "apisecurity-endpoints"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "per-page",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page-token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "method",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication-state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "has-internet-ingress",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "has-vulnerability",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "has-sensitive-data",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "cloud-account-id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cloud-provider",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "resource-type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cloud-organization-id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cloud-organization-unit-id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "domain",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cluster-id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "namespace",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d769caa2-dc65-4cbb-a5f5-bc599894d5cf",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organization-id",
+                    "apisecurity-endpoints"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "per-page",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page-token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "method",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication-state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "has-internet-ingress",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "has-vulnerability",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "has-sensitive-data",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "cloud-account-id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cloud-provider",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "resource-type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cloud-organization-id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cloud-organization-unit-id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "domain",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cluster-id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "namespace",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1b0090ec-c659-4daa-895a-ce2a60f913a1",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organization-id",
+                    "apisecurity-endpoints"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "per-page",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page-token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "method",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication-state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "has-internet-ingress",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "has-vulnerability",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "has-sensitive-data",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "cloud-account-id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cloud-provider",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "resource-type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cloud-organization-id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cloud-organization-unit-id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "domain",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cluster-id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "namespace",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "00e47a30-21ad-4e25-98c1-556543725211",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organization-id",
+                    "apisecurity-endpoints"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "per-page",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page-token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "method",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication-state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "has-internet-ingress",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "has-vulnerability",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "has-sensitive-data",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "cloud-account-id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cloud-provider",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "resource-type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cloud-organization-id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cloud-organization-unit-id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "domain",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cluster-id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "namespace",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"domains\": [\n      \"string\"\n    ],\n    \"first_seen_time\": \"2009-11-16T10:36:37.550Z\",\n    \"id\": \"string\",\n    \"last_seen_time\": \"1997-12-07T09:12:26.594Z\",\n    \"method\": \"PATCH\",\n    \"resource_id\": \"string\",\n    \"risk_overview\": {\n      \"authentication\": {\n        \"state\": \"UNKNOWN\"\n      },\n      \"internet_exposure\": {\n        \"ingress\": {\n          \"last_seen_time\": \"1981-07-14T11:55:06.045Z\"\n        }\n      },\n      \"sensitive_data_findings\": [\n        {\n          \"category\": \"string\",\n          \"last_seen_time\": \"1970-09-16T08:16:37.683Z\",\n          \"type\": \"string\"\n        },\n        {\n          \"category\": \"string\",\n          \"last_seen_time\": \"1974-09-28T05:46:53.060Z\",\n          \"type\": \"string\"\n        }\n      ]\n    },\n    \"status_codes\": [\n      \"string\"\n    ],\n    \"uri\": \"string\"\n  },\n  {\n    \"domains\": [\n      \"string\"\n    ],\n    \"first_seen_time\": \"2016-10-18T09:39:47.311Z\",\n    \"id\": \"string\",\n    \"last_seen_time\": \"1980-01-26T11:12:02.816Z\",\n    \"method\": \"GET\",\n    \"resource_id\": \"string\",\n    \"risk_overview\": {\n      \"authentication\": {\n        \"state\": \"UNAUTHENTICATED\"\n      },\n      \"internet_exposure\": {\n        \"ingress\": {\n          \"last_seen_time\": \"1997-11-18T06:55:15.031Z\"\n        }\n      },\n      \"sensitive_data_findings\": [\n        {\n          \"category\": \"string\",\n          \"last_seen_time\": \"1974-07-03T11:08:47.304Z\",\n          \"type\": \"string\"\n        },\n        {\n          \"category\": \"string\",\n          \"last_seen_time\": \"2020-01-05T17:11:22.651Z\",\n          \"type\": \"string\"\n        }\n      ]\n    },\n    \"status_codes\": [\n      \"string\"\n    ],\n    \"uri\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3b3fde1f-b874-4197-9976-26236aef2ddf",
+          "name": "Search API endpoints",
+          "request": {
+            "name": "Search API endpoints",
+            "description": {
+              "content": "A `POST` request sent to the search endpoint returns a list of API Endpoint objects matching the supplied search conditions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "organizations",
+                ":organization-id",
+                "api-security",
+                "endpoints",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Specifies the maximum number of items to be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "A cursor for pagination to retrieve the next set of results."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "Sort results by one or more fields. Format: `field` or `field:asc` or `field:desc`. Multiple fields: `field1,field2:desc`. Allowed fields: `first_seen_time`, `last_seen_time`."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organization-id",
+                  "description": "(Required) The unique identifier for the Upwind organization."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"conditions\": [\n    {\n      \"operator\": \"<string>\",\n      \"value\": [],\n      \"field\": \"<string>\"\n    },\n    {\n      \"operator\": \"<string>\",\n      \"value\": [],\n      \"field\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "22ed78d5-9b55-4c2d-9c74-8f4ee87b300f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "api-security",
+                    "endpoints",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "eyJvZmZzZXQiOjIwfQ"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "first_seen_time:desc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"conditions\": [\n    {\n      \"operator\": \"eq\",\n      \"value\": [],\n      \"field\": \"method\"\n    },\n    {\n      \"operator\": \"eq\",\n      \"value\": [],\n      \"field\": \"method\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"domains\": [\n        \"string\"\n      ],\n      \"first_seen_time\": \"1980-03-25T06:31:19.942Z\",\n      \"id\": \"string\",\n      \"last_seen_time\": \"1960-10-05T19:02:24.050Z\",\n      \"method\": \"PUT\",\n      \"resource_id\": \"string\",\n      \"risk_overview\": {\n        \"authentication\": {\n          \"state\": \"unauthenticated\"\n        },\n        \"internet_exposure\": {\n          \"ingress\": {\n            \"last_seen_time\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"sensitive_data\": [\n          {\n            \"category\": \"string\",\n            \"last_seen_time\": \"2008-07-04T13:20:30.999Z\",\n            \"type\": \"string\"\n          },\n          {\n            \"category\": \"string\",\n            \"last_seen_time\": \"1984-03-17T19:36:19.421Z\",\n            \"type\": \"string\"\n          }\n        ]\n      },\n      \"status_codes\": [\n        \"string\"\n      ],\n      \"uri\": \"string\"\n    },\n    {\n      \"domains\": [\n        \"string\"\n      ],\n      \"first_seen_time\": \"2010-11-29T19:14:56.740Z\",\n      \"id\": \"string\",\n      \"last_seen_time\": \"1958-02-12T12:47:28.204Z\",\n      \"method\": \"TRACE\",\n      \"resource_id\": \"string\",\n      \"risk_overview\": {\n        \"authentication\": {\n          \"state\": \"unknown\"\n        },\n        \"internet_exposure\": {\n          \"ingress\": {\n            \"last_seen_time\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"sensitive_data\": [\n          {\n            \"category\": \"string\",\n            \"last_seen_time\": \"1982-04-12T19:28:51.865Z\",\n            \"type\": \"string\"\n          },\n          {\n            \"category\": \"string\",\n            \"last_seen_time\": \"1995-08-07T21:43:21.677Z\",\n            \"type\": \"string\"\n          }\n        ]\n      },\n      \"status_codes\": [\n        \"string\"\n      ],\n      \"uri\": \"string\"\n    }\n  ],\n  \"metadata\": {\n    \"limit\": 20,\n    \"next_cursor\": \"eyJvZmZzZXQiOjIwfQ\",\n    \"previous_cursor\": \"eyJvZmZzZXQiOjB9\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5cb42251-e2bf-4763-97c7-8ceff5bfc971",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "api-security",
+                    "endpoints",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "eyJvZmZzZXQiOjIwfQ"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "first_seen_time:desc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"conditions\": [\n    {\n      \"operator\": \"eq\",\n      \"value\": [],\n      \"field\": \"method\"\n    },\n    {\n      \"operator\": \"eq\",\n      \"value\": [],\n      \"field\": \"method\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b7cef243-deab-4e43-9368-beb535defa51",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "api-security",
+                    "endpoints",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "eyJvZmZzZXQiOjIwfQ"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "first_seen_time:desc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"conditions\": [\n    {\n      \"operator\": \"eq\",\n      \"value\": [],\n      \"field\": \"method\"\n    },\n    {\n      \"operator\": \"eq\",\n      \"value\": [],\n      \"field\": \"method\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d045677a-93e5-47d5-8418-70eca18cd067",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "api-security",
+                    "endpoints",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "eyJvZmZzZXQiOjIwfQ"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "first_seen_time:desc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"conditions\": [\n    {\n      \"operator\": \"eq\",\n      \"value\": [],\n      \"field\": \"method\"\n    },\n    {\n      \"operator\": \"eq\",\n      \"value\": [],\n      \"field\": \"method\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.upwind.io",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e7c82cd1-2bff-410e-8420-ed2c370ba70b",
+    "name": "Introduction access-management api-security API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "## Overview\n\nThe Management REST API v1 represents a collection of endpoints designed for the execution of administrative tasks programmatically. Tailored for utilization by back-end servers or trusted entities, the API facilitates integration, data retrieval, and workflow automation.\n\nThe API provides a powerful set of tools to interact with your organization's resources, including [Threats](/restapi/v1/threats), [Vulnerabilities](/restapi/v1/vulnerabilities), [Configurations](/restapi/v1/configurations), and [Workflows](/restapi/v1/workflows). Whether you are building applications, integrating services, or exploring data, this documentation serves as your guide through the various endpoints and functionalities offered by our API.\n\nWhen you make a request to the API, you will specify an HTTP method and a path. Additionally, you might also specify request headers and path, query, or body parameters. The API will return the response status code, response headers, and potentially a response body.\n\nThe API reference documentation describes the HTTP method, path, and parameters for every operation. It also displays example requests and responses for each operation.\n\n## Authentication\n\nTo access the endpoints of the API, you need to authenticate your requests. We use OAuth 2.0, a widely adopted industry standard for authorization, to secure and control access to the API.\n\nThe API uses [JSON Web Tokens (JWTs)](https://datatracker.ietf.org/doc/html/rfc7519) access tokens to authenticate requests. The API access token's scopes claim indicates which request methods can be performed when calling the API. Trying to perform any request method not permitted within the set scopes will result in a **403 Forbidden** response.\n\nYou can authenticate your request by adding an access token in the [Authorization](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-bearer-20#section-2.1) HTTP header using the [Bearer authentication scheme](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-bearer-20). To obtain an access token, you must first obtain client credentials.\n\n### Obtaining client credentials\n\nBefore you can make requests to the API, you will need to obtain client credentials. Follow the steps in the [Generate New Credentials](/settings/credentials#generate-new-credentials) section of the [Credentials](/settings/credentials) page to generate a client ID and client secret unique to your application.\n\n### Obtaining access token\n\nNow that you have your client credentials, proceed with obtaining an access token. To get a token by using the client credentials grant, send a POST request to the OAuth 2.0 token endpoint URL (`/oauth/token`). All requests to the token endpoint should be an HTTP POST.\n\n:::important\nThe `audience` parameter in your token request must match the regional API endpoint you plan to use. This ensures your access token is valid for the correct region. An access token obtained with `audience=https://api.upwind.io` will only work with the US API endpoint and cannot be used with EU or ME endpoints.\n:::\n\n#### For US region\n```bash\ncurl --request POST \\\n  --url \"https://auth.upwind.io/oauth/token\" \\\n  --data-urlencode 'client_id=YOUR_CLIENT_ID' \\\n  --data-urlencode 'client_secret=YOUR_CLIENT_SECRET' \\\n  --data-urlencode 'audience=https://api.upwind.io' \\\n  --data-urlencode 'grant_type=client_credentials'\n```\n\n#### For EU region\n```bash\ncurl --request POST \\\n  --url \"https://auth.upwind.io/oauth/token\" \\\n  --data-urlencode 'client_id=YOUR_CLIENT_ID' \\\n  --data-urlencode 'client_secret=YOUR_CLIENT_SECRET' \\\n  --data-urlencode 'audience=https://api.eu.upwind.io' \\\n  --data-urlencode 'grant_type=client_credentials'\n```\n\n#### For ME region\n```bash\ncurl --request POST \\\n  --url \"https://auth.upwind.io/oauth/token\" \\\n  --data-urlencode 'client_id=YOUR_CLIENT_ID' \\\n  --data-urlencode 'client_secret=YOUR_CLIENT_SECRET' \\\n  --data-urlencode 'audience=https://api.me.upwind.io' \\\n  --data-urlencode 'grant_type=client_credentials'\n```\n\n:::warning\nTreat your access token like a password and consider using another service to store your token securely.\n:::\n\n### Authenticating\n\nOnce you have obtained an access token, you can authenticate your API requests by including it in the [Authorization](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-bearer-20#section-2.1) HTTP header using the [Bearer authentication scheme](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-bearer-20).\n\nFor example, to authenticate a request to list threat detections, include your access token in the `Authorization` header:\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\n## Requests\n\nTo make a request, first find the HTTP method and the path for the operation that you want to use. For example, the \"List Threat Detections\" operation uses the `GET` method and the `/threat-detections` path. For the full reference documentation for this operation, see [List Threat Detections](/restapi/v1/list-threat-detections).\n\nPrepend the base URL for the API to the path to get the full URL. Choose the appropriate regional endpoint:\n- **US**: `https://api.upwind.io`\n- **EU**: `https://api.eu.upwind.io`\n- **ME**: `https://api.me.upwind.io`\n\nFor instance, on the command line, use the `curl` command. Specify the HTTP method using the `--request` or `-X` flag, and provide the full URL using the `--url` flag.\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\n:::note\nIf you get a message similar to \"command not found: curl\", you may need to download and install `curl`. For more information, see [the curl project download page](https://curl.se/download.html).\n:::\n\n### Using headers\n\nMost operations do not require specifying headers other than the `Authorization` header. Other operations may specify that you should pass an `Content-Type` header with a value of `application/json` or additional headers.\n\nTo send a header in a `curl` command, use the `--header` or `-H` flag followed by the header in `key: value` format.\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\n### Using path parameters\n\nPath parameters modify the operation path. For example, the \"List threat detections\" path is `/v1/organizations/{organization-id}/threat-detections`. The curly brackets `{}` denote path parameters that you need to specify. In this case, you must specify your Upwind organization identifier. For the full reference documentation for this operation, see [List Threat Detections](/restapi/v1/list-threat-detections).\n\nFor example, to get a list of Threat Detection objects from the `org_Xk9mPq7RtYwN2vLs` organization, replace `{organization-id}` with `org_Xk9mPq7RtYwN2vLs` and prepend the base URL for the API. The full path is `https://api.upwind.io/v1/organizations/org_Xk9mPq7RtYwN2vLs/threat-detections`.\n\n### Using query parameters\n\nQuery parameters allow you to control what data is returned for a request. For example, a query parameter may let you specify how many items are returned when the response is paginated.\n\nFor `curl` commands, add a `?` to the end of the path, then append your query parameter name and value in the form `name=value`. Separate multiple query parameters with `&`.\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections?severity=CRITICAL\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\n### Using body parameters\n\nBody parameters allow you to pass additional data to the API. For example, the \"Update a threat detection\" operation allows you to change the status of a detection. For the full reference documentation for this operation, see [Update a threat detection](/restapi/v1/update-threat-detection).\n\nFor `curl` commands, use the `--data` flag to pass the body parameters in a JSON object.\n\n```bash\ncurl --request PATCH \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections/{detection-id}\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\" \\\n  --header \"Content-Type: application/json\" \\\n  --data '{\n    \"status\": \"ARCHIVED\"\n  }'\n```\n\nThe operation updates the threat detection and returns data about the modified detection. For more information about using the response, see the [Using the response](#using-the-response) section.\n\n### Using the response\n\nEvery request will return an HTTP status code that indicates the success of the response. For more information about response codes, see [the MDN HTTP response status code documentation](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status).\n\n### About the response code and headers\n\nTo view the status code and headers, use the `--include` or `--i` flag when you send your request.\n\nFor example, this request:\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\" \\\n  --include\n```\n\nReturns the response code and headers like:\n\n```bash\nHTTP/2 200\n```\n\nIn this example, the response code is `200`, which indicates a successful request.\n\n### About the response body\n\nMost operations will return a response body. Unless otherwise specified, the response body is in JSON format.\n\nFor example, this request returns a list of Threat Detection objects with data about each detection:\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\nYou can also filter threat detections using query parameters. For example, to get all HIGH severity threat detections:\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections?severity=HIGH\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\n## Pagination\n\nMany list endpoints return large datasets that are divided into smaller, manageable chunks called pages. The API supports two types of pagination to help you navigate through these results efficiently.\n\nEach list endpoint supports one of the two pagination methods based on the potential amount of data that the endpoint can return. Information about which pagination method is used can be found on the specific endpoint's reference page.\n\n### Page-based Pagination\n\nPage-based pagination uses traditional page numbers to navigate through results. This method is useful when you need to jump to specific pages or when the total number of pages is known.\n\n#### Parameters\n- `page`: Specifies the page number for pagination (default: 1)\n- `per-page`: Specifies how many results are returned on a page (default: 100)\n\nFor example, to get the first page with 50 results per page:\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections?page=1&per-page=50\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\nTo get the second page:\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections?page=2&per-page=50\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\n### Token-based Pagination\n\nToken-based pagination uses opaque tokens to navigate through results. This method is more efficient for large datasets and ensures consistent results even when data is being modified during pagination.\n\n#### Parameters\n- `page-token`: Specifies the token for fetching subsequent pages in a paginated result set\n- `per-page`: Specifies how many results are returned on a page (default: 100)\n\n#### Response Headers\n- `Link`: Provides pagination links for navigating through the result set, formatted as HTTP link headers\n\nFor example, to get the first page:\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/coniguration-findings?per-page=50\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\nTo get the next page, use the page-token from the previous response:\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/coniguration-findings?page-token=eyJjdXJzb3IiOiIxMjM0NTY3ODkwIn0&per-page=50\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\n#### Working with Link Headers\n\nWhen using token-based pagination, the response includes a `Link` header with navigation URLs. This header follows the [RFC 5988](https://datatracker.ietf.org/doc/html/rfc5988) standard for web linking and provides ready-to-use URLs for pagination navigation.\n\n```bash\nLink: <https://api.upwind.io/v1/organizations/org_Xk9mPq7RtYwN2vLs/configuration-findings?page-token=eyJjdXJzb3IiOiIxMjM0NTY3ODkwIn0&per-page=50>; rel=\"next\"\n```\n\nThe Link header may contain multiple relationships:\n- `rel=\"first\"`: URL for the first page of results\n- `rel=\"next\"`: URL for the next page of results (if available)\n- `rel=\"prev\"`: URL for the previous page of results (if available)\n- `rel=\"last\"`: URL for the last page of results (when determinable)\n\nMultiple links are comma-separated. For example:\n\n```bash\nLink: <https://api.upwind.io/v1/organizations/org_Xk9mPq7RtYwN2vLs/configuration-findings?page-token=abc123>; rel=\"first\", <https://api.upwind.io/v1/organizations/org_Xk9mPq7RtYwN2vLs/configuration-findings?page-token=xyz789>; rel=\"next\"\n```\n\nYou can parse this header to automatically navigate through pages without manually constructing URLs or managing page tokens. This approach is particularly useful for automated data processing workflows where you need to iterate through all available data.\n\n## Next steps\n\nThis article demonstrates how to make requests to the API. For more practice, try listing threat detections with different filters or retrieving a specific threat detection by ID. If you encounter any issues or have questions, refer to our [Support](/#contact-us-247-over-chat-email-or-slack) through various channels.\n\nHappy coding!\n",
+      "type": "text/plain"
+    }
+  }
+}

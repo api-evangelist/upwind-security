@@ -1,0 +1,704 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Introduction access-management configurations API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "configurations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List findings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.upwind.io/v1/organizations/:organization-id/configuration-findings",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per-page",
+                "value": "",
+                "type": "query",
+                "description": "Specifies how many results are returned on a page."
+              },
+              {
+                "name": "page-token",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the token for fetching subsequent pages in a paginated result set. Use the token from a previous response to continue retrieving data when the number of results exceeds the current page size."
+              },
+              {
+                "name": "min-last-seen-time",
+                "value": "",
+                "type": "query",
+                "description": "Filters findings by the earliest timestamp (in ISO8601 format) when they were last seen."
+              },
+              {
+                "name": "max-last-seen-time",
+                "value": "",
+                "type": "query",
+                "description": "Filters findings by the latest timestamp (in ISO8601 format) when they were last seen."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filters findings by their status. Defaults to `FAIL` when not specified."
+              },
+              {
+                "name": "severity",
+                "value": "LOW,HIGH",
+                "type": "query",
+                "description": "Filters findings by their severity level. Multiple values may be provided, separated by commas."
+              },
+              {
+                "name": "upwind-asset-id",
+                "value": "",
+                "type": "query",
+                "description": "Filters findings by their Upwind asset ID."
+              },
+              {
+                "name": "resource-name",
+                "value": "",
+                "type": "query",
+                "description": "Filters findings by the specified resource name."
+              },
+              {
+                "name": "check-title",
+                "value": "",
+                "type": "query",
+                "description": "Filters findings by the specified check title."
+              },
+              {
+                "name": "check-id",
+                "value": "",
+                "type": "query",
+                "description": "Filters findings by the specified check ID."
+              },
+              {
+                "name": "framework-id",
+                "value": "",
+                "type": "query",
+                "description": "Filters findings by the specified framework ID."
+              },
+              {
+                "name": "framework-title",
+                "value": "",
+                "type": "query",
+                "description": "Filters findings by the specified framework title."
+              },
+              {
+                "name": "cloud-account-tags",
+                "value": "environment=production,project=webapp",
+                "type": "query",
+                "description": "Filters findings by the specified cloud account tags. Use `key=value` format with multiple tags separated by commas. Currently supported for Amazon Web Services (AWS) accounts only."
+              },
+              {
+                "name": "include-cloud-account-tags",
+                "value": "",
+                "type": "query",
+                "description": "Specifies whether to include cloud account tags in the response."
+              }
+            ]
+          },
+          "docs": "A `GET` request sent to the endpoint root returns a list of Configuration Finding objects that are associated with the specified organization. This endpoint allows you to search and filter configuration findings based on various criteria such as status, severity, resource name, and framework. By default, only findings with `FAIL` status are returned unless otherwise specified. To learn more about Configurations, refer to the [Configurations Overview](/configurations/overview) page."
+        },
+        {
+          "info": {
+            "name": "Get a finding",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.upwind.io/v1/organizations/:organization-id/configuration-findings/:finding-id",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "finding-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for this configuration finding."
+              },
+              {
+                "name": "include-cloud-account-tags",
+                "value": "",
+                "type": "query",
+                "description": "Specifies whether to include cloud account tags in the response."
+              }
+            ]
+          },
+          "docs": "A `GET` request sent to the endpoint root followed by a unique identifier returns detailed information about a specific Configuration Finding. This endpoint provides access to comprehensive details such as the status, severity, framework information, and the associated resource. To learn more about Configuration Findings, refer to the [Configurations Overview](/configurations/overview) page."
+        },
+        {
+          "info": {
+            "name": "List frameworks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.upwind.io/v1/organizations/:organization-id/configuration-frameworks",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number to retrieve. Used for pagination along with the `per-page` parameter."
+              },
+              {
+                "name": "per-page",
+                "value": "",
+                "type": "query",
+                "description": "Specifies how many results are returned on a page."
+              },
+              {
+                "name": "framework-ids",
+                "value": "",
+                "type": "query",
+                "description": "Filters frameworks by the specified framework IDs."
+              },
+              {
+                "name": "cloud-providers",
+                "value": "",
+                "type": "query",
+                "description": "Filters frameworks by the specified cloud providers."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filters frameworks by their status."
+              },
+              {
+                "name": "min-create-time",
+                "value": "",
+                "type": "query",
+                "description": "Filters frameworks by the earliest creation timestamp (in ISO8601 format)."
+              },
+              {
+                "name": "max-create-time",
+                "value": "",
+                "type": "query",
+                "description": "Filters frameworks by the latest creation timestamp (in ISO8601 format)."
+              },
+              {
+                "name": "min-update-time",
+                "value": "",
+                "type": "query",
+                "description": "Filters frameworks by the earliest update timestamp (in ISO8601 format)."
+              },
+              {
+                "name": "max-update-time",
+                "value": "",
+                "type": "query",
+                "description": "Filters frameworks by the latest update timestamp (in ISO8601 format)."
+              },
+              {
+                "name": "min-last-scan-time",
+                "value": "",
+                "type": "query",
+                "description": "Filters frameworks by the earliest last scan timestamp (in ISO8601 format)."
+              },
+              {
+                "name": "max-last-scan-time",
+                "value": "",
+                "type": "query",
+                "description": "Filters frameworks by the latest last scan timestamp (in ISO8601 format)."
+              },
+              {
+                "name": "min-score-value",
+                "value": "",
+                "type": "query",
+                "description": "Filters frameworks by the minimum score value."
+              },
+              {
+                "name": "max-score-value",
+                "value": "",
+                "type": "query",
+                "description": "Filters frameworks by the maximum score value."
+              },
+              {
+                "name": "types",
+                "value": "",
+                "type": "query",
+                "description": "Filters frameworks by the specified types."
+              }
+            ]
+          },
+          "docs": "A `GET` request sent to the endpoint root returns a list of Configuration Framework objects that are associated with the specified organization. This endpoint allows you to search and filter configuration frameworks based on various criteria such as framework IDs, cloud providers, and status. To learn more about Frameworks, refer to the [Frameworks](/configurations/frameworks) page."
+        },
+        {
+          "info": {
+            "name": "Create a framework",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.upwind.io/v1/organizations/:organization-id/configuration-frameworks",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new compliance framework for the specified organization."
+        },
+        {
+          "info": {
+            "name": "Update a framework",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.upwind.io/v1/organizations/:organization-id/configuration-frameworks/:framework-id",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "framework-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the configuration framework."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A `PATCH` request sent to the endpoint allows you to update an existing Configuration Framework object that is associated with the specified organization. You can modify properties such as title, description, and status. To learn more about Frameworks, refer to the [Frameworks](/configurations/frameworks) page."
+        },
+        {
+          "info": {
+            "name": "List rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.upwind.io/v1/organizations/:organization-id/configuration-rules",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number to retrieve. Used for pagination along with the `per-page` parameter."
+              },
+              {
+                "name": "per-page",
+                "value": "",
+                "type": "query",
+                "description": "Specifies how many results are returned on a page."
+              },
+              {
+                "name": "framework",
+                "value": "",
+                "type": "query",
+                "description": "Filters rules by the specified framework."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Filters rules by the specified rule name."
+              },
+              {
+                "name": "has-findings",
+                "value": "",
+                "type": "query",
+                "description": "Filters rules by whether they have associated findings."
+              },
+              {
+                "name": "min-create-time",
+                "value": "",
+                "type": "query",
+                "description": "Filters rules by the earliest creation timestamp (in ISO8601 format)."
+              },
+              {
+                "name": "max-create-time",
+                "value": "",
+                "type": "query",
+                "description": "Filters rules by the latest creation timestamp (in ISO8601 format)."
+              },
+              {
+                "name": "min-update-time",
+                "value": "",
+                "type": "query",
+                "description": "Filters rules by the earliest update timestamp (in ISO8601 format)."
+              },
+              {
+                "name": "max-update-time",
+                "value": "",
+                "type": "query",
+                "description": "Filters rules by the latest update timestamp (in ISO8601 format)."
+              }
+            ]
+          },
+          "docs": "A `GET` request sent to the endpoint root returns a list of Configuration Rule objects that are associated with the specified organization. This endpoint allows you to search and filter configuration rules based on various criteria such as framework, name, and findings status. To learn more about Configurations, refer to the [Configuration Rules](/configurations/custom-configuration-rules) page."
+        },
+        {
+          "info": {
+            "name": "Create a rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.upwind.io/v1/organizations/:organization-id/configuration-rules",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A `POST` request sent to this endpoint creates a Configuration Rule object that is associated with the specified organization. Configuration rules define custom compliance checks using Rego policy language to evaluate your cloud resources against security and governance requirements. To learn more about Configuration Rules, refer to the [Configuration Rules](/configurations/custom-configuration-rules) page."
+        },
+        {
+          "info": {
+            "name": "Update a rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.upwind.io/v1/organizations/:organization-id/configuration-rules/:rule-id",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "rule-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the configuration rule."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A `PATCH` request sent to the endpoint allows you to update an existing Configuration Rule object that is associated with the specified organization. You can modify properties such as name, category, severity, and Rego policy. To learn more about Configuration Rules, refer to the [Configuration Rules](/configurations/custom-configuration-rules) page."
+        },
+        {
+          "info": {
+            "name": "Delete a rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.upwind.io/v1/organizations/:organization-id/configuration-rules/:rule-id",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "rule-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the configuration rule."
+              }
+            ]
+          },
+          "docs": "A `DELETE` request sent to the endpoint deletes a Configuration Rule object that is associated with the specified organization. This action permanently removes the rule and cannot be undone. To learn more about Configuration Rules, refer to the [Configuration Rules](/configurations/custom-configuration-rules) page."
+        },
+        {
+          "info": {
+            "name": "Get an asset example",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/configurations/asset-examples/:asset-kind",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "asset-kind",
+                "value": "aws_s3_bucket",
+                "type": "path",
+                "description": "The asset kind to get an example for"
+              },
+              {
+                "name": "cloud-account-id",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier for the cloud account to get an asset example from"
+              }
+            ]
+          },
+          "docs": "A GET request sent to the endpoint root followed by an asset kind returns an example of that asset. If a cloud account ID is specified, an asset is retrieved from that account as the example."
+        },
+        {
+          "info": {
+            "name": "Create a configuration rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/configurations/custom-rules",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A `POST` request sent to this endpoint creates a configuration rule. Configuration rules define custom compliance checks using Rego policy language to evaluate cloud resources against security and governance requirements."
+        },
+        {
+          "info": {
+            "name": "Search findings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/configurations/findings/search",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned."
+              },
+              {
+                "name": "cursor",
+                "value": "eyJvZmZzZXQiOjIwfQ",
+                "type": "query",
+                "description": "A cursor for pagination to retrieve the next set of results."
+              },
+              {
+                "name": "sort",
+                "value": "evaluation_time:asc",
+                "type": "query",
+                "description": "Sort results by one or more fields. Format: `field` or `field:asc` or `field:desc`. Multiple fields: `field1,field2:desc`. Allowed fields: `first_seen_time`, `evaluation_time`, `rule_title`. Default: `evaluation_time:asc`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A `POST` request sent to the search endpoint returns a list of Configuration Finding objects matching the supplied search conditions. Supported attributes are listed below.\n\n**Filtering by `cloud_account_tags`**: values must be supplied in `key=value` format (e.g., `environment=production`).\n\n"
+        },
+        {
+          "info": {
+            "name": "Search frameworks",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/configurations/frameworks/search",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned."
+              },
+              {
+                "name": "cursor",
+                "value": "eyJvZmZzZXQiOjIwfQ",
+                "type": "query",
+                "description": "A cursor for pagination to retrieve the next set of results."
+              },
+              {
+                "name": "sort",
+                "value": "title:asc",
+                "type": "query",
+                "description": "Sort results by one or more fields. Format: `field` or `field:asc` or `field:desc`. Multiple fields: `field1,field2:desc`. Allowed fields: `title`, `create_time`, `update_time`, `last_evaluation_time`. Default: `title:asc`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A `POST` request sent to the search endpoint returns a list of Configuration Framework objects matching the supplied search conditions."
+        },
+        {
+          "info": {
+            "name": "Update a configuration rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/configurations/custom-rules/:rule-id",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "rule-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the configuration rule."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A `PATCH` request sent to the endpoint root followed by a unique identifier updates an existing configuration rule. Only the fields provided in the request body are updated; other fields remain unchanged."
+        },
+        {
+          "info": {
+            "name": "Get a finding",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/configurations/findings/:finding-id",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "finding-id",
+                "value": "fnd-a268c471aae2e2cf4bcab975b93b538e",
+                "type": "path",
+                "description": "The unique identifier for this configuration finding."
+              }
+            ]
+          },
+          "docs": "A `GET` request sent to the endpoint root followed by a unique identifier returns detailed information about a specific Configuration Finding."
+        },
+        {
+          "info": {
+            "name": "Create a framework",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/configurations/frameworks",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A POST request sent to the endpoint creates a new configuration framework for the specified organization."
+        },
+        {
+          "info": {
+            "name": "Update a framework",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/configurations/frameworks/:framework-id",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "framework-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the configuration framework."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A PATCH request sent to the endpoint root followed by a unique identifier updates the properties of a specific configuration framework."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

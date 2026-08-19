@@ -1,0 +1,95 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Introduction access-management cloud-accounts API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "cloud-accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a cloud account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.upwind.io/v1/organizations/:organization-id/cloud-accounts",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A `POST` request sent to the endpoint root creates a Cloud Account object that is associated with the specified organization. This endpoint allows you to add new cloud accounts to your organization for monitoring and security analysis. To learn more about Cloud Accounts, refer to the [Connect Cloud Account Overview](/getting-started/connect-cloud-account/overview) page."
+        },
+        {
+          "info": {
+            "name": "Update a cloud account",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.upwind.io/v1/organizations/:organization-id/cloud-accounts/:account-id",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "account-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the cloud account."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A `PATCH` request sent to the endpoint updates an existing Cloud Account object that is associated with the specified organization. This endpoint allows you to modify the configuration of an existing cloud account. To learn more about Cloud Accounts, refer to the [Connect Cloud Account Overview](/getting-started/connect-cloud-account/overview) page."
+        },
+        {
+          "info": {
+            "name": "Delete a cloud account",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.upwind.io/v1/organizations/:organization-id/cloud-accounts/:account-id",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "account-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the cloud account."
+              }
+            ]
+          },
+          "docs": "A `DELETE` request sent to the endpoint removes a Cloud Account object that is associated with the specified organization. This action permanently removes the cloud account and all associated data. To learn more about Cloud Accounts, refer to the [Connect Cloud Account Overview](/getting-started/connect-cloud-account/overview) page."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,170 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Introduction access-management vulnerabilities API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "vulnerabilities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List findings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.upwind.io/v1/organizations/:organization-id/vulnerability-findings",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "per-page",
+                "value": "",
+                "type": "query",
+                "description": "Specifies how many results are returned on a page."
+              },
+              {
+                "name": "cloud-account-id",
+                "value": "",
+                "type": "query",
+                "description": "Filters by the specified cloud account ID."
+              },
+              {
+                "name": "package-in-use",
+                "value": "",
+                "type": "query",
+                "description": "Filters findings for packages currently in use."
+              },
+              {
+                "name": "has-exploitable-functions-in-use",
+                "value": "",
+                "type": "query",
+                "description": "Filters findings for vulnerabilities with exploitable functions currently in use."
+              },
+              {
+                "name": "exploitable",
+                "value": "",
+                "type": "query",
+                "description": "Filters findings for packages with a known exploit."
+              },
+              {
+                "name": "fix-available",
+                "value": "",
+                "type": "query",
+                "description": "Filters findings for packages with an available fix."
+              },
+              {
+                "name": "ingress-active-communication",
+                "value": "",
+                "type": "query",
+                "description": "Filters findings for resources with active internet ingress communication."
+              },
+              {
+                "name": "internet-exposure",
+                "value": "",
+                "type": "query",
+                "description": "Filters findings for resources with internet exposure."
+              },
+              {
+                "name": "severity",
+                "value": "",
+                "type": "query",
+                "description": "Filters by the level of CVSS severity."
+              },
+              {
+                "name": "epss-severity",
+                "value": "",
+                "type": "query",
+                "description": "Filters by the level of EPSS severity."
+              },
+              {
+                "name": "cve-id",
+                "value": "",
+                "type": "query",
+                "description": "Filters findings by the specified CVE ID."
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "Filters by the specified Kubernetes namespace."
+              },
+              {
+                "name": "page-token",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the token for fetching subsequent pages in a paginated result set. Use the token from a previous response to continue retrieving data when the number of results exceeds the current page size."
+              },
+              {
+                "name": "image-name",
+                "value": "",
+                "type": "query",
+                "description": "Filters findings by the specified image name. For example, `nginx:latest` or `myapp:1.2`."
+              },
+              {
+                "name": "upwind-asset-id",
+                "value": "",
+                "type": "query",
+                "description": "Filters findings by the specified Upwind asset ID."
+              },
+              {
+                "name": "known-exploit-sources",
+                "value": "",
+                "type": "query",
+                "description": "Filters findings by the vendor catalog that flags the CVE as a known exploit (e.g. `cisa`, `nist`). Comma-separated; matches findings flagged by any of the listed vendors. Values are forwarded to the vulnerability service; new vendor catalogs supported upstream become available here automatically."
+              },
+              {
+                "name": "resource-type",
+                "value": "",
+                "type": "query",
+                "description": "Filters findings by the resource type of the affected asset. Comma-separated; matches findings on any of the listed resource types. Example: `AwsInstance,AwsLambdaFunction,Deployment`."
+              },
+              {
+                "name": "resource-tags",
+                "value": "",
+                "type": "query",
+                "description": "Filters findings by resource tags in `key:value` form. Repeat the parameter to filter on multiple tags; matches findings whose resource carries any of the listed tags. Example: `?resource-tags=env:prod&resource-tags=team:security`. Tag values may contain commas."
+              }
+            ]
+          },
+          "docs": "A `GET` request sent to the endpoint root returns a list of Vulnerability finding objects that are associated with the specified organization. To learn more about Vulnerabilities, refer to the [Vulnerabilities Overview](/vulnerabilities/overview) page."
+        },
+        {
+          "info": {
+            "name": "Get a finding",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.upwind.io/v1/organizations/:organization-id/vulnerability-findings/:finding-id",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "finding-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for this finding."
+              }
+            ]
+          },
+          "docs": "A `GET` request sent to the endpoint root followed by a unique identifier returns detailed information about a specific Vulnerability finding. This endpoint gives access to comprehensive details such as the CVE ID (Common Vulnerabilities and Exposures Identifier), the affected resource, severity, status, and runtime contextual information. To learn more about Vulnerabilities, refer to the [Vulnerabilities Overview](/vulnerabilities/overview) page."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

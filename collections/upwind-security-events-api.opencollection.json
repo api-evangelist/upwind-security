@@ -1,0 +1,105 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Introduction access-management events API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create an event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.upwind.io/v1/organizations/:organization-id/events",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A `POST` request sent to the endpoint root creates an Event object that is associated with the specified organization. To learn more about Events, refer to the [Continuous Integration (CI)](/integrations/continuous-integration/overview) page."
+        },
+        {
+          "info": {
+            "name": "Search ShiftLeft events",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.upwind.io/v1/organizations/:organization-id/events/shift-left/search",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A `POST` request sent to the endpoint searches for ShiftLeft Events between the start_time and end_time."
+        },
+        {
+          "info": {
+            "name": "Search ShiftLeft events",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/events/shift-left/search",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned."
+              },
+              {
+                "name": "cursor",
+                "value": "eyJvZmZzZXQiOjIwfQ",
+                "type": "query",
+                "description": "A cursor for pagination to retrieve the next set of results."
+              },
+              {
+                "name": "sort",
+                "value": "update_time:asc",
+                "type": "query",
+                "description": "Sort results by one or more fields. Format: `field` or `field:asc` or `field:desc`. Multiple fields: `field1,field2:desc`. Allowed fields: `update_time`, `create_time`. Default: `update_time:asc`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A POST request sent to the search endpoint returns a filtered list of ShiftLeft events that are associated with the specified organization based on the specified search criteria."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

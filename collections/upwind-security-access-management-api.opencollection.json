@@ -1,0 +1,444 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Introduction access-management API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "access-management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/access-management/groups/search",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned."
+              },
+              {
+                "name": "cursor",
+                "value": "eyJvZmZzZXQiOjIwfQ",
+                "type": "query",
+                "description": "A cursor for pagination to retrieve the next set of results."
+              },
+              {
+                "name": "sort",
+                "value": "create_time:asc",
+                "type": "query",
+                "description": "Sort results by one or more fields. Format: `field` or `field:asc` or `field:desc`. Multiple fields: `field1,field2:desc`. Allowed fields: `name`, `create_time`. Default: `create_time:asc`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A POST request sent to the endpoint root's search path returns a paginated list of access-management groups matching the specified filter conditions."
+        },
+        {
+          "info": {
+            "name": "Get a group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/access-management/groups/:group-id",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "group-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the group."
+              }
+            ]
+          },
+          "docs": "A GET request sent to the endpoint root followed by a unique identifier returns detailed information about a specific access-management group."
+        },
+        {
+          "info": {
+            "name": "Update a group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/access-management/groups/:group-id",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "group-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the group."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A PATCH request sent to the endpoint root followed by a unique identifier updates the properties of a specific access-management group."
+        },
+        {
+          "info": {
+            "name": "Add members to a group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/access-management/groups/:group-id/members/bulk",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "group-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the group."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A POST request adds the specified members to an access-management group."
+        },
+        {
+          "info": {
+            "name": "Remove members from a group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/access-management/groups/:group-id/members/bulk",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "group-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the group."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A DELETE request removes the specified members from an access-management group."
+        },
+        {
+          "info": {
+            "name": "Add a member",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/access-management/members",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A POST request sent to the endpoint root invites a new member to the organization with optional permissions and group assignments."
+        },
+        {
+          "info": {
+            "name": "Search members",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/access-management/members/search",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned."
+              },
+              {
+                "name": "cursor",
+                "value": "eyJvZmZzZXQiOjIwfQ",
+                "type": "query",
+                "description": "A cursor for pagination to retrieve the next set of results."
+              },
+              {
+                "name": "sort",
+                "value": "create_time:asc",
+                "type": "query",
+                "description": "Sort results by one or more fields. Format: `field` or `field:asc` or `field:desc`. Multiple fields: `field1,field2:desc`. Allowed fields: `email`, `name`, `create_time`. Default: `create_time:asc`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A POST request sent to the endpoint root's search path returns a paginated list of organization members matching the specified filter conditions."
+        },
+        {
+          "info": {
+            "name": "Search roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/access-management/roles/search",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned."
+              },
+              {
+                "name": "cursor",
+                "value": "eyJvZmZzZXQiOjIwfQ",
+                "type": "query",
+                "description": "A cursor for pagination to retrieve the next set of results."
+              },
+              {
+                "name": "sort",
+                "value": "name:asc",
+                "type": "query",
+                "description": "Sort results by one or more fields. Format: `field` or `field:asc` or `field:desc`. Multiple fields: `field1,field2:desc`. Allowed fields: `name`. Default: `name:asc`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A POST request sent to the endpoint returns a paginated list of access-management roles matching the specified filter conditions."
+        },
+        {
+          "info": {
+            "name": "Get a role",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/access-management/roles/:role-id",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "role-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the role."
+              }
+            ]
+          },
+          "docs": "A GET request sent to the endpoint root followed by a unique identifier returns detailed information about a specific access-management role."
+        },
+        {
+          "info": {
+            "name": "Create a scope",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/access-management/scopes",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A POST request sent to the endpoint root creates a new access-management scope with the specified name, description, and resource filters."
+        },
+        {
+          "info": {
+            "name": "Search scopes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/access-management/scopes/search",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned."
+              },
+              {
+                "name": "cursor",
+                "value": "eyJvZmZzZXQiOjIwfQ",
+                "type": "query",
+                "description": "A cursor for pagination to retrieve the next set of results."
+              },
+              {
+                "name": "sort",
+                "value": "create_time:asc",
+                "type": "query",
+                "description": "Sort results by one or more fields. Format: `field` or `field:asc` or `field:desc`. Multiple fields: `field1,field2:desc`. Allowed fields: `name`, `create_time`, `update_time`. Default: `create_time:asc`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A POST request sent to the endpoint returns a paginated list of access-management scopes matching the specified filter conditions."
+        },
+        {
+          "info": {
+            "name": "Get a scope",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/access-management/scopes/:scope-id",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "scope-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the scope."
+              }
+            ]
+          },
+          "docs": "A GET request sent to the endpoint root followed by a unique identifier returns detailed information about a specific access-management scope."
+        },
+        {
+          "info": {
+            "name": "Update a scope",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/access-management/scopes/:scope-id",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "scope-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the scope."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A PATCH request sent to the endpoint root followed by a unique identifier updates an existing access-management scope's name, description, and/or resource filters."
+        },
+        {
+          "info": {
+            "name": "Delete a scope",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/access-management/scopes/:scope-id",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "scope-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the scope."
+              }
+            ]
+          },
+          "docs": "A DELETE request sent to the endpoint root followed by a unique identifier deletes a specific access-management scope."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

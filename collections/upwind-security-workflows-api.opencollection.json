@@ -1,0 +1,139 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Introduction access-management workflows API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "workflows",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List workflows",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.upwind.io/v1/organizations/:organization-id/workflows",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              }
+            ]
+          },
+          "docs": "A `GET` request sent to the endpoint root returns a list of Workflow objects that are associated with the specified organization. Workflows provide automation capabilities for responding to security events, vulnerabilities, and configuration findings. To learn more about Workflows, refer to the [Workflows](/settings/workflows) page."
+        },
+        {
+          "info": {
+            "name": "Create a workflow",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.upwind.io/v1/organizations/:organization-id/workflows",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A `POST` request sent to the endpoint root creates a Workflow object that is associated with the specified organization. Workflows provide automation capabilities for responding to security events, vulnerabilities, and configuration findings. To learn more about Workflows, refer to the [Workflows](/settings/workflows) page."
+        },
+        {
+          "info": {
+            "name": "Get a workflow",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.upwind.io/v1/organizations/:organization-id/workflows/:workflow-id",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "workflow-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for this workflow."
+              }
+            ]
+          },
+          "docs": "A `GET` request sent to the endpoint root followed by a unique identifier returns detailed information about a specific Workflow. This endpoint provides access to comprehensive details such as triggers, actions, and selectors configured for the workflow. To learn more about Workflows, refer to the [Workflows](/settings/workflows) page."
+        },
+        {
+          "info": {
+            "name": "Update a workflow",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.upwind.io/v1/organizations/:organization-id/workflows/:workflow-id",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "workflow-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for this workflow."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A `PATCH` request sent to the endpoint root followed by a unique identifier allows for updating specific fields of an existing Workflow. This endpoint facilitates the modification of attributes such as the workflow name, status, and configuration. To learn more about Workflows, refer to the [Workflows](/settings/workflows) page."
+        },
+        {
+          "info": {
+            "name": "Delete a workflow",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.upwind.io/v1/organizations/:organization-id/workflows/:workflow-id",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "workflow-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for this workflow."
+              }
+            ]
+          },
+          "docs": "A `DELETE` request sent to the endpoint root followed by a unique identifier deletes a specific Workflow. This action permanently removes the workflow and cannot be undone. To learn more about Workflows, refer to the [Workflows](/settings/workflows) page."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

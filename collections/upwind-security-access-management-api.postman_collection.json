@@ -1,0 +1,4560 @@
+{
+  "item": [
+    {
+      "id": "3662f04a-847f-4856-b9c2-9682d79893c7",
+      "name": "access-management",
+      "description": {
+        "content": "The Access Management resource offers methods for managing groups, members, roles, and scopes.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "57e6c886-e7fa-4fa3-b0c5-a9689c765a17",
+          "name": "Search groups",
+          "request": {
+            "name": "Search groups",
+            "description": {
+              "content": "A POST request sent to the endpoint root's search path returns a paginated list of access-management groups matching the specified filter conditions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "organizations",
+                ":organization-id",
+                "access-management",
+                "groups",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Specifies the maximum number of items to be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "A cursor for pagination to retrieve the next set of results."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "Sort results by one or more fields. Format: `field` or `field:asc` or `field:desc`. Multiple fields: `field1,field2:desc`. Allowed fields: `name`, `create_time`. Default: `create_time:asc`."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organization-id",
+                  "description": "(Required) The unique identifier for the Upwind organization."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"conditions\": [\n    {\n      \"operator\": \"<string>\",\n      \"value\": [],\n      \"field\": \"<string>\"\n    },\n    {\n      \"operator\": \"<string>\",\n      \"value\": [],\n      \"field\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c9086658-8945-40b7-b9d5-e524370d87f7",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "groups",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "eyJvZmZzZXQiOjIwfQ"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "create_time:asc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"conditions\": [\n    {\n      \"operator\": \"eq\",\n      \"value\": [],\n      \"field\": \"name\"\n    },\n    {\n      \"operator\": \"eq\",\n      \"value\": [],\n      \"field\": \"name\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"create_time\": \"2024-01-15 10:30:00+00:00\",\n      \"id\": \"upwind_readers\",\n      \"identity_provider_name\": \"okta\",\n      \"name\": \"Upwind Readers\",\n      \"permissions\": [\n        {\n          \"role_ids\": [\n            \"uamr_security_architect\"\n          ],\n          \"scope_id\": \"scope-prod-123\",\n          \"scope_name\": \"Production Environment\"\n        },\n        {\n          \"role_ids\": [\n            \"uamr_security_architect\"\n          ],\n          \"scope_id\": \"scope-prod-123\",\n          \"scope_name\": \"Production Environment\"\n        }\n      ],\n      \"update_time\": \"2024-01-20 14:45:00+00:00\",\n      \"user_count\": 25\n    },\n    {\n      \"create_time\": \"2024-01-15 10:30:00+00:00\",\n      \"id\": \"upwind_readers\",\n      \"identity_provider_name\": \"okta\",\n      \"name\": \"Upwind Readers\",\n      \"permissions\": [\n        {\n          \"role_ids\": [\n            \"uamr_security_architect\"\n          ],\n          \"scope_id\": \"scope-prod-123\",\n          \"scope_name\": \"Production Environment\"\n        },\n        {\n          \"role_ids\": [\n            \"uamr_security_architect\"\n          ],\n          \"scope_id\": \"scope-prod-123\",\n          \"scope_name\": \"Production Environment\"\n        }\n      ],\n      \"update_time\": \"2024-01-20 14:45:00+00:00\",\n      \"user_count\": 25\n    }\n  ],\n  \"metadata\": {\n    \"limit\": 20,\n    \"next_cursor\": \"eyJvZmZzZXQiOjIwfQ\",\n    \"previous_cursor\": \"eyJvZmZzZXQiOjB9\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "98a1ce5c-c065-4aec-816b-7cb669956376",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "groups",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "eyJvZmZzZXQiOjIwfQ"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "create_time:asc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"conditions\": [\n    {\n      \"operator\": \"eq\",\n      \"value\": [],\n      \"field\": \"name\"\n    },\n    {\n      \"operator\": \"eq\",\n      \"value\": [],\n      \"field\": \"name\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6dd2ed08-4577-483f-9607-8de6346b1e68",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "groups",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "eyJvZmZzZXQiOjIwfQ"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "create_time:asc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"conditions\": [\n    {\n      \"operator\": \"eq\",\n      \"value\": [],\n      \"field\": \"name\"\n    },\n    {\n      \"operator\": \"eq\",\n      \"value\": [],\n      \"field\": \"name\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9937fbbd-8eee-47f4-8860-6f3c2ff4f2ad",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "groups",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "eyJvZmZzZXQiOjIwfQ"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "create_time:asc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"conditions\": [\n    {\n      \"operator\": \"eq\",\n      \"value\": [],\n      \"field\": \"name\"\n    },\n    {\n      \"operator\": \"eq\",\n      \"value\": [],\n      \"field\": \"name\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b54c284f-d55c-4ddb-b828-bf87bbc012fc",
+          "name": "Get a group",
+          "request": {
+            "name": "Get a group",
+            "description": {
+              "content": "A GET request sent to the endpoint root followed by a unique identifier returns detailed information about a specific access-management group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "organizations",
+                ":organization-id",
+                "access-management",
+                "groups",
+                ":group-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organization-id",
+                  "description": "(Required) The unique identifier for the Upwind organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "group-id",
+                  "description": "(Required) The unique identifier for the group."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c76a055b-4d34-4529-b2a2-9d15a8cd43da",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "groups",
+                    ":group-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group-id",
+                      "description": "(Required) The unique identifier for the group."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"create_time\": \"2024-01-15 10:30:00+00:00\",\n      \"id\": \"upwind_readers\",\n      \"identity_provider_name\": \"okta\",\n      \"name\": \"Upwind Readers\",\n      \"permissions\": [\n        {\n          \"role_ids\": [\n            \"uamr_security_architect\"\n          ],\n          \"scope_id\": \"scope-prod-123\",\n          \"scope_name\": \"Production Environment\"\n        },\n        {\n          \"role_ids\": [\n            \"uamr_security_architect\"\n          ],\n          \"scope_id\": \"scope-prod-123\",\n          \"scope_name\": \"Production Environment\"\n        }\n      ],\n      \"update_time\": \"2024-01-20 14:45:00+00:00\",\n      \"user_count\": 25\n    },\n    {\n      \"create_time\": \"2024-01-15 10:30:00+00:00\",\n      \"id\": \"upwind_readers\",\n      \"identity_provider_name\": \"okta\",\n      \"name\": \"Upwind Readers\",\n      \"permissions\": [\n        {\n          \"role_ids\": [\n            \"uamr_security_architect\"\n          ],\n          \"scope_id\": \"scope-prod-123\",\n          \"scope_name\": \"Production Environment\"\n        },\n        {\n          \"role_ids\": [\n            \"uamr_security_architect\"\n          ],\n          \"scope_id\": \"scope-prod-123\",\n          \"scope_name\": \"Production Environment\"\n        }\n      ],\n      \"update_time\": \"2024-01-20 14:45:00+00:00\",\n      \"user_count\": 25\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7b3422dd-5316-497f-b33e-12b29f5d32c0",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "groups",
+                    ":group-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group-id",
+                      "description": "(Required) The unique identifier for the group."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "91d84b1a-06fb-4594-b4e1-c22395c96e8d",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "groups",
+                    ":group-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group-id",
+                      "description": "(Required) The unique identifier for the group."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "44e8a868-0be5-43c5-8bcf-2b25455018a2",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "groups",
+                    ":group-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group-id",
+                      "description": "(Required) The unique identifier for the group."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6b13f617-060e-4661-bf74-3bec82de6cd8",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "groups",
+                    ":group-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group-id",
+                      "description": "(Required) The unique identifier for the group."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "be911b76-08b7-40b1-b842-cfbfe3958ab5",
+          "name": "Update a group",
+          "request": {
+            "name": "Update a group",
+            "description": {
+              "content": "A PATCH request sent to the endpoint root followed by a unique identifier updates the properties of a specific access-management group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "organizations",
+                ":organization-id",
+                "access-management",
+                "groups",
+                ":group-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organization-id",
+                  "description": "(Required) The unique identifier for the Upwind organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "group-id",
+                  "description": "(Required) The unique identifier for the group."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"permissions\": [\n    {\n      \"role_ids\": [\n        \"<string>\"\n      ],\n      \"scope_id\": \"<string>\"\n    },\n    {\n      \"role_ids\": [\n        \"<string>\"\n      ],\n      \"scope_id\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a3adc79d-2b72-468f-907d-ac7cc4ebfbbf",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "groups",
+                    ":group-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group-id",
+                      "description": "(Required) The unique identifier for the group."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"permissions\": [\n    {\n      \"role_ids\": [\n        \"string\"\n      ],\n      \"scope_id\": \"string\"\n    },\n    {\n      \"role_ids\": [\n        \"string\"\n      ],\n      \"scope_id\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"create_time\": \"2024-01-15 10:30:00+00:00\",\n      \"id\": \"upwind_readers\",\n      \"identity_provider_name\": \"okta\",\n      \"name\": \"Upwind Readers\",\n      \"permissions\": [\n        {\n          \"role_ids\": [\n            \"uamr_security_architect\"\n          ],\n          \"scope_id\": \"scope-prod-123\",\n          \"scope_name\": \"Production Environment\"\n        },\n        {\n          \"role_ids\": [\n            \"uamr_security_architect\"\n          ],\n          \"scope_id\": \"scope-prod-123\",\n          \"scope_name\": \"Production Environment\"\n        }\n      ],\n      \"update_time\": \"2024-01-20 14:45:00+00:00\",\n      \"user_count\": 25\n    },\n    {\n      \"create_time\": \"2024-01-15 10:30:00+00:00\",\n      \"id\": \"upwind_readers\",\n      \"identity_provider_name\": \"okta\",\n      \"name\": \"Upwind Readers\",\n      \"permissions\": [\n        {\n          \"role_ids\": [\n            \"uamr_security_architect\"\n          ],\n          \"scope_id\": \"scope-prod-123\",\n          \"scope_name\": \"Production Environment\"\n        },\n        {\n          \"role_ids\": [\n            \"uamr_security_architect\"\n          ],\n          \"scope_id\": \"scope-prod-123\",\n          \"scope_name\": \"Production Environment\"\n        }\n      ],\n      \"update_time\": \"2024-01-20 14:45:00+00:00\",\n      \"user_count\": 25\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b30f445d-402a-4382-aca6-3ab8ed640b33",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "groups",
+                    ":group-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group-id",
+                      "description": "(Required) The unique identifier for the group."
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"permissions\": [\n    {\n      \"role_ids\": [\n        \"string\"\n      ],\n      \"scope_id\": \"string\"\n    },\n    {\n      \"role_ids\": [\n        \"string\"\n      ],\n      \"scope_id\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ef7c0c73-c6ed-412d-ae14-cfe848e175f5",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "groups",
+                    ":group-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group-id",
+                      "description": "(Required) The unique identifier for the group."
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"permissions\": [\n    {\n      \"role_ids\": [\n        \"string\"\n      ],\n      \"scope_id\": \"string\"\n    },\n    {\n      \"role_ids\": [\n        \"string\"\n      ],\n      \"scope_id\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "866b81ba-07e8-496e-9ffc-924b882a40d0",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "groups",
+                    ":group-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group-id",
+                      "description": "(Required) The unique identifier for the group."
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"permissions\": [\n    {\n      \"role_ids\": [\n        \"string\"\n      ],\n      \"scope_id\": \"string\"\n    },\n    {\n      \"role_ids\": [\n        \"string\"\n      ],\n      \"scope_id\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c178d2dd-3d0b-44a1-9b18-e8edf5250c2f",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "groups",
+                    ":group-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group-id",
+                      "description": "(Required) The unique identifier for the group."
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"permissions\": [\n    {\n      \"role_ids\": [\n        \"string\"\n      ],\n      \"scope_id\": \"string\"\n    },\n    {\n      \"role_ids\": [\n        \"string\"\n      ],\n      \"scope_id\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "78d0e0cf-dc94-4f16-8cd9-319aa1625570",
+          "name": "Add members to a group",
+          "request": {
+            "name": "Add members to a group",
+            "description": {
+              "content": "A POST request adds the specified members to an access-management group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "organizations",
+                ":organization-id",
+                "access-management",
+                "groups",
+                ":group-id",
+                "members",
+                "bulk"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organization-id",
+                  "description": "(Required) The unique identifier for the Upwind organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "group-id",
+                  "description": "(Required) The unique identifier for the group."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"emails\": [\n    \"<email>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ee33920c-c849-4416-be17-10711a5e4cc4",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "groups",
+                    ":group-id",
+                    "members",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group-id",
+                      "description": "(Required) The unique identifier for the group."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"emails\": [\n    \"user@example.com\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c5e3f0ca-2df4-4ddf-b773-c9e079eafab8",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "groups",
+                    ":group-id",
+                    "members",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group-id",
+                      "description": "(Required) The unique identifier for the group."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"emails\": [\n    \"user@example.com\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "363fbd46-b389-4f1f-b64b-eb8b150bc27f",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "groups",
+                    ":group-id",
+                    "members",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group-id",
+                      "description": "(Required) The unique identifier for the group."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"emails\": [\n    \"user@example.com\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "97250c5f-457c-414f-9632-f7499598e7a0",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "groups",
+                    ":group-id",
+                    "members",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group-id",
+                      "description": "(Required) The unique identifier for the group."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"emails\": [\n    \"user@example.com\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f46c0577-006b-47a3-84d7-0dd1bdb74158",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "groups",
+                    ":group-id",
+                    "members",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group-id",
+                      "description": "(Required) The unique identifier for the group."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"emails\": [\n    \"user@example.com\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "46e59d2d-7815-47d1-b455-d6b4ee62a6fd",
+          "name": "Remove members from a group",
+          "request": {
+            "name": "Remove members from a group",
+            "description": {
+              "content": "A DELETE request removes the specified members from an access-management group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "organizations",
+                ":organization-id",
+                "access-management",
+                "groups",
+                ":group-id",
+                "members",
+                "bulk"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organization-id",
+                  "description": "(Required) The unique identifier for the Upwind organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "group-id",
+                  "description": "(Required) The unique identifier for the group."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"emails\": [\n    \"<email>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5536bdac-0fd9-4d93-add3-e756d7a130cf",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "groups",
+                    ":group-id",
+                    "members",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group-id",
+                      "description": "(Required) The unique identifier for the group."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"emails\": [\n    \"user@example.com\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4a47bc26-4a37-4735-9dc0-44f8e2fe7beb",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "groups",
+                    ":group-id",
+                    "members",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group-id",
+                      "description": "(Required) The unique identifier for the group."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"emails\": [\n    \"user@example.com\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "310ecac3-3572-4671-8e1d-ced4a41169cd",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "groups",
+                    ":group-id",
+                    "members",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group-id",
+                      "description": "(Required) The unique identifier for the group."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"emails\": [\n    \"user@example.com\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ceccde24-3b95-4576-a9d0-cd640026944d",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "groups",
+                    ":group-id",
+                    "members",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group-id",
+                      "description": "(Required) The unique identifier for the group."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"emails\": [\n    \"user@example.com\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "520cd3fd-1d3a-408c-8f60-0fcdc343853f",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "groups",
+                    ":group-id",
+                    "members",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group-id",
+                      "description": "(Required) The unique identifier for the group."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"emails\": [\n    \"user@example.com\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0c096250-215e-4727-8730-e588e552b695",
+          "name": "Add a member",
+          "request": {
+            "name": "Add a member",
+            "description": {
+              "content": "A POST request sent to the endpoint root invites a new member to the organization with optional permissions and group assignments.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "organizations",
+                ":organization-id",
+                "access-management",
+                "members"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organization-id",
+                  "description": "(Required) The unique identifier for the Upwind organization."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"connection_type\": \"<string>\",\n  \"email\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"group_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"last_name\": \"<string>\",\n  \"permissions\": [\n    {\n      \"role_ids\": [\n        \"<string>\"\n      ],\n      \"scope_id\": \"<string>\"\n    },\n    {\n      \"role_ids\": [\n        \"<string>\"\n      ],\n      \"scope_id\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "69d817bb-6d8a-4a07-ade8-0f540ef99ec0",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connection_type\": \"social-google\",\n  \"email\": \"user@example.com\",\n  \"first_name\": \"John\",\n  \"group_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"last_name\": \"Doe\",\n  \"permissions\": [\n    {\n      \"role_ids\": [\n        \"string\"\n      ],\n      \"scope_id\": \"scope-prod-123\"\n    },\n    {\n      \"role_ids\": [\n        \"string\"\n      ],\n      \"scope_id\": \"scope-prod-123\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"email\": \"user@example.com\"\n    },\n    {\n      \"email\": \"user@example.com\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b93d087d-43f1-4b1a-9a9d-e1817c9b6b7a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connection_type\": \"social-google\",\n  \"email\": \"user@example.com\",\n  \"first_name\": \"John\",\n  \"group_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"last_name\": \"Doe\",\n  \"permissions\": [\n    {\n      \"role_ids\": [\n        \"string\"\n      ],\n      \"scope_id\": \"scope-prod-123\"\n    },\n    {\n      \"role_ids\": [\n        \"string\"\n      ],\n      \"scope_id\": \"scope-prod-123\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d831d173-985d-47bd-a8b0-6df25564841f",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connection_type\": \"social-google\",\n  \"email\": \"user@example.com\",\n  \"first_name\": \"John\",\n  \"group_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"last_name\": \"Doe\",\n  \"permissions\": [\n    {\n      \"role_ids\": [\n        \"string\"\n      ],\n      \"scope_id\": \"scope-prod-123\"\n    },\n    {\n      \"role_ids\": [\n        \"string\"\n      ],\n      \"scope_id\": \"scope-prod-123\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "67467f60-6e7a-482b-b495-1419e2cb504d",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connection_type\": \"social-google\",\n  \"email\": \"user@example.com\",\n  \"first_name\": \"John\",\n  \"group_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"last_name\": \"Doe\",\n  \"permissions\": [\n    {\n      \"role_ids\": [\n        \"string\"\n      ],\n      \"scope_id\": \"scope-prod-123\"\n    },\n    {\n      \"role_ids\": [\n        \"string\"\n      ],\n      \"scope_id\": \"scope-prod-123\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "13e28d9a-17ec-4af3-87ec-e7897eb26aec",
+          "name": "Search members",
+          "request": {
+            "name": "Search members",
+            "description": {
+              "content": "A POST request sent to the endpoint root's search path returns a paginated list of organization members matching the specified filter conditions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "organizations",
+                ":organization-id",
+                "access-management",
+                "members",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Specifies the maximum number of items to be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "A cursor for pagination to retrieve the next set of results."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "Sort results by one or more fields. Format: `field` or `field:asc` or `field:desc`. Multiple fields: `field1,field2:desc`. Allowed fields: `email`, `name`, `create_time`. Default: `create_time:asc`."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organization-id",
+                  "description": "(Required) The unique identifier for the Upwind organization."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"conditions\": [\n    {\n      \"operator\": \"<string>\",\n      \"value\": [],\n      \"field\": \"<string>\"\n    },\n    {\n      \"operator\": \"<string>\",\n      \"value\": [],\n      \"field\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "36fc33c6-5d42-4951-8c45-3f27b9cbda09",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "members",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "eyJvZmZzZXQiOjIwfQ"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "create_time:asc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"conditions\": [\n    {\n      \"operator\": \"eq\",\n      \"value\": [],\n      \"field\": \"email\"\n    },\n    {\n      \"operator\": \"eq\",\n      \"value\": [],\n      \"field\": \"email\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"create_time\": \"2024-01-15 10:30:00+00:00\",\n      \"email\": \"user@example.com\",\n      \"id\": \"auth0|abc123\",\n      \"identity_provider_name\": \"okta\",\n      \"member_name\": \"John Doe\",\n      \"permissions\": [\n        {\n          \"group_id\": \"uamg_security_team\",\n          \"role_ids\": [\n            \"uamr_security_architect\"\n          ],\n          \"scope_id\": \"scope-prod-123\",\n          \"scope_name\": \"Production Environment\",\n          \"source\": \"direct\"\n        },\n        {\n          \"group_id\": \"uamg_security_team\",\n          \"role_ids\": [\n            \"uamr_security_architect\"\n          ],\n          \"scope_id\": \"scope-prod-123\",\n          \"scope_name\": \"Production Environment\",\n          \"source\": \"direct\"\n        }\n      ]\n    },\n    {\n      \"create_time\": \"2024-01-15 10:30:00+00:00\",\n      \"email\": \"user@example.com\",\n      \"id\": \"auth0|abc123\",\n      \"identity_provider_name\": \"okta\",\n      \"member_name\": \"John Doe\",\n      \"permissions\": [\n        {\n          \"group_id\": \"uamg_security_team\",\n          \"role_ids\": [\n            \"uamr_security_architect\"\n          ],\n          \"scope_id\": \"scope-prod-123\",\n          \"scope_name\": \"Production Environment\",\n          \"source\": \"direct\"\n        },\n        {\n          \"group_id\": \"uamg_security_team\",\n          \"role_ids\": [\n            \"uamr_security_architect\"\n          ],\n          \"scope_id\": \"scope-prod-123\",\n          \"scope_name\": \"Production Environment\",\n          \"source\": \"direct\"\n        }\n      ]\n    }\n  ],\n  \"metadata\": {\n    \"limit\": 20,\n    \"next_cursor\": \"eyJvZmZzZXQiOjIwfQ\",\n    \"previous_cursor\": \"eyJvZmZzZXQiOjB9\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b546f224-1901-4c05-b4ec-5c35dcafee4f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "members",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "eyJvZmZzZXQiOjIwfQ"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "create_time:asc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"conditions\": [\n    {\n      \"operator\": \"eq\",\n      \"value\": [],\n      \"field\": \"email\"\n    },\n    {\n      \"operator\": \"eq\",\n      \"value\": [],\n      \"field\": \"email\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "439628c1-c593-4ffa-8b27-f283a74d8dd1",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "members",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "eyJvZmZzZXQiOjIwfQ"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "create_time:asc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"conditions\": [\n    {\n      \"operator\": \"eq\",\n      \"value\": [],\n      \"field\": \"email\"\n    },\n    {\n      \"operator\": \"eq\",\n      \"value\": [],\n      \"field\": \"email\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e2d9b4d5-0118-4854-bb5b-1849e7665c87",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "members",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "eyJvZmZzZXQiOjIwfQ"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "create_time:asc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"conditions\": [\n    {\n      \"operator\": \"eq\",\n      \"value\": [],\n      \"field\": \"email\"\n    },\n    {\n      \"operator\": \"eq\",\n      \"value\": [],\n      \"field\": \"email\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5ddd8229-c5f5-4d2a-8662-fcf554c38088",
+          "name": "Search roles",
+          "request": {
+            "name": "Search roles",
+            "description": {
+              "content": "A POST request sent to the endpoint returns a paginated list of access-management roles matching the specified filter conditions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "organizations",
+                ":organization-id",
+                "access-management",
+                "roles",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Specifies the maximum number of items to be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "A cursor for pagination to retrieve the next set of results."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "Sort results by one or more fields. Format: `field` or `field:asc` or `field:desc`. Multiple fields: `field1,field2:desc`. Allowed fields: `name`. Default: `name:asc`."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organization-id",
+                  "description": "(Required) The unique identifier for the Upwind organization."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"conditions\": [\n    {\n      \"operator\": \"<string>\",\n      \"value\": [],\n      \"field\": \"<string>\"\n    },\n    {\n      \"operator\": \"<string>\",\n      \"value\": [],\n      \"field\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "863016bd-9944-4266-9f8a-1dea53ea271c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "roles",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "eyJvZmZzZXQiOjIwfQ"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "name:asc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"conditions\": [\n    {\n      \"operator\": \"eq\",\n      \"value\": [],\n      \"field\": \"name\"\n    },\n    {\n      \"operator\": \"eq\",\n      \"value\": [],\n      \"field\": \"name\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"description\": \"Full access to security features\",\n      \"id\": \"uamr_security_architect\",\n      \"name\": \"Security Architect\",\n      \"type\": \"Persona\"\n    },\n    {\n      \"description\": \"Full access to security features\",\n      \"id\": \"uamr_security_architect\",\n      \"name\": \"Security Architect\",\n      \"type\": \"Persona\"\n    }\n  ],\n  \"metadata\": {\n    \"limit\": 20,\n    \"next_cursor\": \"eyJvZmZzZXQiOjIwfQ\",\n    \"previous_cursor\": \"eyJvZmZzZXQiOjB9\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b3da5c31-a24f-429b-be70-168798c900da",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "roles",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "eyJvZmZzZXQiOjIwfQ"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "name:asc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"conditions\": [\n    {\n      \"operator\": \"eq\",\n      \"value\": [],\n      \"field\": \"name\"\n    },\n    {\n      \"operator\": \"eq\",\n      \"value\": [],\n      \"field\": \"name\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cf43dd0f-7161-45fb-bb6d-ed2e2333051f",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "roles",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "eyJvZmZzZXQiOjIwfQ"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "name:asc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"conditions\": [\n    {\n      \"operator\": \"eq\",\n      \"value\": [],\n      \"field\": \"name\"\n    },\n    {\n      \"operator\": \"eq\",\n      \"value\": [],\n      \"field\": \"name\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0bd5feca-7845-4b6d-a4b4-bc59fa9b7084",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "roles",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "eyJvZmZzZXQiOjIwfQ"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "name:asc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"conditions\": [\n    {\n      \"operator\": \"eq\",\n      \"value\": [],\n      \"field\": \"name\"\n    },\n    {\n      \"operator\": \"eq\",\n      \"value\": [],\n      \"field\": \"name\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1e201762-5740-440e-a060-8501a3123010",
+          "name": "Get a role",
+          "request": {
+            "name": "Get a role",
+            "description": {
+              "content": "A GET request sent to the endpoint root followed by a unique identifier returns detailed information about a specific access-management role.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "organizations",
+                ":organization-id",
+                "access-management",
+                "roles",
+                ":role-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organization-id",
+                  "description": "(Required) The unique identifier for the Upwind organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "role-id",
+                  "description": "(Required) The unique identifier for the role."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "511006c1-85ca-4aba-86e6-110772cda4ba",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "roles",
+                    ":role-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "role-id",
+                      "description": "(Required) The unique identifier for the role."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"based_on_role_ids\": [\n        \"uamr_security_reader\"\n      ],\n      \"description\": \"Full access to security features\",\n      \"id\": \"uamr_security_architect\",\n      \"name\": \"Security Architect\",\n      \"permissions\": [\n        \"vulnerabilities:read\",\n        \"configurations:write\"\n      ],\n      \"type\": \"Persona\"\n    },\n    {\n      \"based_on_role_ids\": [\n        \"uamr_security_reader\"\n      ],\n      \"description\": \"Full access to security features\",\n      \"id\": \"uamr_security_architect\",\n      \"name\": \"Security Architect\",\n      \"permissions\": [\n        \"vulnerabilities:read\",\n        \"configurations:write\"\n      ],\n      \"type\": \"Persona\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b5fb8941-c075-405f-a153-affb4fa2ebff",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "roles",
+                    ":role-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "role-id",
+                      "description": "(Required) The unique identifier for the role."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6c0c5d88-8fad-453e-a918-5a70ea214764",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "roles",
+                    ":role-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "role-id",
+                      "description": "(Required) The unique identifier for the role."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "44bf860a-9053-41bb-97bf-4dc0cec32b39",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "roles",
+                    ":role-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "role-id",
+                      "description": "(Required) The unique identifier for the role."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3c781e49-84c6-44d9-bbe0-24d9c1342efc",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "roles",
+                    ":role-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "role-id",
+                      "description": "(Required) The unique identifier for the role."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7030bf93-1112-40de-8d4d-0d9aed9a988a",
+          "name": "Create a scope",
+          "request": {
+            "name": "Create a scope",
+            "description": {
+              "content": "A POST request sent to the endpoint root creates a new access-management scope with the specified name, description, and resource filters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "organizations",
+                ":organization-id",
+                "access-management",
+                "scopes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organization-id",
+                  "description": "(Required) The unique identifier for the Upwind organization."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"resource_filters\": [\n    {\n      \"attribute\": \"<string>\",\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<string>\"\n      ]\n    },\n    {\n      \"attribute\": \"<string>\",\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<string>\"\n      ]\n    }\n  ],\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "06f3abcf-9783-4f0a-a35d-2ad47e53050b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "scopes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"resource_filters\": [\n    {\n      \"attribute\": \"string\",\n      \"operator\": \"string\",\n      \"values\": [\n        \"string\"\n      ]\n    },\n    {\n      \"attribute\": \"string\",\n      \"operator\": \"string\",\n      \"values\": [\n        \"string\"\n      ]\n    }\n  ],\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"create_time\": \"2024-01-15 10:30:00+00:00\",\n      \"creator_id\": \"user-456\",\n      \"description\": \"All production resources\",\n      \"id\": \"scope-123\",\n      \"name\": \"Production Environment\",\n      \"resource_filters\": [\n        {\n          \"attribute\": \"cloud_account_id\",\n          \"operator\": \"in\",\n          \"values\": [\n            \"aws-acc-prod-001\"\n          ]\n        },\n        {\n          \"attribute\": \"cloud_account_id\",\n          \"operator\": \"in\",\n          \"values\": [\n            \"aws-acc-prod-001\"\n          ]\n        }\n      ],\n      \"update_time\": \"2024-01-20 14:45:00+00:00\"\n    },\n    {\n      \"create_time\": \"2024-01-15 10:30:00+00:00\",\n      \"creator_id\": \"user-456\",\n      \"description\": \"All production resources\",\n      \"id\": \"scope-123\",\n      \"name\": \"Production Environment\",\n      \"resource_filters\": [\n        {\n          \"attribute\": \"cloud_account_id\",\n          \"operator\": \"in\",\n          \"values\": [\n            \"aws-acc-prod-001\"\n          ]\n        },\n        {\n          \"attribute\": \"cloud_account_id\",\n          \"operator\": \"in\",\n          \"values\": [\n            \"aws-acc-prod-001\"\n          ]\n        }\n      ],\n      \"update_time\": \"2024-01-20 14:45:00+00:00\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7397bd76-8fa6-4daa-b0ff-ddc00cfa1652",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "scopes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"resource_filters\": [\n    {\n      \"attribute\": \"string\",\n      \"operator\": \"string\",\n      \"values\": [\n        \"string\"\n      ]\n    },\n    {\n      \"attribute\": \"string\",\n      \"operator\": \"string\",\n      \"values\": [\n        \"string\"\n      ]\n    }\n  ],\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bd4b63f9-7b2e-40ce-9d85-2340150c7e65",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "scopes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"resource_filters\": [\n    {\n      \"attribute\": \"string\",\n      \"operator\": \"string\",\n      \"values\": [\n        \"string\"\n      ]\n    },\n    {\n      \"attribute\": \"string\",\n      \"operator\": \"string\",\n      \"values\": [\n        \"string\"\n      ]\n    }\n  ],\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0cec9cc1-8a13-4d80-9b5b-8f83d1e6cc4e",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "scopes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"resource_filters\": [\n    {\n      \"attribute\": \"string\",\n      \"operator\": \"string\",\n      \"values\": [\n        \"string\"\n      ]\n    },\n    {\n      \"attribute\": \"string\",\n      \"operator\": \"string\",\n      \"values\": [\n        \"string\"\n      ]\n    }\n  ],\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "75c258d0-a0a5-432c-9272-c2cc45e586e8",
+          "name": "Search scopes",
+          "request": {
+            "name": "Search scopes",
+            "description": {
+              "content": "A POST request sent to the endpoint returns a paginated list of access-management scopes matching the specified filter conditions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "organizations",
+                ":organization-id",
+                "access-management",
+                "scopes",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Specifies the maximum number of items to be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "A cursor for pagination to retrieve the next set of results."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "Sort results by one or more fields. Format: `field` or `field:asc` or `field:desc`. Multiple fields: `field1,field2:desc`. Allowed fields: `name`, `create_time`, `update_time`. Default: `create_time:asc`."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organization-id",
+                  "description": "(Required) The unique identifier for the Upwind organization."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"conditions\": [\n    {\n      \"operator\": \"<string>\",\n      \"value\": [],\n      \"field\": \"<string>\"\n    },\n    {\n      \"operator\": \"<string>\",\n      \"value\": [],\n      \"field\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4f2e2247-faa8-41d1-8a2c-374185e62e57",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "scopes",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "eyJvZmZzZXQiOjIwfQ"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "create_time:asc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"conditions\": [\n    {\n      \"operator\": \"eq\",\n      \"value\": [],\n      \"field\": \"name\"\n    },\n    {\n      \"operator\": \"eq\",\n      \"value\": [],\n      \"field\": \"name\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"create_time\": \"2024-01-15 10:30:00+00:00\",\n      \"creator_id\": \"user-456\",\n      \"description\": \"All production resources\",\n      \"id\": \"scope-123\",\n      \"name\": \"Production Environment\",\n      \"resource_filters\": [\n        {\n          \"attribute\": \"cloud_account_id\",\n          \"operator\": \"in\",\n          \"values\": [\n            \"aws-acc-prod-001\"\n          ]\n        },\n        {\n          \"attribute\": \"cloud_account_id\",\n          \"operator\": \"in\",\n          \"values\": [\n            \"aws-acc-prod-001\"\n          ]\n        }\n      ],\n      \"update_time\": \"2024-01-20 14:45:00+00:00\"\n    },\n    {\n      \"create_time\": \"2024-01-15 10:30:00+00:00\",\n      \"creator_id\": \"user-456\",\n      \"description\": \"All production resources\",\n      \"id\": \"scope-123\",\n      \"name\": \"Production Environment\",\n      \"resource_filters\": [\n        {\n          \"attribute\": \"cloud_account_id\",\n          \"operator\": \"in\",\n          \"values\": [\n            \"aws-acc-prod-001\"\n          ]\n        },\n        {\n          \"attribute\": \"cloud_account_id\",\n          \"operator\": \"in\",\n          \"values\": [\n            \"aws-acc-prod-001\"\n          ]\n        }\n      ],\n      \"update_time\": \"2024-01-20 14:45:00+00:00\"\n    }\n  ],\n  \"metadata\": {\n    \"limit\": 20,\n    \"next_cursor\": \"eyJvZmZzZXQiOjIwfQ\",\n    \"previous_cursor\": \"eyJvZmZzZXQiOjB9\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6850f7f8-fb16-4fb8-9dfb-27022cbd9b1f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "scopes",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "eyJvZmZzZXQiOjIwfQ"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "create_time:asc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"conditions\": [\n    {\n      \"operator\": \"eq\",\n      \"value\": [],\n      \"field\": \"name\"\n    },\n    {\n      \"operator\": \"eq\",\n      \"value\": [],\n      \"field\": \"name\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c9ce7e18-ac45-4588-9ece-ba81cc2f17f9",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "scopes",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "eyJvZmZzZXQiOjIwfQ"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "create_time:asc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"conditions\": [\n    {\n      \"operator\": \"eq\",\n      \"value\": [],\n      \"field\": \"name\"\n    },\n    {\n      \"operator\": \"eq\",\n      \"value\": [],\n      \"field\": \"name\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9aaf6144-580e-4335-97b6-97d6c99ab529",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "scopes",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "eyJvZmZzZXQiOjIwfQ"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "create_time:asc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"conditions\": [\n    {\n      \"operator\": \"eq\",\n      \"value\": [],\n      \"field\": \"name\"\n    },\n    {\n      \"operator\": \"eq\",\n      \"value\": [],\n      \"field\": \"name\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3f12e115-3ed1-4658-ac58-5aeff2bd676d",
+          "name": "Get a scope",
+          "request": {
+            "name": "Get a scope",
+            "description": {
+              "content": "A GET request sent to the endpoint root followed by a unique identifier returns detailed information about a specific access-management scope.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "organizations",
+                ":organization-id",
+                "access-management",
+                "scopes",
+                ":scope-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organization-id",
+                  "description": "(Required) The unique identifier for the Upwind organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "scope-id",
+                  "description": "(Required) The unique identifier for the scope."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2eeb24cc-de7f-43d9-a18d-564be965c347",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "scopes",
+                    ":scope-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scope-id",
+                      "description": "(Required) The unique identifier for the scope."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"create_time\": \"2024-01-15 10:30:00+00:00\",\n      \"creator_id\": \"user-456\",\n      \"description\": \"All production resources\",\n      \"id\": \"scope-123\",\n      \"name\": \"Production Environment\",\n      \"resource_filters\": [\n        {\n          \"attribute\": \"cloud_account_id\",\n          \"operator\": \"in\",\n          \"values\": [\n            \"aws-acc-prod-001\"\n          ]\n        },\n        {\n          \"attribute\": \"cloud_account_id\",\n          \"operator\": \"in\",\n          \"values\": [\n            \"aws-acc-prod-001\"\n          ]\n        }\n      ],\n      \"update_time\": \"2024-01-20 14:45:00+00:00\"\n    },\n    {\n      \"create_time\": \"2024-01-15 10:30:00+00:00\",\n      \"creator_id\": \"user-456\",\n      \"description\": \"All production resources\",\n      \"id\": \"scope-123\",\n      \"name\": \"Production Environment\",\n      \"resource_filters\": [\n        {\n          \"attribute\": \"cloud_account_id\",\n          \"operator\": \"in\",\n          \"values\": [\n            \"aws-acc-prod-001\"\n          ]\n        },\n        {\n          \"attribute\": \"cloud_account_id\",\n          \"operator\": \"in\",\n          \"values\": [\n            \"aws-acc-prod-001\"\n          ]\n        }\n      ],\n      \"update_time\": \"2024-01-20 14:45:00+00:00\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bee9b2dc-a011-4656-99c4-5b88e8db60a8",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "scopes",
+                    ":scope-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scope-id",
+                      "description": "(Required) The unique identifier for the scope."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "01fdcf60-bb42-4e80-9c2e-1d6fd0759550",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "scopes",
+                    ":scope-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scope-id",
+                      "description": "(Required) The unique identifier for the scope."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d964ed37-d570-4676-9ec7-38bb2fc04e84",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "scopes",
+                    ":scope-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scope-id",
+                      "description": "(Required) The unique identifier for the scope."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "826a2014-d7db-4ea5-a67a-7fbdd5f67deb",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "scopes",
+                    ":scope-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scope-id",
+                      "description": "(Required) The unique identifier for the scope."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bef929fa-d5d2-4036-8e02-3169a64954c5",
+          "name": "Delete a scope",
+          "request": {
+            "name": "Delete a scope",
+            "description": {
+              "content": "A DELETE request sent to the endpoint root followed by a unique identifier deletes a specific access-management scope.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "organizations",
+                ":organization-id",
+                "access-management",
+                "scopes",
+                ":scope-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organization-id",
+                  "description": "(Required) The unique identifier for the Upwind organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "scope-id",
+                  "description": "(Required) The unique identifier for the scope."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8ce91aa0-e688-49b1-af0e-80457486f0e9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "scopes",
+                    ":scope-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scope-id",
+                      "description": "(Required) The unique identifier for the scope."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e3a59302-53d6-4472-b2ff-432624694c62",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "scopes",
+                    ":scope-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scope-id",
+                      "description": "(Required) The unique identifier for the scope."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e3a88194-703e-4c8b-9546-98000bf8e607",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "scopes",
+                    ":scope-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scope-id",
+                      "description": "(Required) The unique identifier for the scope."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "97ae0d0a-3cd0-4bd9-976b-eca38a4d3b79",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "scopes",
+                    ":scope-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scope-id",
+                      "description": "(Required) The unique identifier for the scope."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b64fff13-b522-4c2e-91cd-ca68e153be11",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "scopes",
+                    ":scope-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scope-id",
+                      "description": "(Required) The unique identifier for the scope."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9993f242-45d2-4f5c-b91d-9fd803e489fd",
+          "name": "Update a scope",
+          "request": {
+            "name": "Update a scope",
+            "description": {
+              "content": "A PATCH request sent to the endpoint root followed by a unique identifier updates an existing access-management scope's name, description, and/or resource filters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "organizations",
+                ":organization-id",
+                "access-management",
+                "scopes",
+                ":scope-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organization-id",
+                  "description": "(Required) The unique identifier for the Upwind organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "scope-id",
+                  "description": "(Required) The unique identifier for the scope."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"resource_filters\": [\n    {\n      \"attribute\": \"<string>\",\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<string>\"\n      ]\n    },\n    {\n      \"attribute\": \"<string>\",\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ec11bf0c-8fc4-4e0d-8d0a-4f3c8f809e40",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "scopes",
+                    ":scope-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scope-id",
+                      "description": "(Required) The unique identifier for the scope."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"resource_filters\": [\n    {\n      \"attribute\": \"string\",\n      \"operator\": \"string\",\n      \"values\": [\n        \"string\"\n      ]\n    },\n    {\n      \"attribute\": \"string\",\n      \"operator\": \"string\",\n      \"values\": [\n        \"string\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"create_time\": \"2024-01-15 10:30:00+00:00\",\n      \"creator_id\": \"user-456\",\n      \"description\": \"All production resources\",\n      \"id\": \"scope-123\",\n      \"name\": \"Production Environment\",\n      \"resource_filters\": [\n        {\n          \"attribute\": \"cloud_account_id\",\n          \"operator\": \"in\",\n          \"values\": [\n            \"aws-acc-prod-001\"\n          ]\n        },\n        {\n          \"attribute\": \"cloud_account_id\",\n          \"operator\": \"in\",\n          \"values\": [\n            \"aws-acc-prod-001\"\n          ]\n        }\n      ],\n      \"update_time\": \"2024-01-20 14:45:00+00:00\"\n    },\n    {\n      \"create_time\": \"2024-01-15 10:30:00+00:00\",\n      \"creator_id\": \"user-456\",\n      \"description\": \"All production resources\",\n      \"id\": \"scope-123\",\n      \"name\": \"Production Environment\",\n      \"resource_filters\": [\n        {\n          \"attribute\": \"cloud_account_id\",\n          \"operator\": \"in\",\n          \"values\": [\n            \"aws-acc-prod-001\"\n          ]\n        },\n        {\n          \"attribute\": \"cloud_account_id\",\n          \"operator\": \"in\",\n          \"values\": [\n            \"aws-acc-prod-001\"\n          ]\n        }\n      ],\n      \"update_time\": \"2024-01-20 14:45:00+00:00\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "11e39c49-439c-4e5b-9d3a-1620dc8d3ac2",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "scopes",
+                    ":scope-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scope-id",
+                      "description": "(Required) The unique identifier for the scope."
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"resource_filters\": [\n    {\n      \"attribute\": \"string\",\n      \"operator\": \"string\",\n      \"values\": [\n        \"string\"\n      ]\n    },\n    {\n      \"attribute\": \"string\",\n      \"operator\": \"string\",\n      \"values\": [\n        \"string\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5be87503-0cad-4b7e-9755-bf90f52096ac",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "scopes",
+                    ":scope-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scope-id",
+                      "description": "(Required) The unique identifier for the scope."
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"resource_filters\": [\n    {\n      \"attribute\": \"string\",\n      \"operator\": \"string\",\n      \"values\": [\n        \"string\"\n      ]\n    },\n    {\n      \"attribute\": \"string\",\n      \"operator\": \"string\",\n      \"values\": [\n        \"string\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "508d8dd9-bc11-4aa4-9d66-ca3557c84891",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "scopes",
+                    ":scope-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scope-id",
+                      "description": "(Required) The unique identifier for the scope."
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"resource_filters\": [\n    {\n      \"attribute\": \"string\",\n      \"operator\": \"string\",\n      \"values\": [\n        \"string\"\n      ]\n    },\n    {\n      \"attribute\": \"string\",\n      \"operator\": \"string\",\n      \"values\": [\n        \"string\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "503a9ecc-7c6d-4705-a21c-c3be30de57ed",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "organizations",
+                    ":organization-id",
+                    "access-management",
+                    "scopes",
+                    ":scope-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization-id",
+                      "description": "(Required) The unique identifier for the Upwind organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scope-id",
+                      "description": "(Required) The unique identifier for the scope."
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"resource_filters\": [\n    {\n      \"attribute\": \"string\",\n      \"operator\": \"string\",\n      \"values\": [\n        \"string\"\n      ]\n    },\n    {\n      \"attribute\": \"string\",\n      \"operator\": \"string\",\n      \"values\": [\n        \"string\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.upwind.io",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6df6d0ad-52a6-407b-a306-ef901f6c1663",
+    "name": "Introduction access-management API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "## Overview\n\nThe Management REST API v1 represents a collection of endpoints designed for the execution of administrative tasks programmatically. Tailored for utilization by back-end servers or trusted entities, the API facilitates integration, data retrieval, and workflow automation.\n\nThe API provides a powerful set of tools to interact with your organization's resources, including [Threats](/restapi/v1/threats), [Vulnerabilities](/restapi/v1/vulnerabilities), [Configurations](/restapi/v1/configurations), and [Workflows](/restapi/v1/workflows). Whether you are building applications, integrating services, or exploring data, this documentation serves as your guide through the various endpoints and functionalities offered by our API.\n\nWhen you make a request to the API, you will specify an HTTP method and a path. Additionally, you might also specify request headers and path, query, or body parameters. The API will return the response status code, response headers, and potentially a response body.\n\nThe API reference documentation describes the HTTP method, path, and parameters for every operation. It also displays example requests and responses for each operation.\n\n## Authentication\n\nTo access the endpoints of the API, you need to authenticate your requests. We use OAuth 2.0, a widely adopted industry standard for authorization, to secure and control access to the API.\n\nThe API uses [JSON Web Tokens (JWTs)](https://datatracker.ietf.org/doc/html/rfc7519) access tokens to authenticate requests. The API access token's scopes claim indicates which request methods can be performed when calling the API. Trying to perform any request method not permitted within the set scopes will result in a **403 Forbidden** response.\n\nYou can authenticate your request by adding an access token in the [Authorization](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-bearer-20#section-2.1) HTTP header using the [Bearer authentication scheme](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-bearer-20). To obtain an access token, you must first obtain client credentials.\n\n### Obtaining client credentials\n\nBefore you can make requests to the API, you will need to obtain client credentials. Follow the steps in the [Generate New Credentials](/settings/credentials#generate-new-credentials) section of the [Credentials](/settings/credentials) page to generate a client ID and client secret unique to your application.\n\n### Obtaining access token\n\nNow that you have your client credentials, proceed with obtaining an access token. To get a token by using the client credentials grant, send a POST request to the OAuth 2.0 token endpoint URL (`/oauth/token`). All requests to the token endpoint should be an HTTP POST.\n\n:::important\nThe `audience` parameter in your token request must match the regional API endpoint you plan to use. This ensures your access token is valid for the correct region. An access token obtained with `audience=https://api.upwind.io` will only work with the US API endpoint and cannot be used with EU or ME endpoints.\n:::\n\n#### For US region\n```bash\ncurl --request POST \\\n  --url \"https://auth.upwind.io/oauth/token\" \\\n  --data-urlencode 'client_id=YOUR_CLIENT_ID' \\\n  --data-urlencode 'client_secret=YOUR_CLIENT_SECRET' \\\n  --data-urlencode 'audience=https://api.upwind.io' \\\n  --data-urlencode 'grant_type=client_credentials'\n```\n\n#### For EU region\n```bash\ncurl --request POST \\\n  --url \"https://auth.upwind.io/oauth/token\" \\\n  --data-urlencode 'client_id=YOUR_CLIENT_ID' \\\n  --data-urlencode 'client_secret=YOUR_CLIENT_SECRET' \\\n  --data-urlencode 'audience=https://api.eu.upwind.io' \\\n  --data-urlencode 'grant_type=client_credentials'\n```\n\n#### For ME region\n```bash\ncurl --request POST \\\n  --url \"https://auth.upwind.io/oauth/token\" \\\n  --data-urlencode 'client_id=YOUR_CLIENT_ID' \\\n  --data-urlencode 'client_secret=YOUR_CLIENT_SECRET' \\\n  --data-urlencode 'audience=https://api.me.upwind.io' \\\n  --data-urlencode 'grant_type=client_credentials'\n```\n\n:::warning\nTreat your access token like a password and consider using another service to store your token securely.\n:::\n\n### Authenticating\n\nOnce you have obtained an access token, you can authenticate your API requests by including it in the [Authorization](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-bearer-20#section-2.1) HTTP header using the [Bearer authentication scheme](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-bearer-20).\n\nFor example, to authenticate a request to list threat detections, include your access token in the `Authorization` header:\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\n## Requests\n\nTo make a request, first find the HTTP method and the path for the operation that you want to use. For example, the \"List Threat Detections\" operation uses the `GET` method and the `/threat-detections` path. For the full reference documentation for this operation, see [List Threat Detections](/restapi/v1/list-threat-detections).\n\nPrepend the base URL for the API to the path to get the full URL. Choose the appropriate regional endpoint:\n- **US**: `https://api.upwind.io`\n- **EU**: `https://api.eu.upwind.io`\n- **ME**: `https://api.me.upwind.io`\n\nFor instance, on the command line, use the `curl` command. Specify the HTTP method using the `--request` or `-X` flag, and provide the full URL using the `--url` flag.\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\n:::note\nIf you get a message similar to \"command not found: curl\", you may need to download and install `curl`. For more information, see [the curl project download page](https://curl.se/download.html).\n:::\n\n### Using headers\n\nMost operations do not require specifying headers other than the `Authorization` header. Other operations may specify that you should pass an `Content-Type` header with a value of `application/json` or additional headers.\n\nTo send a header in a `curl` command, use the `--header` or `-H` flag followed by the header in `key: value` format.\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\n### Using path parameters\n\nPath parameters modify the operation path. For example, the \"List threat detections\" path is `/v1/organizations/{organization-id}/threat-detections`. The curly brackets `{}` denote path parameters that you need to specify. In this case, you must specify your Upwind organization identifier. For the full reference documentation for this operation, see [List Threat Detections](/restapi/v1/list-threat-detections).\n\nFor example, to get a list of Threat Detection objects from the `org_Xk9mPq7RtYwN2vLs` organization, replace `{organization-id}` with `org_Xk9mPq7RtYwN2vLs` and prepend the base URL for the API. The full path is `https://api.upwind.io/v1/organizations/org_Xk9mPq7RtYwN2vLs/threat-detections`.\n\n### Using query parameters\n\nQuery parameters allow you to control what data is returned for a request. For example, a query parameter may let you specify how many items are returned when the response is paginated.\n\nFor `curl` commands, add a `?` to the end of the path, then append your query parameter name and value in the form `name=value`. Separate multiple query parameters with `&`.\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections?severity=CRITICAL\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\n### Using body parameters\n\nBody parameters allow you to pass additional data to the API. For example, the \"Update a threat detection\" operation allows you to change the status of a detection. For the full reference documentation for this operation, see [Update a threat detection](/restapi/v1/update-threat-detection).\n\nFor `curl` commands, use the `--data` flag to pass the body parameters in a JSON object.\n\n```bash\ncurl --request PATCH \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections/{detection-id}\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\" \\\n  --header \"Content-Type: application/json\" \\\n  --data '{\n    \"status\": \"ARCHIVED\"\n  }'\n```\n\nThe operation updates the threat detection and returns data about the modified detection. For more information about using the response, see the [Using the response](#using-the-response) section.\n\n### Using the response\n\nEvery request will return an HTTP status code that indicates the success of the response. For more information about response codes, see [the MDN HTTP response status code documentation](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status).\n\n### About the response code and headers\n\nTo view the status code and headers, use the `--include` or `--i` flag when you send your request.\n\nFor example, this request:\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\" \\\n  --include\n```\n\nReturns the response code and headers like:\n\n```bash\nHTTP/2 200\n```\n\nIn this example, the response code is `200`, which indicates a successful request.\n\n### About the response body\n\nMost operations will return a response body. Unless otherwise specified, the response body is in JSON format.\n\nFor example, this request returns a list of Threat Detection objects with data about each detection:\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\nYou can also filter threat detections using query parameters. For example, to get all HIGH severity threat detections:\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections?severity=HIGH\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\n## Pagination\n\nMany list endpoints return large datasets that are divided into smaller, manageable chunks called pages. The API supports two types of pagination to help you navigate through these results efficiently.\n\nEach list endpoint supports one of the two pagination methods based on the potential amount of data that the endpoint can return. Information about which pagination method is used can be found on the specific endpoint's reference page.\n\n### Page-based Pagination\n\nPage-based pagination uses traditional page numbers to navigate through results. This method is useful when you need to jump to specific pages or when the total number of pages is known.\n\n#### Parameters\n- `page`: Specifies the page number for pagination (default: 1)\n- `per-page`: Specifies how many results are returned on a page (default: 100)\n\nFor example, to get the first page with 50 results per page:\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections?page=1&per-page=50\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\nTo get the second page:\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/threat-detections?page=2&per-page=50\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\n### Token-based Pagination\n\nToken-based pagination uses opaque tokens to navigate through results. This method is more efficient for large datasets and ensures consistent results even when data is being modified during pagination.\n\n#### Parameters\n- `page-token`: Specifies the token for fetching subsequent pages in a paginated result set\n- `per-page`: Specifies how many results are returned on a page (default: 100)\n\n#### Response Headers\n- `Link`: Provides pagination links for navigating through the result set, formatted as HTTP link headers\n\nFor example, to get the first page:\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/coniguration-findings?per-page=50\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\nTo get the next page, use the page-token from the previous response:\n\n```bash\ncurl --request GET \\\n  --url \"https://api.upwind.io/v1/organizations/{organization-id}/coniguration-findings?page-token=eyJjdXJzb3IiOiIxMjM0NTY3ODkwIn0&per-page=50\" \\\n  --header \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\n#### Working with Link Headers\n\nWhen using token-based pagination, the response includes a `Link` header with navigation URLs. This header follows the [RFC 5988](https://datatracker.ietf.org/doc/html/rfc5988) standard for web linking and provides ready-to-use URLs for pagination navigation.\n\n```bash\nLink: <https://api.upwind.io/v1/organizations/org_Xk9mPq7RtYwN2vLs/configuration-findings?page-token=eyJjdXJzb3IiOiIxMjM0NTY3ODkwIn0&per-page=50>; rel=\"next\"\n```\n\nThe Link header may contain multiple relationships:\n- `rel=\"first\"`: URL for the first page of results\n- `rel=\"next\"`: URL for the next page of results (if available)\n- `rel=\"prev\"`: URL for the previous page of results (if available)\n- `rel=\"last\"`: URL for the last page of results (when determinable)\n\nMultiple links are comma-separated. For example:\n\n```bash\nLink: <https://api.upwind.io/v1/organizations/org_Xk9mPq7RtYwN2vLs/configuration-findings?page-token=abc123>; rel=\"first\", <https://api.upwind.io/v1/organizations/org_Xk9mPq7RtYwN2vLs/configuration-findings?page-token=xyz789>; rel=\"next\"\n```\n\nYou can parse this header to automatically navigate through pages without manually constructing URLs or managing page tokens. This approach is particularly useful for automated data processing workflows where you need to iterate through all available data.\n\n## Next steps\n\nThis article demonstrates how to make requests to the API. For more practice, try listing threat detections with different filters or retrieving a specific threat detection by ID. If you encounter any issues or have questions, refer to our [Support](/#contact-us-247-over-chat-email-or-slack) through various channels.\n\nHappy coding!\n",
+      "type": "text/plain"
+    }
+  }
+}

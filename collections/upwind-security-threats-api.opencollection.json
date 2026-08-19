@@ -1,0 +1,835 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Introduction access-management threats API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "threats",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List detections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.upwind.io/v1/organizations/:organization-id/threat-detections",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "severity",
+                "value": "",
+                "type": "query",
+                "description": "Filters by the level of severity."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filters detections by their type."
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "Filters detections by their category."
+              },
+              {
+                "name": "upwind-asset-id",
+                "value": "",
+                "type": "query",
+                "description": "Filters detections by their Upwind asset ID."
+              },
+              {
+                "name": "min-first-seen-time",
+                "value": "",
+                "type": "query",
+                "description": "Filters detections by the earliest timestamp (in ISO8601 format) when they were first seen."
+              },
+              {
+                "name": "max-first-seen-time",
+                "value": "",
+                "type": "query",
+                "description": "Filters detections by the latest timestamp (in ISO8601 format) when they were first seen."
+              },
+              {
+                "name": "max-last-seen-time",
+                "value": "",
+                "type": "query",
+                "description": "Filters detections by the latest timestamp (in ISO8601 format) when they were last seen."
+              },
+              {
+                "name": "min-last-seen-time",
+                "value": "",
+                "type": "query",
+                "description": "Filters detections by the earliest timestamp (in ISO8601 format) when they were last seen."
+              }
+            ]
+          },
+          "docs": "A `GET` request sent to the endpoint root returns a list of Threat Detection objects that are associated with the specified organization. To learn more about Threat Detections, refer to the [Detections Overview](/threats/detections/overview) page."
+        },
+        {
+          "info": {
+            "name": "Get a detection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.upwind.io/v1/organizations/:organization-id/threat-detections/:detection-id",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "detection-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for this detection."
+              }
+            ]
+          },
+          "docs": "A `GET` request sent to the endpoint root followed by a unique identifier returns detailed information about a specific Threat Detection. This endpoint provides access to comprehensive details such as the triggers (policy violations) and attributes related to the associated resource. To learn more about Threat Detections, refer to the [Detections Overview](/threats/detections/overview) page."
+        },
+        {
+          "info": {
+            "name": "Update a detection",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.upwind.io/v1/organizations/:organization-id/threat-detections/:detection-id",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "detection-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for this detection."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A `PATCH` request sent to the endpoint root followed by a unique identifier allows for updating specific fields of an existing Threat Detection. This endpoint facilitates the modification of attributes such the detection status. To modify a Threat Detection, provide the necessary changes in the request body. To learn more about Threat Detections, refer to the [Detections Overview](/threats/detections/overview) page."
+        },
+        {
+          "info": {
+            "name": "List events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.upwind.io/v1/organizations/:organization-id/threat-events",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number to retrieve. Used for pagination along with the `per-page` parameter."
+              },
+              {
+                "name": "per-page",
+                "value": "",
+                "type": "query",
+                "description": "Specifies how many results are returned on a page."
+              },
+              {
+                "name": "cloud-account-id",
+                "value": "",
+                "type": "query",
+                "description": "Filters by the specified cloud account ID."
+              },
+              {
+                "name": "min-first-seen-time",
+                "value": "",
+                "type": "query",
+                "description": "Filters events by the earliest timestamp (in ISO8601 format) when they were first seen."
+              },
+              {
+                "name": "max-first-seen-time",
+                "value": "",
+                "type": "query",
+                "description": "Filters events by the latest timestamp (in ISO8601 format) when they were first seen."
+              },
+              {
+                "name": "max-last-seen-time",
+                "value": "",
+                "type": "query",
+                "description": "Filters events by the latest timestamp (in ISO8601 format) when they were last seen."
+              },
+              {
+                "name": "min-last-seen-time",
+                "value": "",
+                "type": "query",
+                "description": "Filters events by the earliest timestamp (in ISO8601 format) when they were last seen."
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "Filters events by their category."
+              },
+              {
+                "name": "severity",
+                "value": "",
+                "type": "query",
+                "description": "Filters by the level of severity."
+              },
+              {
+                "name": "upwind-asset-id",
+                "value": "",
+                "type": "query",
+                "description": "Filters events by the Upwind asset ID."
+              }
+            ]
+          },
+          "docs": "A `GET` request sent to the endpoint root returns a list of Threat Events objects that are associated with the specified organization. To learn more about Threat Events, refer to the [Events Overview](/threats/events/overview) page."
+        },
+        {
+          "info": {
+            "name": "List policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.upwind.io/v1/organizations/:organization-id/threat-policies",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "managed-by",
+                "value": "",
+                "type": "query",
+                "description": "Filters the policy list to include only policies managed by the specified entity."
+              }
+            ]
+          },
+          "docs": "A `GET` request sent to the endpoint root returns a list of Threat Policy objects that are associated with the specified organization. To learn more about Threat Policies, refer to the [Policies Overview](/threats/policies/overview) page."
+        },
+        {
+          "info": {
+            "name": "Update a policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.upwind.io/v1/organizations/:organization-id/threat-policies/:policy-id",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "policy-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for this policy."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A `PATCH` request sent to the endpoint root followed by a unique identifier allows for updating specific fields of an existing Threat Policy. This endpoint facilitates the modification of attributes such the enablement status. To modify a Threat Policy, provide the necessary changes in the request body. To learn more about Threat Policies, refer to the [Policies Overview](/threats/policies/overview) page."
+        },
+        {
+          "info": {
+            "name": "Get a policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/threats/policies/:policy-id",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "policy-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the policy"
+              }
+            ]
+          },
+          "docs": "A GET request sent to the endpoint root followed by a unique identifier returns detailed information about a specific policy."
+        },
+        {
+          "info": {
+            "name": "Get a policy rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/threats/policies/:policy-id/rules/:policy-rule-id",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "policy-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the policy"
+              },
+              {
+                "name": "policy-rule-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the policy rule"
+              }
+            ]
+          },
+          "docs": "A GET request sent to the endpoint root followed by a unique identifier returns detailed information about a specific policy rule."
+        },
+        {
+          "info": {
+            "name": "Get a rule definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/threats/rule-definitions/:rule-definition-id",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "rule-definition-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the rule definition"
+              }
+            ]
+          },
+          "docs": "A GET request sent to the endpoint root followed by a unique identifier returns detailed information about a specific rule definition."
+        },
+        {
+          "info": {
+            "name": "List stories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/threats/stories",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned."
+              },
+              {
+                "name": "cursor",
+                "value": "eyJvZmZzZXQiOjIwfQ",
+                "type": "query",
+                "description": "A cursor for pagination to retrieve the next set of results."
+              },
+              {
+                "name": "sort",
+                "value": "update_time:asc",
+                "type": "query",
+                "description": "Sort results by one or more fields. Format: `field` or `field:asc` or `field:desc`. Multiple fields: `field1,field2:desc`. Allowed fields: `update_time`, `create_time`. Default: `update_time:asc`."
+              }
+            ]
+          },
+          "docs": "A GET request sent to the endpoint root returns a list of threat stories objects that are associated with the specified organization."
+        },
+        {
+          "info": {
+            "name": "Search policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/threats/policies/search",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned."
+              },
+              {
+                "name": "cursor",
+                "value": "eyJvZmZzZXQiOjIwfQ",
+                "type": "query",
+                "description": "A cursor for pagination to retrieve the next set of results."
+              },
+              {
+                "name": "sort",
+                "value": "create_time:asc",
+                "type": "query",
+                "description": "Sort results by one or more fields. Format: `field` or `field:asc` or `field:desc`. Multiple fields: `field1,field2:desc`. Allowed fields: `name`, `severity`, `create_time`, `update_time`. Default: `create_time:asc`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A POST request sent to the search endpoint returns a filtered list of policy objects that are associated with the specified organization based on the specified search criteria."
+        },
+        {
+          "info": {
+            "name": "Search policy rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/threats/policies/:policy-id/rules/search",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "policy-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the policy"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned."
+              },
+              {
+                "name": "cursor",
+                "value": "eyJvZmZzZXQiOjIwfQ",
+                "type": "query",
+                "description": "A cursor for pagination to retrieve the next set of results."
+              },
+              {
+                "name": "sort",
+                "value": "create_time:asc",
+                "type": "query",
+                "description": "Sort results by one or more fields. Format: `field` or `field:asc` or `field:desc`. Multiple fields: `field1,field2:desc`. Allowed fields: `severity`, `create_time`, `update_time`. Default: `create_time:asc`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A POST request sent to the search endpoint returns a filtered list of policy rule objects for the specified policy, based on the given search criteria."
+        },
+        {
+          "info": {
+            "name": "Search rule definitions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/threats/rule-definitions/search",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned."
+              },
+              {
+                "name": "cursor",
+                "value": "eyJvZmZzZXQiOjIwfQ",
+                "type": "query",
+                "description": "A cursor for pagination to retrieve the next set of results."
+              },
+              {
+                "name": "sort",
+                "value": "create_time:asc",
+                "type": "query",
+                "description": "Sort results by one or more fields. Format: `field` or `field:asc` or `field:desc`. Multiple fields: `field1,field2:desc`. Allowed fields: `name`, `create_time`, `update_time`. Default: `create_time:asc`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A POST request sent to the search endpoint returns a filtered list of rule definition objects that are associated with the specified organization based on the specified search criteria."
+        },
+        {
+          "info": {
+            "name": "Search stories",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/threats/stories/search",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned."
+              },
+              {
+                "name": "cursor",
+                "value": "eyJvZmZzZXQiOjIwfQ",
+                "type": "query",
+                "description": "A cursor for pagination to retrieve the next set of results."
+              },
+              {
+                "name": "sort",
+                "value": "update_time:asc",
+                "type": "query",
+                "description": "Sort results by one or more fields. Format: `field` or `field:asc` or `field:desc`. Multiple fields: `field1,field2:desc`. Allowed fields: `update_time`, `create_time`. Default: `update_time:asc`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A POST request sent to the search endpoint returns a filtered list of threat stories objects that are associated with the specified organization based on the specified search criteria."
+        },
+        {
+          "info": {
+            "name": "Bulk create policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/threats/policies/bulk",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A POST request sent to the bulk endpoint creates multiple policies. If any policy in the request fails validation, no policies are created."
+        },
+        {
+          "info": {
+            "name": "Bulk edit policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/threats/policies/bulk",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A PATCH request sent to the bulk endpoint updates multiple policies. If any policy in the request is not found or fails validation, no updates are applied."
+        },
+        {
+          "info": {
+            "name": "Bulk delete policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/threats/policies/bulk",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A DELETE request sent to the bulk endpoint removes multiple policies and their rule attachments. If any ID in the request is invalid, no policies are removed."
+        },
+        {
+          "info": {
+            "name": "Bulk create policy rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/threats/policies/:policy-id/rules/bulk",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "policy-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the policy"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A POST request sent to the bulk endpoint attaches multiple rule definitions to the policy. Returns 400 if any rule definition's category is incompatible with the policy source type, or if the rule definition and policy have mismatched management types. If any item in the request fails, no policy rules are created."
+        },
+        {
+          "info": {
+            "name": "Bulk edit policy rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/threats/policies/:policy-id/rules/bulk",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "policy-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the policy"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A PATCH request sent to the bulk endpoint updates multiple policy rules. Each item must include id plus at least one of severity, scope, or is_enabled. If any item in the request is not found or fails validation, no updates are applied."
+        },
+        {
+          "info": {
+            "name": "Bulk delete policy rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/threats/policies/:policy-id/rules/bulk",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "policy-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the policy"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A DELETE request sent to the bulk endpoint detaches multiple rule definitions from the policy. The rule definitions themselves are not affected. If any ID in the request is invalid, no policy rules are removed."
+        },
+        {
+          "info": {
+            "name": "Bulk create rule definitions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/threats/rule-definitions/bulk",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A POST request sent to the bulk endpoint creates multiple rule definitions. If any rule definition in the request fails validation, no rule definitions are created."
+        },
+        {
+          "info": {
+            "name": "Bulk edit rule definitions",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/threats/rule-definitions/bulk",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A PATCH request sent to the bulk endpoint updates multiple rule definitions. If any rule definition in the request is not found or fails validation, no updates are applied."
+        },
+        {
+          "info": {
+            "name": "Bulk delete rule definitions",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/threats/rule-definitions/bulk",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A DELETE request sent to the bulk endpoint removes multiple rule definitions and their policy attachments. If any ID in the request is invalid, no rule definitions are removed."
+        },
+        {
+          "info": {
+            "name": "Get a story",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/threats/stories/:story-id",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "story-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the story"
+              }
+            ]
+          },
+          "docs": "A GET request sent to the endpoint root followed by a unique identifier returns detailed information about a specific story."
+        },
+        {
+          "info": {
+            "name": "Get the policies a rule definition is attached to",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/threats/rule-definitions/:rule-definition-id/policies",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "rule-definition-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the rule definition"
+              }
+            ]
+          },
+          "docs": "Returns the list of policies this rule definition is attached to, with per-attachment effective values (severity, scope, scope_type, is_enabled, is_suspended). An unknown or unattached rule-definition ID returns an empty items list with 200 OK, not 404 — the upstream service does not validate ID existence on this route."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

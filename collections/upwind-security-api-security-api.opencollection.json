@@ -1,0 +1,168 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Introduction access-management api-security API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "api-security",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List endpoints",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.upwind.io/v1/organizations/:organization-id/apisecurity-endpoints",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "per-page",
+                "value": "",
+                "type": "query",
+                "description": "Specifies how many results are returned on a page."
+              },
+              {
+                "name": "page-token",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the token for fetching subsequent pages in a paginated result set. Use the token from a previous response to continue retrieving data when the number of results exceeds the current page size."
+              },
+              {
+                "name": "method",
+                "value": "",
+                "type": "query",
+                "description": "Filters endpoints by HTTP method (GET, POST, PUT, DELETE, etc.)."
+              },
+              {
+                "name": "authentication-state",
+                "value": "AUTHENTICATED,UNAUTHENTICATED",
+                "type": "query",
+                "description": "Filters endpoints by authentication state. Multiple values may be provided, separated by commas."
+              },
+              {
+                "name": "has-internet-ingress",
+                "value": "",
+                "type": "query",
+                "description": "Filters endpoints that have internet ingress exposure."
+              },
+              {
+                "name": "has-vulnerability",
+                "value": "",
+                "type": "query",
+                "description": "Filters endpoints that have associated vulnerabilities."
+              },
+              {
+                "name": "has-sensitive-data",
+                "value": "",
+                "type": "query",
+                "description": "Filters endpoints that handle sensitive data."
+              },
+              {
+                "name": "cloud-account-id",
+                "value": "",
+                "type": "query",
+                "description": "Filters by the specified cloud account ID."
+              },
+              {
+                "name": "cloud-provider",
+                "value": "",
+                "type": "query",
+                "description": "Filters endpoints by cloud provider (AWS, Azure, GCP, etc.)."
+              },
+              {
+                "name": "resource-type",
+                "value": "",
+                "type": "query",
+                "description": "Filters endpoints by resource type."
+              },
+              {
+                "name": "cloud-organization-id",
+                "value": "",
+                "type": "query",
+                "description": "Filters endpoints by cloud organization ID."
+              },
+              {
+                "name": "cloud-organization-unit-id",
+                "value": "",
+                "type": "query",
+                "description": "Filters endpoints by cloud organization unit ID."
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "query",
+                "description": "Filters endpoints by domain name."
+              },
+              {
+                "name": "cluster-id",
+                "value": "",
+                "type": "query",
+                "description": "Filters endpoints by cluster ID."
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "Filters by the specified Kubernetes namespace."
+              }
+            ]
+          },
+          "docs": "A `GET` request sent to the endpoint root returns a list of API Endpoint objects that are associated with the specified organization. To learn more about API Security, refer to the [API Security Overview](/api-security/overview) page."
+        },
+        {
+          "info": {
+            "name": "Search API endpoints",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/api-security/endpoints/search",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned."
+              },
+              {
+                "name": "cursor",
+                "value": "eyJvZmZzZXQiOjIwfQ",
+                "type": "query",
+                "description": "A cursor for pagination to retrieve the next set of results."
+              },
+              {
+                "name": "sort",
+                "value": "first_seen_time:desc",
+                "type": "query",
+                "description": "Sort results by one or more fields. Format: `field` or `field:asc` or `field:desc`. Multiple fields: `field1,field2:desc`. Allowed fields: `first_seen_time`, `last_seen_time`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A `POST` request sent to the search endpoint returns a list of API Endpoint objects matching the supplied search conditions."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

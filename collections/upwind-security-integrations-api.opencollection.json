@@ -1,0 +1,120 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Introduction access-management integrations API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "integrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List webhooks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.upwind.io/v1/organizations/:organization-id/integration-webhooks",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "vendor",
+                "value": "",
+                "type": "query",
+                "description": "Filters integration webhooks by vendor type."
+              }
+            ]
+          },
+          "docs": "A `GET` request sent to the endpoint root returns a list of integration webhook objects that are associated with the specified organization. Integration Webhooks enable you to send notifications and data to external systems when specific events occur. To learn more about integration webhooks, refer to the [Custom Webhook](/integrations/monitoring-and-logging/custom-webhook) page."
+        },
+        {
+          "info": {
+            "name": "Create a webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.upwind.io/v1/organizations/:organization-id/integration-webhooks",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A `POST` request sent to the endpoint root creates a integration webhook object that is associated with the specified organization. Integration Webhooks enable you to send notifications and data to external systems when specific events occur. To learn more about integration webhooks, refer to the [Custom Webhook](/integrations/monitoring-and-logging/custom-webhook) page."
+        },
+        {
+          "info": {
+            "name": "Update a webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.upwind.io/v1/organizations/:organization-id/integration-webhooks/:webhook-id",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "webhook-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for this integration webhook."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A `PATCH` request sent to the endpoint root followed by a unique identifier allows for updating specific fields of an existing integration webhook. This endpoint facilitates the modification of attributes such as the name, status, and configuration. To learn more about integration webhooks, refer to the [Custom Webhook](/integrations/monitoring-and-logging/custom-webhook) page."
+        },
+        {
+          "info": {
+            "name": "Delete a webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.upwind.io/v1/organizations/:organization-id/integration-webhooks/:webhook-id",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "webhook-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for this integration webhook."
+              }
+            ]
+          },
+          "docs": "A `DELETE` request sent to the endpoint root followed by a unique identifier deletes a specific integration webhook. This action permanently removes the integration webhook and cannot be undone. To learn more about integration webhooks, refer to the [Custom Webhook](/integrations/monitoring-and-logging/custom-webhook) page."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

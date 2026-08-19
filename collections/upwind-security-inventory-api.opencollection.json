@@ -1,0 +1,163 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Introduction access-management inventory API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "inventory",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search catalog assets",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/inventory/catalog/assets/search",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned."
+              },
+              {
+                "name": "cursor",
+                "value": "eyJvZmZzZXQiOjIwfQ",
+                "type": "query",
+                "description": "A cursor for pagination to retrieve the next set of results."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A `POST` request sent to the search endpoint retrieves a comprehensive list of assets based on the direct attributes described below. It is purpose-built for high-volume inventory queries, allowing you to filter the catalog by specific properties, tags, or security posture.\n\n**When to Use This API**\n\nUse this endpoint for flat searches where the filtering criteria are contained within the asset itself. This is the ideal tool for:\n- **Bulk Data Retrieval**: Generating large lists of resources acr"
+        },
+        {
+          "info": {
+            "name": "List asset schemas",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/inventory/schema",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned."
+              },
+              {
+                "name": "cursor",
+                "value": "eyJvZmZzZXQiOjIwfQ",
+                "type": "query",
+                "description": "A cursor for pagination to retrieve the next set of results."
+              }
+            ]
+          },
+          "docs": "Retrieves the inventory schema containing all asset labels and their searchable fields with their types. Use this endpoint to discover available asset labels and their queryable attributes for building search requests."
+        },
+        {
+          "info": {
+            "name": "Get an asset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/inventory/catalog/assets/:id",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "id",
+                "value": "uwr-b7d8d158c28ab7ca281fd424311e9d19",
+                "type": "path",
+                "description": "Upwind asset ID"
+              }
+            ]
+          },
+          "docs": "A `GET` request sent to the endpoint root followed by a unique identifier returns detailed information about a specific asset."
+        },
+        {
+          "info": {
+            "name": "Get asset schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/inventory/schema/:label-name",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "label-name",
+                "value": "`aws_ec2_instance`",
+                "type": "path",
+                "description": "The name of the asset label to retrieve"
+              }
+            ]
+          },
+          "docs": "Retrieves the schema for a specific asset label containing its searchable fields with their types. Use this endpoint to discover the queryable attributes for a specific asset label."
+        },
+        {
+          "info": {
+            "name": "Update an inventory asset",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.upwind.io/v2/organizations/:organization-id/inventory/assets/:id",
+            "params": [
+              {
+                "name": "organization-id",
+                "value": "org_Xk9mPq7RtYwN2vLs",
+                "type": "path",
+                "description": "The unique identifier for the Upwind organization."
+              },
+              {
+                "name": "id",
+                "value": "uwr-b7d8d158c28ab7ca281fd424311e9d19",
+                "type": "path",
+                "description": "Upwind asset ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A `PATCH` request sent to the endpoint updates fields on a specific inventory asset. The request body supports updating `custom_tags` only; additional patchable fields may be added in the future. The provided list of custom tags **replaces any existing custom tags on the asset**."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
