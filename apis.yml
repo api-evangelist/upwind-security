@@ -11,6 +11,18 @@ description: >-
   credentials, and the company ships a hosted MCP server plus an official
   Agent Skill for AI coding assistants.
 url: https://raw.githubusercontent.com/api-evangelist/upwind-security/refs/heads/main/apis.yml
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
