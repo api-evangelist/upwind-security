@@ -65,7 +65,7 @@ apis:
   humanURL: https://docs.upwind.io/restapi/v2/introduction
   baseURL: https://api.upwind.io
   tags:
-  - access-management
+  - Access Management
   tags_raw:
   - access-management
   properties:
@@ -80,7 +80,7 @@ apis:
   humanURL: https://docs.upwind.io/restapi/v2/introduction
   baseURL: https://api.upwind.io
   tags:
-  - api-security
+  - API Security
   tags_raw:
   - api-security
   properties:
@@ -96,7 +96,7 @@ apis:
   humanURL: https://docs.upwind.io/restapi/v2/introduction
   baseURL: https://api.upwind.io
   tags:
-  - cloud-accounts
+  - Cloud Accounts
   tags_raw:
   - cloud-accounts
   properties:
@@ -112,7 +112,7 @@ apis:
   humanURL: https://docs.upwind.io/restapi/v2/introduction
   baseURL: https://api.upwind.io
   tags:
-  - configurations
+  - Configurations
   tags_raw:
   - configurations
   properties:
@@ -200,7 +200,7 @@ apis:
   humanURL: https://docs.upwind.io/restapi/v2/introduction
   baseURL: https://api.upwind.io
   tags:
-  - threats
+  - Threats
   tags_raw:
   - threats
   properties:
@@ -216,7 +216,7 @@ apis:
   humanURL: https://docs.upwind.io/restapi/v2/introduction
   baseURL: https://api.upwind.io
   tags:
-  - vulnerabilities
+  - Vulnerabilities
   tags_raw:
   - vulnerabilities
   properties:
